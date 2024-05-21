@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { ProcedimentosdetailsComponent } from '../procedimentosdetails/procedimentosdetails.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -17,8 +17,11 @@ import Swal from 'sweetalert2';
 
 export class ProcedimentoslistComponent {
   lista: Procedimento[] = [];
-  procedimentoEdit: Procedimento = new Procedimento(0,'',new Date(0),'', '');
+  procedimentoEdit: Procedimento = new Procedimento(0,'',new Date(0),'', '', null);
 
+  @Input("esconderBotoes") esconderBotoes: boolean = false;
+  @Output("retorno") retorno = new EventEmitter<any>();
+  
   modalService = inject(MdbModalService);
   @ViewChild("modalProcedimentoDetalhe") modalProcedimentoDetalhe!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
@@ -32,7 +35,6 @@ export class ProcedimentoslistComponent {
     let procedimentoEditado = history.state.procedimentoEditado;
 
     if(procedimentoNovo != null){
-      procedimentoNovo.id = 555;
       this.lista.push(procedimentoNovo);
     }
 
@@ -91,7 +93,7 @@ export class ProcedimentoslistComponent {
     }
 
     new(){
-      this.procedimentoEdit = new Procedimento(0,'',new Date(0),'','');
+      this.procedimentoEdit = new Procedimento(0,'',new Date(0),'','', null);
       this.modalRef = this.modalService.open(this.modalProcedimentoDetalhe);
     }
 
@@ -103,6 +105,10 @@ export class ProcedimentoslistComponent {
     retornoDetalhe(procedimento: Procedimento){
       this.listAll();
       this.modalRef.close();
+    }
+
+    select(procedimento: Procedimento){
+      this.retorno.emit(procedimento);
     }
 
 }

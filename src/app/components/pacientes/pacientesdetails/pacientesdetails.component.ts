@@ -7,40 +7,43 @@ import { PacienteService } from '../../../services/paciente.service';
 import Swal from 'sweetalert2';
 import { Procedimento } from '../../../models/procedimento';
 import { Tutor } from '../../../models/tutor';
+import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.component';
+import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslist/procedimentoslist.component';
 
 @Component({
   selector: 'app-pacientesdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule],
+  imports: [FormsModule, MdbModalModule, TutoreslistComponent, ProcedimentoslistComponent],
   templateUrl: './pacientesdetails.component.html',
   styleUrl: './pacientesdetails.component.scss'
 })
+
 export class PacientesdetailsComponent {
-  @Input("paciente") paciente: Paciente = new Paciente(0,'','',new Date(),'',null);
+  @Input("paciente") paciente: Paciente = new Paciente(0, '', '', new Date(), '', null);
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);
   router2 = inject(Router);
 
-  modalService = inject(MdbModalService); // para conseguir abrir a modal
+  modalService = inject(MdbModalService);
   @ViewChild("modalTutores") modalTutores!: TemplateRef<any>;
   @ViewChild("modalProcedimentos") modalProcedimentos!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
   pacienteService = inject(PacienteService);
 
-  constructor(){
+  constructor() {
     let id = this.router.snapshot.params['id'];
-    if(id > 0){
+    if (id > 0) {
       this.findById(id);
-    }else{
-      if(this.paciente.id > 0){
+    } else {
+      if (this.paciente.id > 0) {
         this.findById(id);
       }
     }
   }
 
-  findById(id: number){
+  findById(id: number) {
     this.pacienteService.findById(id).subscribe({
       next: retorno => {
         this.paciente = retorno;
@@ -103,29 +106,29 @@ export class PacientesdetailsComponent {
     }
   }
 
-  buscarTutor(){
-    this.modalRef = this.modalService.open(this.modalTutores, {modalClass: 'modal-lg'});
+  buscarTutor() {
+    this.modalRef = this.modalService.open(this.modalTutores, { modalClass: 'modal-lg' });
   }
 
-  buscarProcedimentos(){
-    this.modalRef = this.modalService.open(this.modalProcedimentos, { modalClass: 'modal-la'});
+  buscarProcedimentos() {
+    this.modalRef = this.modalService.open(this.modalProcedimentos, { modalClass: 'modal-la' });
   }
 
-  retornoTutor(tutor: Tutor){
+  retornoTutor(tutor: Tutor) {
     this.paciente.tutor = tutor;
     this.modalRef.close();
   }
 
-  retornoProcedimento(procedimento: Procedimento){
-    if(this.paciente.procedimentos == null)
+  retornoProcedimento(procedimento: Procedimento) {
+    if (this.paciente.procedimentos == null)
       this.paciente.procedimentos = [];
 
     this.paciente.procedimentos.push(procedimento);
     this.modalRef.close();
   }
 
-  desvincularProcedimentoPaciente(procedimento: Procedimento){
-    let posicao = this.paciente.procedimentos.findIndex(x => {return x.id == procedimento.id});
+  desvincularProcedimentoPaciente(procedimento: Procedimento) {
+    let posicao = this.paciente.procedimentos.findIndex(x => { return x.id == procedimento.id });
     this.paciente.procedimentos.splice(posicao, 1);
   }
 }

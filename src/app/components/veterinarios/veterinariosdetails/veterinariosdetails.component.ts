@@ -27,17 +27,19 @@ export class VeterinariosdetailsComponent {
     let id = this.router.snapshot.params['id'];
     if(id > 0){
       this.findById(id);
+    }else{
+      if(this.veterinario.id > 0){
+        this.findById(id);
+      }
     }
   }
 
   findById(id: number){
     this.veterinarioService.findById(id).subscribe({
-      next: (veterinario) => {
-        this.veterinario = veterinario;
+      next: retorno => {
+        this.veterinario = retorno;
       },
-      error: (erro) => {
-        alert(erro.status);
-        console.log(erro);
+      error: erro => {
         Swal.fire({
           title: "Algo deu errado na busca, tente novamente.",
           icon: "error",
@@ -50,20 +52,18 @@ export class VeterinariosdetailsComponent {
   save() {
     if (this.veterinario.id > 0) {
       this.veterinarioService.update(this.veterinario, this.veterinario.id).subscribe({
-        next: (retorno) => {
+        next: mensagem => {
           Swal.fire({
-            title: 'Editado com sucesso!',
+            title: mensagem,
             icon: 'success',
             confirmButtonText: 'Ok',
           });
           this.router2.navigate(['admin/veterinarios'], {
-            state: { veterinarioNovo: this.veterinario },
+            state: { veterinarioEditado: this.veterinario },
           });
           this.retorno.emit(this.veterinario);
         },
-        error: (erro) => {
-          alert(erro.status);
-          console.log(erro);
+        error: erro => {
           Swal.fire({
             title: 'Erro ao editar o cadastro do veterinario',
             icon: 'error',
@@ -73,9 +73,9 @@ export class VeterinariosdetailsComponent {
       });
     } else {
       this.veterinarioService.save(this.veterinario).subscribe({
-        next: (retorno) => {
+        next: mensagem => {
           Swal.fire({
-            title: 'Sucesso!',
+            title: mensagem,
             confirmButtonColor: '#54B4D3',
             text: 'Veterinario salvo com sucesso!',
             icon: 'success',
@@ -85,9 +85,7 @@ export class VeterinariosdetailsComponent {
           });
           this.retorno.emit(this.veterinario);
         },
-        error: (erro) => {
-          alert(erro.status);
-          console.log(erro);
+        error: erro => {
           Swal.fire({
             title: 'Erro ao salvar o veterinario',
             icon: 'error',

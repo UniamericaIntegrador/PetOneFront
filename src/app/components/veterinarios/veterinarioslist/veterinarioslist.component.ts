@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { VeterinariosdetailsComponent } from '../veterinariosdetails/veterinariosdetails.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -17,6 +17,9 @@ import Swal from 'sweetalert2';
 export class VeterinarioslistComponent {
   lista: Veterinario[] = [];
   veterinarioEdit: Veterinario = new Veterinario(0,'','','');
+
+  @Input("esconderBotoes") esconderBotoes: boolean = false;
+  @Output("retorno") retorno = new EventEmitter<any>();
 
   modalService = inject(MdbModalService);
   @ViewChild("modalVeterinarioDetalhe") modalVeterinarioDetalhe!: TemplateRef<any>;
