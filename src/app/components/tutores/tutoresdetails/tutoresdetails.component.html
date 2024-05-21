@@ -1,0 +1,24 @@
+<div class="container">
+    <h3 style="color: #54b4d3">CADASTRO DE TUTORES</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                Nome
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.nome" />
+                Cpf
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.cpf" />
+                Idade
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.idade" />
+                Endereço
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.endereco" />
+                <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
+                    (click)="save()">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Salvar
+                </button>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+</div>
