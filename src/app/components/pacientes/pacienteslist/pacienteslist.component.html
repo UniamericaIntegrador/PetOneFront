@@ -1,27 +1,24 @@
-<div class="container">
-
+<div>
     <div class="card">
         <div class="card-body">
             <div class="alinhamentoListagem">
                 <div>
-                    <h3 style="color: #54B4D3;">Listagem de pacientes</h3>
                 </div>
                 <div class="alinharDireita">
-                    <button (click)="new()" type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init><i
-                            class="fa-solid fa-square-plus"></i>
-                        Novo</button>
+                    <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn" data-mdb-ripple-init>
+                        <p>Novo</p></button>
                 </div>
             </div>
         </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">ID</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Nome</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Espécie</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Nascimento</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Raça</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Ação</th>
+                    <th class="centralizar" scope="col">ID</th>
+                    <th class="centralizar" scope="col">Nome</th>
+                    <th class="centralizar" scope="col">Espécie</th>
+                    <th class="centralizar" scope="col">Nascimento</th>
+                    <th class="centralizar" scope="col">Raça</th>
+                    <th class="centralizar" scope="col">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,18 +32,20 @@
 
 
                     <td>
-                        <div class="centralizar">
+                        <div class="centralizar actionbtn">
 
-                            <button (click)="edit(paciente)" type="button" type="button"
-                                class="btn btn-outline-warning btn-rounded" data-mdb-ripple-init
-                                data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                Editar</button>
-
-                            <button (click)="delete(paciente)" type="button" class="btn btn-outline-danger btn-rounded"
+                            <button (click)="edit(paciente)" type="button" type="button" class="actionbtns info"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Deletar</button>
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+
+                            <button (click)="delete(paciente)" type="button" class="actionbtns danger"
+                                data-mdb-ripple-init data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span></button>
                         </div>
                     </td>
                 </tr>
