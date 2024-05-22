@@ -9,11 +9,13 @@ import { VeterinarioslistComponent } from './components/veterinarios/veterinario
 import { ProcedimentosdetailsComponent } from './components/procedimentos/procedimentosdetails/procedimentosdetails.component';
 import { TutoresdetailsComponent } from './components/tutores/tutoresdetails/tutoresdetails.component';
 import { VeterinariosdetailsComponent } from './components/veterinarios/veterinariosdetails/veterinariosdetails.component';
+import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {path: "", redirectTo:"login", pathMatch:"full"},
     {path: "login", component: LoginComponent},
     {path: "admin", component: PrincipalComponent, children:[
+        {path: "dashboard", component: DashboardComponent},
         {path: "pacientes", component: PacienteslistComponent},
         {path: "procedimentos", component: ProcedimentoslistComponent},
         {path: "tutores", component: TutoreslistComponent},
