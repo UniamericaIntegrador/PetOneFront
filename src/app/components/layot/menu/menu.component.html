@@ -1,27 +1,58 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #54B4D3;">
-    <div class="container-fluid">
-        <a style="color: azure;" class="navbar-brand" href="#"> <i class="fa-solid fa-otter"></i> Pet One</a>
-        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <div class="cadastro">
-                    <a style="color: azure;" class="nav-link active" aria-current="page" href="admin/pacientes"> <i
-                            class="fa-solid fa-book"></i> Pets</a>
-                    <a style="color: azure;" class="nav-link" href="admin/tutores"> <i class="fa-solid fa-user"></i>
-                        Tutores</a>
-                    <a style="color: azure;" class="nav-link" href="admin/veterinarios"> <i
-                            class="fa-solid fa-pen-fancy"></i> Veterinários</a>
-                    <a style="color: azure;" class="nav-link" href="admin/procedimentos"> <i
-                            class="fa-solid fa-pen-fancy"></i> Procedimentos</a>
-                </div>
-            </div>
-        </div>
-        <div class="alinharDireita">
-            <a style="color: azure;" class="nav-link" href="login"> Sair <i
-                    class="fa-solid fa-right-from-bracket"></i></a>
-        </div>
+<div class="sidebar-container">
+    <div class="logo">
+      <img src="assets/pet-one-logo.png" alt="Pet One Logo">
     </div>
-</nav>
+    <nav class="nav">
+      <ul>
+        <li>
+          <a href="#" class="nav-link">
+            <span class="icon dashboard-icon"></span>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link active">
+            <span class="icon vet-icon"></span>
+            Veterinários
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <span class="icon patients-icon"></span>
+            Pacientes
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <span class="icon tutors-icon"></span>
+            Tutores
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <span class="icon procedures-icon"></span>
+            Procedimentos
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <span class="icon settings-icon"></span>
+            Configurações
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <span class="icon logs-icon"></span>
+            Logs
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="logout">
+      <a href="#" class="nav-link">
+        <span class="icon logout-icon"></span>
+        Sair
+      </a>
+    </div>
+  </div>
+  

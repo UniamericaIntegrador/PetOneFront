@@ -1,18 +1,15 @@
-<div class="container">
-
+<div class="container mt-4">
     <div class="card">
         <div class="card-body">
-            <div class="alinhamentoListagem">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 style="color: #54B4D3;">Listagem de pacientes</h3>
                 <div>
-                    <h3 style="color: #54B4D3;">Listagem de pacientes</h3>
-                </div>
-                <div class="alinharDireita">
-                    <button [routerLink]="['/admin/pacientes/new']" type="button" class="btn btn-info btn-rounded"
-                        data-mdb-ripple-init><i class="fa-solid fa-square-plus"></i>
-                        Novo (rota)</button>
-                    <button (click)="new()" type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init><i
-                            class="fa-solid fa-square-plus"></i>
-                        Novo (modal)</button>
+                    <button [routerLink]="['/admin/pacientes/new']" type="button" class="btn btn-info btn-rounded me-2"
+                        data-mdb-ripple-init><i class="fa-solid fa-square-plus"></i> Novo (rota)
+                    </button>
+                    <button (click)="new()" type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init>
+                        <i class="fa-solid fa-square-plus"></i> Novo (modal)
+                    </button>
                 </div>
             </div>
         </div>
@@ -28,32 +25,27 @@
                 </tr>
             </thead>
             <tbody>
-                @for (paciente of lista; track $index) {
-                <tr>
-                    <th class="centralizar" scope="row">{{paciente.id}}</th>
-                    <td class="centralizar">{{paciente.nome}}</td>
-                    <td class="centralizar">{{paciente.especie}}</td>
-                    <td class="centralizar">{{paciente.dataNascimento}}</td>
-                    <td class="centralizar">{{paciente.raca}}</td>
-
-
+                <tr *ngFor="let paciente of lista; let i = index">
+                    <th class="centralizar" scope="row">{{ paciente.id }}</th>
+                    <td class="centralizar">{{ paciente.nome }}</td>
+                    <td class="centralizar">{{ paciente.especie }}</td>
+                    <td class="centralizar">{{ paciente.dataNascimento }}</td>
+                    <td class="centralizar">{{ paciente.raca }}</td>
                     <td>
                         <div class="centralizar">
-
-                            <button (click)="edit(paciente)" type="button" type="button"
-                                class="btn btn-outline-warning btn-rounded" data-mdb-ripple-init
+                            <button (click)="edit(paciente)" type="button"
+                                class="btn btn-outline-warning btn-rounded me-2" data-mdb-ripple-init
                                 data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                Editar</button>
-
-                            <button (click)="delete(paciente)" type="button" class="btn btn-outline-danger btn-rounded"
-                                data-mdb-ripple-init data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Deletar</button>
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                            </button>
+                            <button (click)="delete(paciente)" type="button"
+                                class="btn btn-outline-danger btn-rounded" data-mdb-ripple-init
+                                data-mdb-ripple-color="dark">
+                                <i class="fa-solid fa-trash-can"></i> Deletar
+                            </button>
                         </div>
                     </td>
                 </tr>
-                }
             </tbody>
         </table>
     </div>

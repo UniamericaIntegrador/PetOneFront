@@ -1,0 +1,78 @@
+.sidebar-container {
+    width: 15rem;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 1rem 0;
+  }
+  
+  .logo {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+  
+  .logo img {
+    width: 50%;
+  }
+  
+  .nav {
+    flex-grow: 1;
+  }
+  
+  .nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: #495057;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .nav-link.active,
+  .nav-link:hover {
+    background: #e9ecef;
+    color: #000;
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
+  }
+  
+  .logout {
+    padding: 1rem;
+  }
+  
+  .logout-icon::before {
+    content: '\f2f5'; /* Font Awesome logout icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+  }
+  
+  .dashboard-icon::before,
+  .vet-icon::before,
+  .patients-icon::before,
+  .tutors-icon::before,
+  .procedures-icon::before,
+  .settings-icon::before,
+  .logs-icon::before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+  }
+  
+  .dashboard-icon::before { content: '\f015'; }
+  .vet-icon::before { content: '\f0f0'; }
+  .patients-icon::before { content: '\f007'; }
+  .tutors-icon::before { content: '\f0c0'; }
+  .procedures-icon::before { content: '\f0ad'; }
+  .settings-icon::before { content: '\f013'; }
+  .logs-icon::before { content: '\f02d'; }
+  
