@@ -104,6 +104,7 @@ table{
 }
 
 .addbtn {
+
     display: flex;
     padding: 1rem;
     align-items: center;
@@ -118,25 +119,6 @@ table{
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    text-align: center;
+    line-height: normal;
 }
-
-/*
-<table class="charts-css column data-center show-labels">
-                <thead>
-                    <tr>
-                        <th scope="col">Tutores</th>
-                        <th scope="col">Pets</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">Tutores</th>
-                        <td style="--size: 0.46">73</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Pets</th>
-                        <td style="--size: 0.46">96</td>
-                    </tr>
-                </tbody>
-            </table>
-*/
