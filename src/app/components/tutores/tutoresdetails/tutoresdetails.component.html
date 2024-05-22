@@ -1,24 +1,36 @@
 <div class="container">
-    <h3 style="color: #54b4d3">CADASTRO DE TUTORES</h3>
+    <h3 style="color: #000000">Tutores</h3>
+    <p>Edite o formulário para atualizar a tabela de tutores</p>
     <div class="card">
-        <div class="card-body">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                Nome
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.nome" />
-                Cpf
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.cpf" />
-                Idade
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.idade" />
-                Endereço
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="tutor.endereco" />
-                <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
+        <div class="card-body centralizarModal">
+            <div class="holder">
+                <div>
+                    Nome
+                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.nome" />
+
+                </div>
+                <div>
+                    Cpf
+                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.cpf" />
+
+                </div>
+                <div>
+                    Idade
+                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.idade" />
+                </div>
+                <div>
+                    Endereço
+                    <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.endereco" />
+                </div>
+                
+               
+            </div>
+            <div class="teste">
+                <button style="background-color: #f98948; color: aliceblue;" type="button" class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init
                     (click)="save()">
-                    <i class="fa-solid fa-floppy-disk"></i>
-                    Salvar
+                    Adicionar
                 </button>
             </div>
-            <div class="col-lg-4"></div>
         </div>
     </div>
 </div>

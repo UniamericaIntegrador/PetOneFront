@@ -3,10 +3,13 @@
         <div class="card-body">
             <div class="alinhamentoListagem">
                 <div>
+                    <h3 class="head title">Listagem de pacientes</h3>
                 </div>
                 <div class="alinharDireita">
-                    <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn" data-mdb-ripple-init>
-                        <p>Novo</p></button>
+                    <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
+                        data-mdb-ripple-init>
+                        <p>Novo</p>
+                    </button>
                 </div>
             </div>
         </div>
@@ -29,8 +32,6 @@
                     <td class="centralizar">{{paciente.especie}}</td>
                     <td class="centralizar">{{paciente.dataNascimento}}</td>
                     <td class="centralizar">{{paciente.raca}}</td>
-
-
                     <td>
                         <div class="centralizar actionbtn">
 
@@ -56,7 +57,7 @@
 </div>
 
 <ng-template #modalPacienteDetalhe>
-    <div style="background-color: #54B4D3;" class="modal-header">
+    <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
     </div>
     <div class="modal-body">

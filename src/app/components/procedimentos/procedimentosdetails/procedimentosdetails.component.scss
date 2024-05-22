@@ -1,0 +1,44 @@
+h3{
+    display: flex;
+    justify-content: center;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+}
+.fomularioTutor{
+    border-radius: 20px;
+    width: 350px;
+    
+}
+.centralizarModal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.teste{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    margin-top: 10px;
+}
+
+.holder{
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+p{
+    color: #000;
+font-family: Inter;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
