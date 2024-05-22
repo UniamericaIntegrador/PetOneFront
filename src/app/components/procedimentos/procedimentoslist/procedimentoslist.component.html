@@ -7,12 +7,9 @@
                     <h3 style="color: #54B4D3;">Listagem de procedimentos</h3>
                 </div>
                 <div class="alinharDireita">
-                    <button [routerLink]="['/admin/procedimentos/new']" type="button" class="btn btn-info btn-rounded"
-                        data-mdb-ripple-init><i class="fa-solid fa-square-plus"></i>
-                        Novo (rota)</button>
                     <button (click)="new()" type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init><i
                             class="fa-solid fa-square-plus"></i>
-                        Novo (modal)</button>
+                        Novo</button>
                 </div>
             </div>
         </div>
@@ -35,21 +32,24 @@
                     <td class="centralizar">{{procedimento.data}}</td>
                     <td class="centralizar">{{procedimento.resultado}}</td>
                     <td class="centralizar">{{procedimento.diagnostico}}</td>
-
-
                     <td>
+                        @if(esconderBotoes){
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple
+                            (click)="select(procedimento)">
+                            Selecionar
+                        </button>
+                        }@else{
+                        <button (click)="edit(procedimento)" type="button" type="button"
+                            class="btn btn-outline-warning btn-rounded" data-mdb-ripple-init
+                            data-mdb-ripple-color="dark">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Editar</button>
+                        <button (click)="delete(procedimento)" type="button" class="btn btn-outline-danger btn-rounded"
+                            data-mdb-ripple-init data-mdb-ripple-color="dark">
+                            <i class="fa-solid fa-trash-can"></i>
+                            Deletar</button>
+                        }
                         <div class="centralizar">
-
-                            <button (click)="edit(procedimento)" type="button" type="button"
-                                class="btn btn-outline-warning btn-rounded" data-mdb-ripple-init
-                                data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                Editar</button>
-
-                            <button (click)="delete(procedimento)" type="button" class="btn btn-outline-danger btn-rounded"
-                                data-mdb-ripple-init data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Deletar</button>
                         </div>
                     </td>
                 </tr>
@@ -64,6 +64,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
     </div>
     <div class="modal-body">
-        <app-procedimentosdetails [procedimento]="procedimentoEdit" (retorno)="retornoDetalhe($event)"></app-procedimentosdetails>
+        <app-procedimentosdetails [procedimento]="procedimentoEdit"
+            (retorno)="retornoDetalhe($event)"></app-procedimentosdetails>
     </div>
 </ng-template>

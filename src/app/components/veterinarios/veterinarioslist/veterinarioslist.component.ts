@@ -107,4 +107,8 @@ export class VeterinarioslistComponent {
       this.modalRef.close();
     }
 
+    select(veterinario: Veterinario){
+      this.retorno.emit(veterinario);
+    }
+
 }

@@ -7,12 +7,10 @@
                     <h3 style="color: #54B4D3;">Listagem de tutores</h3>
                 </div>
                 <div class="alinharDireita">
-                    <button [routerLink]="['/admin/tutores/new']" type="button" class="btn btn-info btn-rounded"
-                        data-mdb-ripple-init><i class="fa-solid fa-square-plus"></i>
-                        Novo (rota)</button>
+                    
                     <button (click)="new()" type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init><i
                             class="fa-solid fa-square-plus"></i>
-                        Novo (modal)</button>
+                        Novo</button>
                 </div>
             </div>
         </div>
@@ -35,21 +33,24 @@
                     <td class="centralizar">{{tutor.cpf}}</td>
                     <td class="centralizar">{{tutor.idade}}</td>
                     <td class="centralizar">{{tutor.endereco}}</td>
-
-
                     <td>
-                        <div class="centralizar">
-
+                        @if(esconderBotoes){
+                            <button type="button" class="btn btn-primary btn-rounded" mdbRipple
+                                (click)="select(tutor)">
+                                Selecionar
+                            </button>
+                            }@else{
                             <button (click)="edit(tutor)" type="button" type="button"
                                 class="btn btn-outline-warning btn-rounded" data-mdb-ripple-init
                                 data-mdb-ripple-color="dark">
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 Editar</button>
-
                             <button (click)="delete(tutor)" type="button" class="btn btn-outline-danger btn-rounded"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <i class="fa-solid fa-trash-can"></i>
                                 Deletar</button>
+                            }
+                        <div class="centralizar">
                         </div>
                     </td>
                 </tr>
