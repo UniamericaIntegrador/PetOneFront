@@ -1,3 +1,4 @@
+<!--
 <div class="container">
     <div style="color: azure;" class="row topo">
         <div class="col-lg-4 teste">
@@ -17,6 +18,37 @@
             <div class="centralizar espacamento">
                 <button type="button" class="btn btn-light btn-rounded" data-mdb-ripple-init
                     (click)="logar()">Entrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+
+<div class="login">
+    <img src="https://s3-alpha-sig.figma.com/img/dea3/64ff/92892724685b3de583268ba3e565a24a?Expires=1717372800&amp;Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&amp;Signature=DRqdNlzhpx1eQjkBySibZ~BfthhnZpEJ-61zCppIoHL~f3Mba-dJQHV6PkWI7oaCud8Fg4P024-efnICVTftmhhZdHm8Go4~BSGQhpwTpFSl1EiIHyXugcAJ2gI8l0D6aiVrIJzFzpfNHuALPy0nh-17Kea0ohNx1MjtWimuuhwkOcyVLo6ihr2jDFz43bX4vEOwWn6h6wVCmsXvvuZuXfqLhVX900S8rjk~Idn~6~QdubWM4QRrHVRX2n9w0Gu8rdZBVR30bgpQBcAckfxaaWZihZMtnVwZyWXFH8RcvEweZ5wTg2uwofLfRzCC8ewnoRG9VNUewlbwY1XTMM02IA__" width="450px" height="100%">
+    <div class="container">
+        <div class="form-box">
+            <div class="text-box">
+                <h2>Bem vindo!</h2>
+                <h4>Crie uma conta ou entre para começar a usar o Pet One</h4>
+            </div>
+            <div class="input-box">
+                <div class="form-outline" data-mdb-input-init>
+                    <h3>Email</h3>
+                    <input (keyup.enter)="logar()" type="email" id="typeEmail" [(ngModel)]="login"/>
+                </div>
+                <div class="form-outline" data-mdb-input-init>
+                    <h3>Senha</h3>
+                    <input (keyup.enter)="logar()" type="password" id="typePassword" [(ngModel)]="senha"/>
+                </div>
+                <h5>Esqueceu sua senha?</h5>
+            </div>
+            <div class="btn-box">
+                <button class="btn-1" (click)="logar()" >Entrar</button>
+                <h5>ou</h5>
+                <button class="btn-2">Cadastre-se</button>
             </div>
         </div>
     </div>
