@@ -25,7 +25,7 @@ export class LoginComponent {
         showConfirmButton: false,
         timer: 1500
       });
-      this.router.navigate(['admin/pacientes']);
+      this.router.navigate(['admin/dashboard']);
     }else{
       Swal.fire({
         title: "Erro",
