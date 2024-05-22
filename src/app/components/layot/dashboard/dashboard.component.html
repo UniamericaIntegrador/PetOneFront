@@ -1,0 +1,91 @@
+<div class="dashboard">
+    <div class="cards">
+        <div class="card red">
+            <div class="card-body">
+                <h5 class="card-title">Pacientes cadastrados</h5>
+                <h4>{{PacienteCount}}</h4>
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="card-body">
+                <h5 class="card-title">Tutores cadastrados</h5>
+                <h4>{{TutorCount}}</h4>
+            </div>
+        </div>
+        <div class="card green">
+            <div class="card-body">
+                <h5 class="card-title">Veterinários cadastrados</h5>
+                <h4>{{VeterinarioCount}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="chart">
+            <table class="charts-css column data-center show-labels">
+                <thead>
+                    <tr>
+                        <th scope="col"> Tutores </th>
+                        <th scope="col"> Pets </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th scope="row"> Tutores </th>
+                        <td style="--size: calc( {{TutorCount}} / 100); --color: #F98948;"> {{TutorCount}} </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> Pets </th>
+                        <td style="--size: calc( {{PacienteCount}} / 100); --color: #B6174B;"> {{PacienteCount}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="chart">
+            <table class="charts-css column data-center show-labels">
+                <thead>
+                    <tr>
+                        <th scope="col"> Veterinários </th>
+                        <th scope="col"> Procedimentos </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th scope="row"> Veterinários </th>
+                        <td style="--size: calc( {{VeterinarioCount}} / 100); --color: #87B6A7; "> {{VeterinarioCount}} </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> Procedimentos </th>
+                        <td style="--size: calc( {{ProcedimentoCount}} / 100); --color: #F6E8EA;"> {{ProcedimentoCount}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="interaction">
+            <button class="addbtn">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Paciente</h5>
+            </button>
+            <button class="addbtn">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Tutor</h5>
+            </button>
+            <button class="addbtn">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Procedimento</h5>
+            </button>
+            <button class="addbtn">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Veterinário</h5>
+            </button>
+        </div>
+    </div>

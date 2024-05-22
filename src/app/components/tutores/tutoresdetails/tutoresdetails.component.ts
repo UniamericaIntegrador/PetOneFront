@@ -26,17 +26,19 @@ export class TutoresdetailsComponent {
     let id = this.router.snapshot.params['id'];
     if(id > 0){
       this.findById(id);
+    }else{
+      if(this.tutor.id > 0){
+        this.findById(id);
+      }
     }
   }
 
   findById(id: number){
     this.tutorService.findById(id).subscribe({
-      next: (tutor) => {
-        this.tutor = tutor;
+      next: retorno => {
+        this.tutor = retorno;
       },
-      error: (erro) => {
-        alert(erro.status);
-        console.log(erro);
+      error: erro => {
         Swal.fire({
           title: "Algo deu errado na busca, tente novamente.",
           icon: "error",
@@ -49,9 +51,9 @@ export class TutoresdetailsComponent {
   save() {
     if (this.tutor.id > 0) {
       this.tutorService.update(this.tutor, this.tutor.id).subscribe({
-        next: (retorno) => {
+        next: mensagem => {
           Swal.fire({
-            title: 'Editado com sucesso!',
+            title: mensagem,
             icon: 'success',
             confirmButtonText: 'Ok',
           });
@@ -60,9 +62,7 @@ export class TutoresdetailsComponent {
           });
           this.retorno.emit(this.tutor);
         },
-        error: (erro) => {
-          alert(erro.status);
-          console.log(erro);
+        error: erro => {
           Swal.fire({
             title: 'Erro ao editar o cadastro do tutor',
             icon: 'error',
@@ -72,9 +72,9 @@ export class TutoresdetailsComponent {
       });
     } else {
       this.tutorService.save(this.tutor).subscribe({
-        next: (retorno) => {
+        next: mensagem => {
           Swal.fire({
-            title: 'Sucesso!',
+            title: mensagem,
             confirmButtonColor: '#54B4D3',
             text: 'Tutor salvo com sucesso!',
             icon: 'success',
@@ -84,9 +84,7 @@ export class TutoresdetailsComponent {
           });
           this.retorno.emit(this.tutor);
         },
-        error: (erro) => {
-          alert(erro.status);
-          console.log(erro);
+        error: erro => {
           Swal.fire({
             title: 'Erro ao salvar o tutor',
             icon: 'error',

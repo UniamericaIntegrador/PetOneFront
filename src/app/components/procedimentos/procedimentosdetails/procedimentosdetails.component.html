@@ -5,13 +5,35 @@
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
                 Procedimento
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="procedimento.nomeProcedimento" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.nomeProcedimento" />
                 Data
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="procedimento.data" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.data" />
                 Resultado
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="procedimento.resultado" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.resultado" />
                 Diagnostico
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="procedimento.diagnostico" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.diagnostico" />
+                <div>
+                    @if(procedimento.veterinario == null){
+                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarVeterinario()">
+                        Buscar veterinario</button>
+                    }@else {
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <p class="text-primary alert-primary">Tutor: {{procedimento.veterinario.nome}}</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-warning btn-rounded" mdbRipple
+                                (click)="buscarVeterinario()">
+                                Trocar Veterinario
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
                 <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
                     (click)="save()">
                     <i class="fa-solid fa-floppy-disk"></i>
@@ -22,3 +44,15 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalVeterinarios>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Veterinarios</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-veterinarioslist [esconderBotoes]="true" (retorno)="retornoVeterinario($event)"></app-veterinarioslist>
+
+    </div>
+</ng-template>

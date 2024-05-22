@@ -5,20 +5,101 @@
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
                 Nome
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="paciente.nome" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="paciente.nome" />
                 Especie
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="paciente.especie" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="paciente.especie" />
                 Data de Nascimento
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="paciente.dataNascimento" />
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="paciente.dataNascimento" />
                 Raça
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()" [(ngModel)]="paciente.raca" />
-                <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
-                    (click)="save()">
-                    <i class="fa-solid fa-floppy-disk"></i>
-                    Salvar
-                </button>
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="paciente.raca" />
+                <div>
+                    @if(paciente.tutor == null){
+                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarTutor()">
+                        Buscar tutor</button>
+                    }@else {
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
+                                Trocar Tutor
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarProcedimentos()">
+                        Buscar Procedimento
+                    </button>
+                </div>
+
+                <table border="1" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (procedimento of paciente.procedimentos; track $index) {
+                        <tr>
+                            <td>{{ procedimento.id }}</td>
+                            <td>{{ procedimento.nomeProcedimento }}</td>
+                            <td class="direita">
+                                <button type="button" class="btn btn-danger btn-rounded" mdbRipple
+                                    (click)="desvincularProcedimentoPaciente(procedimento)">
+                                    Deletar
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+
             </div>
-            <div class="col-lg-4"></div>
+
+
+
+            <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
+                (click)="save()">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Salvar
+            </button>
         </div>
+        <div class="col-lg-4"></div>
     </div>
 </div>
+
+<ng-template #modalTutores>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tutores</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-tutoreslist [esconderBotoes]="true" (retorno)="retornoTutor($event)"></app-tutoreslist>
+
+    </div>
+</ng-template>
+
+<ng-template #modalProcedimentos>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Procedimentos</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-procedimentoslist [esconderBotoes]="true" (retorno)="retornoProcedimento($event)"></app-procedimentoslist>
+
+    </div>
+
+</ng-template>

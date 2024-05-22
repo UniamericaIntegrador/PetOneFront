@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
@@ -18,6 +18,9 @@ export class TutoreslistComponent {
   lista: Tutor[] = [];
   tutorEdit: Tutor = new Tutor(0,'','',0,'');
 
+  @Input("esconderBotoes") esconderBotoes: boolean = false;
+  @Output("retorno") retorno = new EventEmitter<any>();
+
   modalService = inject(MdbModalService);
   @ViewChild("modalTutorDetalhe") modalTutorDetalhe!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
@@ -31,7 +34,6 @@ export class TutoreslistComponent {
     let tutorEditado = history.state.tutorEditado;
 
     if(tutorNovo != null){
-      tutorNovo.id = 555;
       this.lista.push(tutorNovo);
     }
 
@@ -102,6 +104,10 @@ export class TutoreslistComponent {
     retornoDetalhe(tutor: Tutor){
       this.listAll();
       this.modalRef.close();
+    }
+
+    select(tutor: Tutor){
+      this.retorno.emit(tutor);
     }
 
 }
