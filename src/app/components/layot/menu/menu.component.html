@@ -1,27 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #54B4D3;">
-    <div class="container-fluid">
-        <a style="color: azure;" class="navbar-brand" href="#"> <i class="fa-solid fa-otter"></i> Pet One</a>
-        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <div class="cadastro">
-                    <a style="color: azure;" class="nav-link active" aria-current="page" href="admin/pacientes"> <i
-                            class="fa-solid fa-book"></i> Pets</a>
-                    <a style="color: azure;" class="nav-link" href="admin/tutores"> <i class="fa-solid fa-user"></i>
-                        Tutores</a>
-                    <a style="color: azure;" class="nav-link" href="admin/veterinarios"> <i
-                            class="fa-solid fa-pen-fancy"></i> Veterinários</a>
-                    <a style="color: azure;" class="nav-link" href="admin/procedimentos"> <i
-                            class="fa-solid fa-pen-fancy"></i> Procedimentos</a>
-                </div>
-            </div>
-        </div>
-        <div class="alinharDireita">
-            <a style="color: azure;" class="nav-link" href="login"> Sair <i
-                    class="fa-solid fa-right-from-bracket"></i></a>
-        </div>
-    </div>
-</nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+<div class="sidebar">
+  <img src="assets/logo.svg" alt="Logo" class="top-image">
+  <a href="#" class="sidebar-button">
+    <img src="assets/dashboard.svg" alt="Dashboard Icon" class="icon">
+    Dashboard
+  </a>
+  <a href="admin/veterinarios" class="sidebar-button">
+    <img src="assets/estetoscopio.svg" alt="Veterinários Icon" class="icon">
+    Veterináriosd
+  </a>
+  <a href="admin/pacientes" class="sidebar-button">
+    <img src="assets/pata.svg" alt="Pacientes Icon" class="icon">
+    Pacientes
+  </a>
+  <a href="admin/tutores" class="sidebar-button">
+    <img src="assets/paciente.svg" alt="Tutores Icon" class="icon">
+    Tutores
+  </a>
+  <a href="admin/procedimentos" class="sidebar-button">
+    <img src="assets/procedimento.svg" alt="Procedimentos Icon" class="icon">
+    Procedimentos
+  </a>
+  <a href="#" class="sidebar-button">
+    <img src="assets/config.svg" alt="Configurações Icon" class="icon">
+    Configurações
+  </a>
+  <a href="#" class="sidebar-button">
+    <img src="assets/relogio.svg" alt="Logs Icon" class="icon">
+    Logs
+  </a>
+  <a href="login" class="logout-button">Sair</a>
+</div>
