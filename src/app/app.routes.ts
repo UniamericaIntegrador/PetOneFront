@@ -12,21 +12,21 @@ import { VeterinariosdetailsComponent } from './components/veterinarios/veterina
 import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    {path: "", redirectTo:"login", pathMatch:"full"},
-    {path: "login", component: LoginComponent},
-    {path: "admin", component: PrincipalComponent, children:[
-        {path: "dashboard", component: DashboardComponent},
-        {path: "pacientes", component: PacienteslistComponent},
-        {path: "procedimentos", component: ProcedimentoslistComponent},
-        {path: "tutores", component: TutoreslistComponent},
-        {path: "veterinarios", component: VeterinarioslistComponent},
-        {path: "pacientes/new", component: PacientesdetailsComponent},
-        {path: "pacientes/edit/:id", component: PacientesdetailsComponent},
-        {path: "procedimentos/new", component: ProcedimentosdetailsComponent},
-        {path: "procedimentos/edit/:id", component: ProcedimentosdetailsComponent},
-        {path: "tutores/new", component: TutoresdetailsComponent},
-        {path: "tutores/edit/:id", component: TutoresdetailsComponent},
-        {path: "veteterinarios/new", component: VeterinariosdetailsComponent},
-        {path: "veterinarios/edit/:id", component: VeterinariosdetailsComponent}
+    { path: "", redirectTo: "login", pathMatch: "full" },
+    { path: "login", component: LoginComponent },
+    { path: "admin", component: PrincipalComponent, children: [
+      { path: "dashboard", component: DashboardComponent, data: { title: 'Dashboard' } },
+      { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
+      { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },
+      { path: "tutores", component: TutoreslistComponent, data: { title: 'Tutores' } },
+      { path: "veterinarios", component: VeterinarioslistComponent, data: { title: 'Veterinários' } },
+      { path: "pacientes/new", component: PacientesdetailsComponent, data: { title: 'Novo Paciente' } },
+      { path: "pacientes/edit/:id", component: PacientesdetailsComponent, data: { title: 'Editar Paciente' } },
+      { path: "procedimentos/new", component: ProcedimentosdetailsComponent, data: { title: 'Novo Procedimento' } },
+      { path: "procedimentos/edit/:id", component: ProcedimentosdetailsComponent, data: { title: 'Editar Procedimento' } },
+      { path: "tutores/new", component: TutoresdetailsComponent, data: { title: 'Novo Tutor' } },
+      { path: "tutores/edit/:id", component: TutoresdetailsComponent, data: { title: 'Editar Tutor' } },
+      { path: "veterinarios/new", component: VeterinariosdetailsComponent, data: { title: 'Novo Veterinário' } },
+      { path: "veterinarios/edit/:id", component: VeterinariosdetailsComponent, data: { title: 'Editar Veterinário' } }
     ]}
-];
+  ];
