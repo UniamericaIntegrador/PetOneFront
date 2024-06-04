@@ -29,35 +29,36 @@
                         [(ngModel)]="paciente.raca" />
                 </div>
 
-                <div>
 
-                </div>
 
-                <div>
-                    @if(paciente.tutor == null){
-                    <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded"
-                        mdbRipple (click)="buscarTutor()">
-                        Buscar tutor</button>
-                    }@else {
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
+                <div class="btn-buscas">
+                    <div>
+                        @if(paciente.tutor == null){
+                        <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded"
+                            mdbRipple (click)="buscarTutor()">
+                            Buscar tutor</button>
+                        }@else {
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
+                                    Trocar Tutor
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-lg-4">
-                            <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
-                                Trocar Tutor
-                            </button>
-                        </div>
+                        }
                     </div>
-                    }
+    
+                    <div class="teste">
+                        <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded"
+                            mdbRipple (click)="buscarProcedimentos()">
+                            Buscar Procedimento
+                        </button>
+                    </div>
                 </div>
 
-                <div class="teste">
-                    <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded"
-                        mdbRipple (click)="buscarProcedimentos()">
-                        Buscar Procedimento
-                    </button>
-                </div>
                 <table border="1" class="table table-striped">
                     <thead>
                         <tr>

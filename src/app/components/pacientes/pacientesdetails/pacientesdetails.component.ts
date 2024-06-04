@@ -111,7 +111,7 @@ export class PacientesdetailsComponent {
   }
 
   buscarProcedimentos() {
-    this.modalRef = this.modalService.open(this.modalProcedimentos, { modalClass: 'modal-la' });
+    this.modalRef = this.modalService.open(this.modalProcedimentos, { modalClass: 'modal-lg' });
   }
 
   retornoTutor(tutor: Tutor) {
