@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject 
 import { VeterinariosdetailsComponent } from '../veterinariosdetails/veterinariosdetails.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbModalConfig, MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Veterinario } from '../../../models/veterinario';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
@@ -94,7 +94,9 @@ export class VeterinarioslistComponent {
 
     new(){
       this.veterinarioEdit = new Veterinario(0,'','','');
-      this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe);
+      this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe, {
+        modalClass: 'CustomModal'
+      });
     }
 
     edit(veterinario: Veterinario){

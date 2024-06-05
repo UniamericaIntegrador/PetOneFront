@@ -1,5 +1,5 @@
 .dashboard {
-    padding: 2.25rem 3.5rem 4.6875rem 3.5rem;
+    padding: 16px;
     align-items: flex-start;
     align-content: flex-start;
     gap: 1.25rem;
@@ -75,22 +75,72 @@
     overflow: hidden;
 }
 
-table{
+table {
     height: 100%;
 }
 
 .chart {
+    display: flex;
+    padding: 0.5rem;
+    align-items: flex-start;
+    gap: 1rem;
     flex: 1 0 0;
-    align-self: self-end;
+    align-self: stretch;
 }
 
-.chart table td {
-    color: white;
-    font-family: Inter;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.75rem;
+.caption {
+    display: flex;
+    max-width: 11.25rem;
+    padding: 0rem 0rem 2rem 0rem;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+    gap: 2px;
+}
+
+.caption p{
+    margin: 0px;
+}
+
+.chartholder {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.barchart {
+    display: flex;
+    padding: 0rem 1rem;
+    align-items: flex-end;
+    gap: 1rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.title {
+    display: flex;
+    max-height: 2rem;
+    padding: 0.5rem 1rem;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.title p{
+    width: 100%;
+}
+
+.bar{
+  height: 100%;
+  flex: 1 0 0;
+  background: #D9D9D9;
+  min-height: 10px;
 }
 
 .interaction {
@@ -118,7 +168,7 @@ table{
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;    
+    line-height: normal;
     text-align: center;
     line-height: normal;
 }

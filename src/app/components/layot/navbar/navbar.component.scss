@@ -1,16 +1,15 @@
 .header-container {
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   background: white;
-  border-bottom: 0.0625rem #87B6A7 solid;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .title {
-  color: #B6174B;
-  font-size: 2rem;
+  color: rgb(79, 79, 79);
+  font-size: 1.5rem;
   font-family: Inter, sans-serif;
   font-weight: 700;
   word-wrap: break-word;

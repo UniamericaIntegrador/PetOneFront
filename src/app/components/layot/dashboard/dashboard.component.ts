@@ -47,4 +47,8 @@ export class DashboardComponent {
       error => console.error('Erro ao buscar contagem de procedimentos', error)
     );
   }
+
+  calcular(count: number){
+    return count = count * 5;
+  }
 }

@@ -18,3 +18,11 @@
 *{
     font-family: Inter;
 }
+
+.CustomModal{
+    --mdb-modal-width: 65rem;
+}
+
+.modal-header{
+    display: none;
+}
