@@ -5,6 +5,7 @@ import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.comp
 import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslist/procedimentoslist.component';
 import { VeterinarioslistComponent } from '../../veterinarios/veterinarioslist/veterinarioslist.component';
 import { DashboardService } from '../../../services/dashboard.service';
+import ApexCharts from 'apexcharts'
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent {
 
   ngOnInit() {
     this.fetchCounts();
+    this.grafico();
   }
 
   fetchCounts() {
@@ -46,5 +48,23 @@ export class DashboardComponent {
       count => this.ProcedimentoCount = count,
       error => console.error('Erro ao buscar contagem de procedimentos', error)
     );
+  }
+
+  grafico() {
+    var options = {
+      chart: {
+        type: 'bar'
+      },
+      series: [{
+        data: [1, this.TutorCount, this.PacienteCount, this.VeterinarioCount, this.ProcedimentoCount]
+      }],
+      xaxis: {
+        categories: ["Tutores", "Pacientes", "Veterinarios", "Procedimentos"]
+      }
+    }
+    
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    
+    chart.render();
   }
 }
