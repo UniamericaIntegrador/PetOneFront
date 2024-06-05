@@ -49,6 +49,6 @@ export class DashboardComponent {
   }
 
   calcular(count: number){
-    return count = count * 10;
+    return count = count * 5;
   }
 }

@@ -3,6 +3,14 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Veterinario } from '../models/veterinario';
 
+interface Cep {
+  cep: string;
+  logradouro: string;
+  localidade: string;
+  bairro: string;
+  uf: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +39,9 @@ export class VeterinarioService {
 
   findById(id: number): Observable<Veterinario>{
     return this.http.get<Veterinario>(this.API+"/findById/"+id);
+  }
+
+  getCEP(cep: Cep):Observable<Cep>{
+    return this.http.get<Cep>(`https://viacep.com.br/ws/${cep}/json/` );
   }
 }

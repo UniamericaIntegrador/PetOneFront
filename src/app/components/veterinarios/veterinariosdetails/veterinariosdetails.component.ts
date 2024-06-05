@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 
 export class VeterinariosdetailsComponent {
-  @Input("veterinario") veterinario: Veterinario = new Veterinario(0,'','','');
+  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', '');
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);
@@ -23,18 +23,18 @@ export class VeterinariosdetailsComponent {
 
   veterinarioService = inject(VeterinarioService);
 
-  constructor(){
+  constructor() {
     let id = this.router.snapshot.params['id'];
-    if(id > 0){
+    if (id > 0) {
       this.findById(id);
-    }else{
-      if(this.veterinario.id > 0){
+    } else {
+      if (this.veterinario.id > 0) {
         this.findById(id);
       }
     }
   }
 
-  findById(id: number){
+  findById(id: number) {
     this.veterinarioService.findById(id).subscribe({
       next: retorno => {
         this.veterinario = retorno;
@@ -95,5 +95,32 @@ export class VeterinariosdetailsComponent {
       });
     }
   }
+  
+  cep: any;
+  logradouro: any;
+  localidade: any;
+  bairro: any;
+  uf: any;
+  complemento: any;
+
+  ngOnInit(): void { }
+
+  buscaCEP() {
+    this.veterinarioService.getCEP(this.cep).subscribe((data) => {
+      this.cep = data.cep;
+      this.logradouro = data.logradouro;
+      this.localidade = data.localidade;
+      this.bairro = data.bairro;
+      this.uf = data.uf;
+      console.log(this.bairro);
+    });
+  }
+  blur(event: any) {
+    this.buscaCEP();
+
+    console.log(this.buscaCEP);
+  }
+
 
 }
+
