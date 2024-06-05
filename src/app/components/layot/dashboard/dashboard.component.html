@@ -21,46 +21,38 @@
     </div>
     <div class="charts">
         <div class="chart">
-            <table class="charts-css column data-center show-labels">
-                <thead>
-                    <tr>
-                        <th scope="col"> Tutores </th>
-                        <th scope="col"> Pets </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <th scope="row"> Tutores </th>
-                        <td style="--size: calc( {{TutorCount}} / 100); --color: #F98948;"> {{TutorCount}} </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"> Pets </th>
-                        <td style="--size: calc( {{PacienteCount}} / 100); --color: #B6174B;"> {{PacienteCount}} </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="chart">
-            <table class="charts-css column data-center show-labels">
-                <thead>
-                    <tr>
-                        <th scope="col"> Veterinários </th>
-                        <th scope="col"> Procedimentos </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <th scope="row"> Veterinários </th>
-                        <td style="--size: calc( {{VeterinarioCount}} / 100); --color: #87B6A7; "> {{VeterinarioCount}} </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"> Procedimentos </th>
-                        <td style="--size: calc( {{ProcedimentoCount}} / 100); --color: #F6E8EA;"> {{ProcedimentoCount}} </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="caption">
+                <p>0</p>
+                <p>10</p>
+                <p>20</p>
+                <p>30</p>
+                <p>40</p>
+                <p>50</p>
+                <p>60</p>
+                <p>70</p>
+                <p>80</p>
+                <p>90</p>
+                <p>100</p>
+            </div>
+            <div class="chartholder">
+                <div class="barchart">
+                    <div class="bar" [style.height.px]="calcular(VeterinarioCount)">
+                    </div>
+                    <div class="bar" [style.height.px]="calcular(ProcedimentoCount)">
+                    </div>
+                    <div class="bar" [style.height.px]="calcular(PacienteCount)">
+                    </div>
+                    <div class="bar" [style.height.px]="calcular(TutorCount)">
+                    </div>
+                                                      
+                </div>
+                <div class="title">
+                    <p>Veterinários</p>
+                    <p>Procedimentos</p>
+                    <p>Pacientes</p>
+                    <p>Tutores</p>
+                </div>
+            </div>
         </div>
         <div class="interaction">
             <button class="addbtn">
