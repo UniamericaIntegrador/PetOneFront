@@ -9,11 +9,15 @@ import { Procedimento } from '../../../models/procedimento';
 import { Tutor } from '../../../models/tutor';
 import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.component';
 import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslist/procedimentoslist.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-pacientesdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule, TutoreslistComponent, ProcedimentoslistComponent],
+  imports: [FormsModule, MdbModalModule, TutoreslistComponent, ProcedimentoslistComponent, MatFormFieldModule, MatInputModule, MatDatepickerModule],
   templateUrl: './pacientesdetails.component.html',
   styleUrl: './pacientesdetails.component.scss'
 })

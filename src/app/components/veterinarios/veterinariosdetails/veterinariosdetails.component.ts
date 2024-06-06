@@ -1,29 +1,39 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { Veterinario } from '../../../models/veterinario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
+import { EnderecoService } from '../../../services/endereco.service';
 
 @Component({
   selector: 'app-veterinariosdetails',
   standalone: true,
   imports: [FormsModule, MdbModalModule],
   templateUrl: './veterinariosdetails.component.html',
-  styleUrl: './veterinariosdetails.component.scss'
+  styleUrls: ['./veterinariosdetails.component.scss'] 
 })
 
 export class VeterinariosdetailsComponent {
   @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', '');
   @Output("retorno") retorno = new EventEmitter<any>();
 
-  router = inject(ActivatedRoute);
-  router2 = inject(Router);
+  constructor(
+    private router: ActivatedRoute,
+    private router2: Router,
+    private veterinarioService: VeterinarioService,
+    private enderecoService: EnderecoService // Corrigido para EnderecoService
+  ) {}
 
-  veterinarioService = inject(VeterinarioService);
+  cep: any;
+  logradouro: any;
+  localidade: any;
+  bairro: any;
+  uf: any;
+  complemento: any;
 
-  constructor() {
+  ngOnInit() {
     let id = this.router.snapshot.params['id'];
     if (id > 0) {
       this.findById(id);
@@ -95,32 +105,20 @@ export class VeterinariosdetailsComponent {
       });
     }
   }
-  
-  cep: any;
-  logradouro: any;
-  localidade: any;
-  bairro: any;
-  uf: any;
-  complemento: any;
 
-  ngOnInit(): void { }
-
-  buscaCEP() {
-    this.veterinarioService.getCEP(this.cep).subscribe((data) => {
-      this.cep = data.cep;
-      this.logradouro = data.logradouro;
-      this.localidade = data.localidade;
-      this.bairro = data.bairro;
-      this.uf = data.uf;
-      console.log(this.bairro);
+  blur(event: any) {
+    this.enderecoService.getCEP(this.cep).subscribe({
+      next: novocep => {
+        console.log(novocep);
+        this.cep = novocep.cep;
+        this.logradouro = novocep.logradouro;
+        this.localidade = novocep.localidade;
+        this.bairro = novocep.bairro;
+        this.uf = novocep.uf;
+      },
+      error: erro => {
+        console.log(erro);
+      },
     });
   }
-  blur(event: any) {
-    this.buscaCEP();
-
-    console.log(this.buscaCEP);
-  }
-
-
 }
-

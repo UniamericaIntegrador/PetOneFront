@@ -1,3 +1,121 @@
+<div class="modalholder">
+    <div class="title">
+        <div class="text">
+            <h2>Pacientes</h2>
+            <span><b>Edite o formulário</b> para atualizar a tabela de veterinários</span>
+        </div>
+    </div>
+    <div class="inputholder">
+        <div class="input-patient">
+            <div class="inpit">
+                <p>Nome</p>
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="paciente.nome" />
+
+            </div>
+            <div class="inpit">
+                <p>Especie:</p>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="paciente.especie">
+                    <option selected>Selecione a espécie</option>
+                    <option value="1">Gato</option>
+                    <option value="2">Cachorro</option>
+                </select>
+            </div>
+            <div class="inpit">
+                <p>Raça</p>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="paciente.raca">
+                    <option selected>Selecione a raça</option>
+                    <option value="1">Malhado</option>
+                    <option value="2">Golden Retriever</option>
+                </select>
+            </div>
+        </div>
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="paciente.dataNascimento">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+    </div>
+
+
+
+
+
+
+    <div class="btn-buscas">
+        <div>
+            @if(paciente.tutor == null){
+            <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded" mdbRipple
+                (click)="buscarTutor()">
+                Buscar tutor</button>
+            }@else {
+            <div class="row">
+                <div class="col-lg-8">
+                    <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
+                </div>
+                <div class="col-lg-4">
+                    <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
+                        Trocar Tutor
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="procedimento-form">
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (procedimento of paciente.procedimentos; track $index) {
+            <tr>
+                <td>{{ procedimento.id }}</td>
+                <td>{{ procedimento.nomeProcedimento }}</td>
+                <td class="direita">
+                    <button type="button" class="btn btn-danger btn-rounded btnmargin" mdbRipple
+                        (click)="desvincularProcedimentoPaciente(procedimento)">
+                        Deletar
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded" mdbRipple
+        (click)="buscarProcedimentos()">
+        Buscar Procedimento
+    </button>
+</div>
+
+
+
+
+
+<button type="button" style="background-color: #B6174B; color: aliceblue;" class="btn btn-info btn-rounded"
+    (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+    Adicionar
+</button>
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <div class="container">
     <h3 style="color: #000000">PACIENTE</h3>
     <p>Edite o formulário para atualizar a tabela de pacientes</p>
@@ -96,6 +214,8 @@
         <div class="col-lg-4"></div>
     </div>
 </div>
+-->
+
 
 <ng-template #modalTutores>
     <div class="modal-header">
