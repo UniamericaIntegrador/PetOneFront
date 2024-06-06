@@ -92,12 +92,16 @@ export class PacienteslistComponent {
 
     new(){
       this.pacienteEdit = new Paciente(0,'','',new Date(0),'',null);
-      this.modalRef = this.modalService.open(this.modalPacienteDetalhe);
+      this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
+        modalClass: 'CustomModal'
+      });
     }
 
     edit(paciente: Paciente){
       this.pacienteEdit = Object.assign({}, paciente); //clonando pra evitar referência de objeto
-      this.modalRef = this.modalService.open(this.modalPacienteDetalhe);
+      this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
+        modalClass: 'CustomModal'
+      });
     }
 
     retornoDetalhe(paciente: Paciente){
