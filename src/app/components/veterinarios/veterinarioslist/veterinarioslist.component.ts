@@ -101,7 +101,9 @@ export class VeterinarioslistComponent {
 
     edit(veterinario: Veterinario){
       this.veterinarioEdit = Object.assign({}, veterinario); //clonando pra evitar referência de objeto
-      this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe);
+      this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe, {
+        modalClass: 'CustomModal'
+      });
     }
 
     retornoDetalhe(veterinario: Veterinario){

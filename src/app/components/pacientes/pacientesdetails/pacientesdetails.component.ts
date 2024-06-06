@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject, input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Paciente } from '../../../models/paciente';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,15 +9,27 @@ import { Procedimento } from '../../../models/procedimento';
 import { Tutor } from '../../../models/tutor';
 import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.component';
 import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslist/procedimentoslist.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-pacientesdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule, TutoreslistComponent, ProcedimentoslistComponent, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MdbModalModule,
+    TutoreslistComponent,
+    ProcedimentoslistComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatSelectModule
+  ],
   templateUrl: './pacientesdetails.component.html',
   styleUrl: './pacientesdetails.component.scss'
 })
@@ -36,7 +48,17 @@ export class PacientesdetailsComponent {
 
   pacienteService = inject(PacienteService);
 
+  startDate = new Date(2024, 6, 6);
+
+  lista: string[] = [];
+  listaDog: string[] = [];
+
+  Gatos: boolean = false;
+  Cachorros: boolean = false;
+
   constructor() {
+    this.carregarRacas();
+    this.carregarRacasDog();
     let id = this.router.snapshot.params['id'];
     if (id > 0) {
       this.findById(id);
@@ -135,4 +157,36 @@ export class PacientesdetailsComponent {
     let posicao = this.paciente.procedimentos.findIndex(x => { return x.id == procedimento.id });
     this.paciente.procedimentos.splice(posicao, 1);
   }
+
+
+  carregarRacas() {
+    this.pacienteService.getRacas().subscribe({
+      next: data => {
+        this.lista = data;
+      },
+      error: erro => {
+        Swal.fire({
+          title: "Ocorreu um erro ao exibir a lista de raças",
+          icon: "error",
+          confirmButtonText: "Ok"
+        });
+      }
+    });
+  }
+
+  carregarRacasDog() {
+    this.pacienteService.getRacasDog().subscribe({
+      next: data => {
+        this.listaDog = data;
+      },
+      error: erro => {
+        Swal.fire({
+          title: "Ocorreu um erro ao exibir a lista de raças",
+          icon: "error",
+          confirmButtonText: "Ok"
+        });
+      }
+    });
+  }
+  
 }
