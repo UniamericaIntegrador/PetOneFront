@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { EnderecoService } from '../../../services/endereco.service';
+import { Endereco } from '../../../models/endereco';
 
 @Component({
   selector: 'app-veterinariosdetails',
@@ -16,7 +17,7 @@ import { EnderecoService } from '../../../services/endereco.service';
 })
 
 export class VeterinariosdetailsComponent {
-  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', null);
+  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', new Endereco(0,'','','','','','',''));
   @Output("retorno") retorno = new EventEmitter<any>();
 
   constructor(
@@ -25,13 +26,6 @@ export class VeterinariosdetailsComponent {
     private veterinarioService: VeterinarioService,
     private enderecoService: EnderecoService // Corrigido para EnderecoService
   ) {}
-
-  cep: any;
-  logradouro: any;
-  localidade: any;
-  bairro: any;
-  uf: any;
-  complemento: any;
 
   ngOnInit() {
     let id = this.router.snapshot.params['id'];
@@ -59,6 +53,7 @@ export class VeterinariosdetailsComponent {
     });
   }
 
+  /*
   save() {
     if (this.veterinario.id > 0) {
       this.veterinarioService.update(this.veterinario, this.veterinario.id).subscribe({
@@ -105,38 +100,97 @@ export class VeterinariosdetailsComponent {
       });
     }
   }
+  */
 
-  blur(event: any) {
-    this.enderecoService.getCEP(this.cep).subscribe({
-      next: novocep => {
-        console.log(novocep);
-        this.cep = novocep.cep;
-        this.logradouro = novocep.logradouro;
-        this.localidade = novocep.cidade;
-        this.bairro = novocep.bairro;
-        this.uf = novocep.estado;
-      },
-      error: erro => {
-        console.log(erro);
-      },
-    });
-  }
+  save() {
+    if (this.veterinario.id > 0) {
+        // Atualiza o endereço primeiro, se necessário
+        this.enderecoService.update(this.veterinario.endereco, this.veterinario.endereco.id).subscribe({
+            next: enderecoAtualizado => {
+                // Após o endereço ser atualizado, atualiza o veterinário
+                this.veterinarioService.update(this.veterinario, this.veterinario.id).subscribe({
+                    next: mensagem => {
+                        Swal.fire({
+                            title: mensagem,
+                            icon: 'success',
+                            confirmButtonText: 'Ok',
+                        });
+                        this.router2.navigate(['admin/veterinarios'], {
+                            state: { veterinarioEditado: this.veterinario },
+                        });
+                        this.retorno.emit(this.veterinario);
+                    },
+                    error: erro => {
+                        Swal.fire({
+                            title: 'Erro ao editar o cadastro do veterinário',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        });
+                    },
+                });
+            },
+            error: erro => {
+                Swal.fire({
+                    title: 'Erro ao atualizar o endereço',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                });
+            },
+        });
+    } else {
+        // Salva o endereço primeiro
+        this.enderecoService.save(this.veterinario.endereco).subscribe({
+            next: (endereco: Endereco) => {
+                // Atualiza o endereço do veterinário com o ID retornado
+                this.veterinario.endereco.id = endereco.id;
+                // Após o endereço ser salvo, salva o veterinário
+                this.veterinarioService.save(this.veterinario).subscribe({
+                    next: mensagem => {
+                        Swal.fire({
+                            title: mensagem,
+                            confirmButtonColor: '#54B4D3',
+                            text: 'Veterinário salvo com sucesso!',
+                            icon: 'success',
+                        });
+                        this.router2.navigate(['admin/veterinarios'], {
+                            state: { pacienteNovo: this.veterinario },
+                        });
+                        this.retorno.emit(this.veterinario);
+                    },
+                    error: erro => {
+                        Swal.fire({
+                            title: 'Erro ao salvar o veterinário',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        });
+                    },
+                });
+            },
+            error: erro => {
+                Swal.fire({
+                    title: 'Erro ao salvar o endereço',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                });
+            },
+        });
+    }
+}
 
-  /*
   blur(event: any) {
     this.enderecoService.getCEP(this.veterinario.endereco.cep).subscribe({
       next: novocep => {
         console.log(novocep);
         this.veterinario.endereco.cep = novocep.cep;
         this.veterinario.endereco.logradouro = novocep.logradouro;
-        this.veterinario.endereco.cidade = novocep.cidade;
+        this.veterinario.endereco.cidade = novocep.localidade;
         this.veterinario.endereco.bairro = novocep.bairro;
-        this.veterinario.endereco.estado = novocep.estado;
+        this.veterinario.endereco.estado = novocep.uf;
         console.log(this.veterinario);
       },
       error: erro => {
         console.log(erro);
       },
     });
-  }*/
+  }
 }

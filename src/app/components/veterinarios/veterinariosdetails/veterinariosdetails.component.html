@@ -9,16 +9,13 @@
     <div class="input-user-data">
         <div class="input-nome">
             <p>Nome completo</p>
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Ex. Dra. Ana" value="" [(ngModel)]="veterinario.nome">
-            </mat-form-field>
-            
+            <input type="text" name="nome" class="form-control formulario" (keyup.enter)="save()"
+                [(ngModel)]="veterinario.nome" />
         </div>
         <div class="input-crmv">
             <p>CRMV</p>
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="" value="" [(ngModel)]="veterinario.crmv">
-            </mat-form-field>
+            <input type="text" name="nome" class="form-control formulario" (keyup.enter)="save()"
+                [(ngModel)]="veterinario.crmv" />
         </div>
     </div>
     <div class="input-endereco">
@@ -27,41 +24,45 @@
             <div id="CEP">
                 <label for="">CEP</label>
                 <input #buscaCEP type="text" class="form-control" name="cep" id="cep" (blur)="blur($event)" ngModel
-                    [(ngModel)]="cep" required f>
+                    [(ngModel)]="veterinario.endereco.cep" required f>
             </div>
             <div id="Rua">
                 <label for="">Logradouro</label>
                 <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="logradouro" id="logradouro" ngModel
-                        [(ngModel)]="logradouro" required />
+                        [(ngModel)]="veterinario.endereco.logradouro" required />
             </div>
             <div id="Numero">
                 <label for="">Numero</label>
-                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid">
+                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid" [(ngModel)]="veterinario.endereco.numero" >
             </div>
             <div id="Rua">
                 <label for="">Bairro</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro" id="bairro" ngModel [(ngModel)]="bairro"
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro" id="bairro" ngModel [(ngModel)]="veterinario.endereco.bairro"
                         required />
             </div>
             <div id="Cidade">
                 <label for="">Cidade</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="cidade" id="cidadde" ngModel
-                        [(ngModel)]="localidade" required />
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="localidade" id="localidade" ngModel
+                        [(ngModel)]="veterinario.endereco.cidade" required />
             </div>
             <div id="Estado">
                 <label for="">Estado</label>
-                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="estado" required />
+                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="veterinario.endereco.estado" required />
             </div>
             
             <div id="Complemento">
                 <label for="">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento" ngModel [(ngModel)]="complemento" required />
+                <input type="text" class="form-control" name="complemento" id="complemento" ngModel [(ngModel)]="veterinario.endereco.complemento" required />
             </div>
         </div>
     </div>
     <div class="btn-holder">
         <div class="btns">
             <button style="background-color: #87B6A7; color: aliceblue;" type="button"
+                class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+                Adicionar
+            </button>
+            <button style="background-color: red; color: aliceblue;" type="button"
                 class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
                 Adicionar
             </button>

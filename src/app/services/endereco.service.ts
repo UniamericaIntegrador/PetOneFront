@@ -8,11 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class EnderecoService {
 
+  API = "http://localhost:8080/api/endereco";
   http = inject(HttpClient);
 
   constructor() { }
 
-  getCEP(cep: string):Observable<Endereco>{
-    return this.http.get<Endereco>(`https://viacep.com.br/ws/${cep}/json/` );
+  getCEP(cep: string): Observable<any> {
+    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`);
+  }
+
+  save(endereco: Endereco): Observable<Endereco> {
+    return this.http.post<Endereco>(`${this.API}/save`, endereco);
+  }
+
+  update(endereco: Endereco, id: number): Observable<Endereco> {
+    return this.http.put<Endereco>(`${this.API}/update/${id}`, endereco);
   }
 }

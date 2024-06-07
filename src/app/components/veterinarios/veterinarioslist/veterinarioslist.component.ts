@@ -6,6 +6,7 @@ import { MdbModalConfig, MdbModalModule, MdbModalRef, MdbModalService } from 'md
 import { Veterinario } from '../../../models/veterinario';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
+import { Endereco } from '../../../models/endereco';
 
 @Component({
   selector: 'app-veterinarioslist',
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class VeterinarioslistComponent {
   lista: Veterinario[] = [];
-  veterinarioEdit: Veterinario = new Veterinario(0,'','',null);
+  veterinarioEdit: Veterinario = new Veterinario(0,'','',new Endereco(0,'','','','','','',''));
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -93,7 +94,7 @@ export class VeterinarioslistComponent {
     }
 
     new(){
-      this.veterinarioEdit = new Veterinario(0,'','',null);
+      this.veterinarioEdit = new Veterinario(0,'','',new Endereco(0,'','','','','','',''));
       this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe, {
         modalClass: 'CustomModal'
       });
