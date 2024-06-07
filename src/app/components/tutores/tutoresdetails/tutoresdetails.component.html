@@ -3,63 +3,104 @@
         <h2>Tutor</h2>
         <p><b>Edite o formulário</b>&nbsp;para atualizar a tabela de tutores</p>
     </div>
-    <button _ngcontent-ng-c3955682678="" type="button" aria-label="Close" class="btn-close"></button>
     <div class="tutor">
         <div>
-            <p>Nome completo</p>
+            <p>Nome</p>
             <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
                 [(ngModel)]="tutor.nome" />
         </div>
         <div>
             <p>CPF</p>
-            <input type="text" name="cpf" class="form-control fomularioTutor" (keyup.enter)="save()"
+            <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
                 [(ngModel)]="tutor.cpf" />
         </div>
     </div>
+
     <div class="input-endereco">
         <h4 class="sub-title">Endereço:</h4>
         <div class="input-holder">
             <div id="CEP">
-                <label for="cep">CEP</label>
-                <input type="text" class="form-control" name="cep" id="cep" (blur)="blur($event)"
-                    [(ngModel)]="tutor.endereco.cep" required>
+                <label for="">CEP</label>
+                <input #buscaCEP type="text" class="form-control" name="cep" id="cep" (blur)="blur($event)" ngModel
+                    [(ngModel)]="cep" required f>
             </div>
-            <div id="Logradouro">
-                <label for="logradouro">Logradouro</label>
-                <input type="text" class="form-control" name="logradouro" id="logradouro"
-                    [(ngModel)]="tutor.endereco.logradouro" required>
+            <div id="Rua">
+                <label for="">Logradouro</label>
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="logradouro"
+                    id="logradouro" ngModel [(ngModel)]="logradouro" required />
             </div>
             <div id="Numero">
-                <label for="numero">Número</label>
-                <input type="text" class="form-control" name="numero" id="numero" [(ngModel)]="tutor.endereco.numero">
+                <label for="">Numero</label>
+                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid">
             </div>
-            <div id="Bairro">
-                <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" name="bairro" id="bairro" [(ngModel)]="tutor.endereco.bairro"
-                    required>
+            <div id="Rua">
+                <label for="">Bairro</label>
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro"
+                    id="bairro" ngModel [(ngModel)]="bairro" required />
             </div>
             <div id="Cidade">
-                <label for="cidade">Cidade</label>
-                <input type="text" class="form-control" name="localidade" id="localidade" [(ngModel)]="tutor.endereco.cidade"
-                    required>
+                <label for="">Cidade</label>
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="localidade"
+                    id="localidade" ngModel [(ngModel)]="localidade" required />
             </div>
             <div id="Estado">
-                <label for="estado">Estado</label>
-                <input type="text" class="form-control" name="uf" id="uf" [(ngModel)]="tutor.endereco.estado"
-                    required>
+                <label for="">Estado</label>
+                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="uf" required />
             </div>
+
             <div id="Complemento">
-                <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento"
-                    [(ngModel)]="tutor.endereco.complemento">
+                <label for="">Complemento</label>
+                <input type="text" class="form-control" name="complemento" id="complemento" ngModel
+                    [(ngModel)]="complemento" required />
             </div>
         </div>
         <div class="btn-holder">
             <div class="btns">
                 <button style="background-color: #87B6A7; color: aliceblue;" type="button"
-                    class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init
+                    class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+                    Adicionar
+                </button>
+            </div>
+        </div>
+</div>
+
+
+
+    <!--
+    <div class="container">
+    <h3 style="color: #000000">Tutores</h3>
+    <p>Edite o formulário para atualizar a tabela de tutores</p>
+    <div class="card">
+        <div class="card-body centralizarModal">
+            <div class="holder">
+                <div>
+                    Nome
+                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.nome" />
+
+                </div>
+                <div>
+                    Cpf
+                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.cpf" />
+
+                </div>
+                <div>
+                    Idade
+                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.idade" />
+                </div>
+                <div>
+                    Endereço
+                    <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.endereco" />
+                </div>
+                
+
+            </div>
+            <div class="teste">
+                <button style="background-color: #f98948; color: aliceblue;" type="button" class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init
                     (click)="save()">
                     Adicionar
                 </button>
             </div>
         </div>
+    </div>
+</div>
+-->
