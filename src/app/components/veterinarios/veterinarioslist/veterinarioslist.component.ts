@@ -19,6 +19,9 @@ export class VeterinarioslistComponent {
   lista: Veterinario[] = [];
   veterinarioEdit: Veterinario = new Veterinario(0,'','',new Endereco(0,'','','','','','',''));
 
+  listaEndereco: Endereco[] = [];
+  enderecoEdit: Endereco = new Endereco(0,'','','','','','','');
+
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
 
@@ -34,9 +37,15 @@ export class VeterinarioslistComponent {
     let veterinarioNovo = history.state.veterinarioNovo;
     let veterinarioEditado = history.state.veterinarioEditado;
 
+    let enderecoNovo = history.state.enderecoNovo;
+    let endrecoEditado = history.state.endrecoEditado;
+
     if(veterinarioNovo != null){
-      veterinarioNovo.id = 555;
       this.lista.push(veterinarioNovo);
+    }
+
+    if(enderecoNovo != null){
+      this.listaEndereco.push(enderecoNovo);
     }
 
     if(veterinarioEditado != null){
@@ -45,9 +54,18 @@ export class VeterinarioslistComponent {
       });
       this.lista[indice] = veterinarioEditado;
     }
+
+    if(endrecoEditado != null){
+      let indice = this.listaEndereco.findIndex((x) => {
+        return x.id == endrecoEditado.id;
+      });
+      this.listaEndereco[indice] = endrecoEditado;
+    }
   }
 
+  /*
   listAll(){
+    console.log("list all esta funcionado")
     this.veterinarioService.listAll().subscribe({
       next: lista => {
         this.lista = lista;
@@ -61,6 +79,24 @@ export class VeterinarioslistComponent {
       }
     });
   }
+  */
+
+  listAll(){
+    console.log("list all esta funcionado");
+    this.veterinarioService.listAll().subscribe({
+        next: lista => {
+            this.lista = lista;
+            console.log(lista); // Verifique se os dados de endereço estão presentes
+        },
+        error: erro => {
+            Swal.fire({
+                title: "Ocorreu um erro ao exibir a lista de veterinário",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+        }
+    });
+}
 
   delete(veterinario: Veterinario){
     Swal.fire({
@@ -101,13 +137,18 @@ export class VeterinarioslistComponent {
     }
 
     edit(veterinario: Veterinario){
-      this.veterinarioEdit = Object.assign({}, veterinario); //clonando pra evitar referência de objeto
+      this.veterinarioEdit = Object.assign({}, veterinario);
+      console.log(veterinario.id)
+      this.veterinarioEdit.endereco = Object.assign({}, veterinario.endereco);
+      console.log("objeto endereco")
       this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe, {
         modalClass: 'CustomModal'
       });
     }
+    
 
     retornoDetalhe(veterinario: Veterinario){
+      console.log("retorno de detalhes")
       this.listAll();
       this.modalRef.close();
     }

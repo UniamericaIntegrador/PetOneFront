@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Veterinario } from '../models/veterinario';
+import { Endereco } from '../models/endereco';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class VeterinarioService {
   http = inject(HttpClient);
   
   API = "http://localhost:8080/api/veterinario";
+  
+  APIENDERECO = "http://localhost:8080/api/endereco";
 
   constructor() { }
   listAll(): Observable<Veterinario[]>{
@@ -32,4 +35,10 @@ export class VeterinarioService {
   findById(id: number): Observable<Veterinario>{
     return this.http.get<Veterinario>(this.API+"/findById/"+id);
   }
+
+  findByIdEndereco(id: number): Observable<Endereco>{
+    return this.http.get<Endereco>(this.API+"/findById/"+id);
+  }
+
+
 }

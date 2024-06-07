@@ -120,4 +120,5 @@ export class TutoresdetailsComponent {
       },
     });
   }
+
 }

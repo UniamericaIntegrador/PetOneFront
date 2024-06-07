@@ -92,15 +92,16 @@ export class TutoreslistComponent {
     }
 
     new(){
-<<<<<<< HEAD
+
       this.tutorEdit = new Tutor(0,'','',0,'');
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });
-=======
+
       this.tutorEdit = new Tutor(0,'','',0,null);
+
       this.modalRef = this.modalService.open(this.modalTutorDetalhe);
->>>>>>> 48b2632fe55d6788702db0fd5a5e09715fb9c48f
+
     }
 
     edit(tutor: Tutor){
