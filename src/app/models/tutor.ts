@@ -1,15 +1,17 @@
+import { Endereco } from "./endereco";
+
 export class Tutor {
     id!: number;
     nome!: string;
     cpf!: string;
     idade!: number;
-    endereco!: string;
+    endereco!: Endereco;
 
-    constructor(id: number, nome: string, cpf: string, idade: number, endereco: string){
+    constructor(id: number, nome: string, cpf: string, idade: number, endereco: Endereco | null){
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
-        this.endereco = endereco;
+        if(endereco) this.endereco = endereco;
     }
 }

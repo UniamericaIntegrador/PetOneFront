@@ -1,17 +1,21 @@
 export class Endereco {
+    id!: number;
     cep!: string;
     logradouro!: string;
-    localidade!: string;
+    numero!:string;
+    cidade!: string;
     bairro!: string;
-    uf!: string;
+    estado!: string;
     complemento!: string;
 
-    constructor(cep: string, logradouro: string, localidade: string, bairro: string, uf: string, complemento: string){
+    constructor(id: number, cep: string, logradouro: string, numero: string,cidade: string, bairro: string, estado: string, complemento: string){
+        id = this.id;
         cep = this.cep;
         logradouro = this.logradouro;
-        localidade = this.localidade;
+        numero = this.numero;
+        cidade = this.cidade;
         bairro = this.bairro;
-        uf = this.uf;
+        estado = this.estado;
         complemento = this.complemento
     }
 }

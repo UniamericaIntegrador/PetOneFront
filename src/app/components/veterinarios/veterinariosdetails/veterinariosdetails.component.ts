@@ -16,7 +16,7 @@ import { EnderecoService } from '../../../services/endereco.service';
 })
 
 export class VeterinariosdetailsComponent {
-  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', '');
+  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', null);
   @Output("retorno") retorno = new EventEmitter<any>();
 
   constructor(
@@ -112,13 +112,31 @@ export class VeterinariosdetailsComponent {
         console.log(novocep);
         this.cep = novocep.cep;
         this.logradouro = novocep.logradouro;
-        this.localidade = novocep.localidade;
+        this.localidade = novocep.cidade;
         this.bairro = novocep.bairro;
-        this.uf = novocep.uf;
+        this.uf = novocep.estado;
       },
       error: erro => {
         console.log(erro);
       },
     });
   }
+
+  /*
+  blur(event: any) {
+    this.enderecoService.getCEP(this.veterinario.endereco.cep).subscribe({
+      next: novocep => {
+        console.log(novocep);
+        this.veterinario.endereco.cep = novocep.cep;
+        this.veterinario.endereco.logradouro = novocep.logradouro;
+        this.veterinario.endereco.cidade = novocep.cidade;
+        this.veterinario.endereco.bairro = novocep.bairro;
+        this.veterinario.endereco.estado = novocep.estado;
+        console.log(this.veterinario);
+      },
+      error: erro => {
+        console.log(erro);
+      },
+    });
+  }*/
 }

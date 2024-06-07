@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrl: './tutoresdetails.component.scss'
 })
 export class TutoresdetailsComponent {
-  @Input("tutor") tutor: Tutor = new Tutor(0, '', '', 0, '');
+  @Input("tutor") tutor: Tutor = new Tutor(0, '', '', 0, null);
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);

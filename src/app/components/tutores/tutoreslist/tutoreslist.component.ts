@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class TutoreslistComponent {
   lista: Tutor[] = [];
-  tutorEdit: Tutor = new Tutor(0,'','',0,'');
+  tutorEdit: Tutor = new Tutor(0,'','',0,null);
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -92,7 +92,7 @@ export class TutoreslistComponent {
     }
 
     new(){
-      this.tutorEdit = new Tutor(0,'','',0,'');
+      this.tutorEdit = new Tutor(0,'','',0,null);
       this.modalRef = this.modalService.open(this.modalTutorDetalhe);
     }
 

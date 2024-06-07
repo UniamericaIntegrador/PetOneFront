@@ -35,7 +35,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 })
 
 export class PacientesdetailsComponent {
-  @Input("paciente") paciente: Paciente = new Paciente(0, '', '', new Date(), '', null);
+  @Input("paciente") paciente: Paciente = new Paciente(0,'', null, new Date(), null, null);
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);

@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 
 export class PacienteslistComponent {
   lista: Paciente[] = [];
-  pacienteEdit: Paciente = new Paciente(0,'','',new Date(0),'',null);
+  pacienteEdit: Paciente = new Paciente(0,'',null,new Date(0),null,null);
 
   modalService = inject(MdbModalService);
   @ViewChild("modalPacienteDetalhe") modalPacienteDetalhe!: TemplateRef<any>;
@@ -91,7 +91,7 @@ export class PacienteslistComponent {
     }
 
     new(){
-      this.pacienteEdit = new Paciente(0,'','',new Date(0),'',null);
+      this.pacienteEdit = new Paciente(0,'',null,new Date(0),null,null);
       this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
         modalClass: 'CustomModal'
       });
