@@ -9,13 +9,16 @@
     <div class="input-user-data">
         <div class="input-nome">
             <p>Nome completo</p>
-            <input type="text" name="nome" class="form-control formulario" (keyup.enter)="save()"
-                [(ngModel)]="veterinario.nome" />
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ex. Dra. Ana" value="" [(ngModel)]="veterinario.nome">
+            </mat-form-field>
+            
         </div>
         <div class="input-crmv">
             <p>CRMV</p>
-            <input type="text" name="nome" class="form-control formulario" (keyup.enter)="save()"
-                [(ngModel)]="veterinario.crmv" />
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="" value="" [(ngModel)]="veterinario.crmv">
+            </mat-form-field>
         </div>
     </div>
     <div class="input-endereco">
@@ -47,7 +50,7 @@
             </div>
             <div id="Estado">
                 <label for="">Estado</label>
-                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="uf" required />
+                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="estado" required />
             </div>
             
             <div id="Complemento">
@@ -59,10 +62,6 @@
     <div class="btn-holder">
         <div class="btns">
             <button style="background-color: #87B6A7; color: aliceblue;" type="button"
-                class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
-                Adicionar
-            </button>
-            <button style="background-color: red; color: aliceblue;" type="button"
                 class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
                 Adicionar
             </button>
