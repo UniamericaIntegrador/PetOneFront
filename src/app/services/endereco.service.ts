@@ -13,11 +13,15 @@ export class EnderecoService {
 
   constructor() { }
 
-  getCEP(cep: string):Observable<any>{
-    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/` );
+  getCEP(cep: string): Observable<any> {
+    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 
-  save(endereco: Endereco): Observable<string>{
-    return this.http.post<string>(this.API+"/save", endereco, {responseType: 'text' as 'json'});
+  save(endereco: Endereco): Observable<Endereco> {
+    return this.http.post<Endereco>(`${this.API}/save`, endereco);
+  }
+
+  update(endereco: Endereco, id: number): Observable<Endereco> {
+    return this.http.put<Endereco>(`${this.API}/update/${id}`, endereco);
   }
 }
