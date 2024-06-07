@@ -5,6 +5,8 @@ import { Tutor } from '../../../models/tutor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
+import { Endereco } from '../../../models/endereco';
+import { EnderecoService } from '../../../services/endereco.service';
 
 @Component({
   selector: 'app-tutoresdetails',
@@ -21,19 +23,27 @@ export class TutoresdetailsComponent {
   router2 = inject(Router);
 
   tutorService = inject(TutorService);
+  enderecoService = inject(EnderecoService);
 
-  constructor(){
+  constructor() {
     let id = this.router.snapshot.params['id'];
-    if(id > 0){
+    if (id > 0) {
       this.findById(id);
-    }else{
-      if(this.tutor.id > 0){
+    } else {
+      if (this.tutor.id > 0) {
         this.findById(id);
       }
     }
   }
 
-  findById(id: number){
+  cep: any;
+  logradouro: any;
+  localidade: any;
+  bairro: any;
+  uf: any;
+  complemento: any;
+
+  findById(id: number) {
     this.tutorService.findById(id).subscribe({
       next: retorno => {
         this.tutor = retorno;
@@ -95,4 +105,19 @@ export class TutoresdetailsComponent {
     }
   }
 
+  blur(event: any) {
+    this.enderecoService.getCEP(this.cep).subscribe({
+      next: novocep => {
+        console.log(novocep);
+        this.cep = novocep.cep;
+        this.logradouro = novocep.logradouro;
+        this.localidade = novocep.localidade;
+        this.bairro = novocep.bairro;
+        this.uf = novocep.uf;
+      },
+      error: erro => {
+        console.log(erro);
+      },
+    });
+  }
 }
