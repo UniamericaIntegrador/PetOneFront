@@ -24,35 +24,35 @@
             <div id="CEP">
                 <label for="">CEP</label>
                 <input #buscaCEP type="text" class="form-control" name="cep" id="cep" (blur)="blur($event)" ngModel
-                    [(ngModel)]="cep" required f>
+                    [(ngModel)]="veterinario.endereco.cep" required f>
             </div>
             <div id="Rua">
                 <label for="">Logradouro</label>
                 <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="logradouro" id="logradouro" ngModel
-                        [(ngModel)]="logradouro" required />
+                        [(ngModel)]="veterinario.endereco.logradouro" required />
             </div>
             <div id="Numero">
                 <label for="">Numero</label>
-                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid">
+                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid" [(ngModel)]="veterinario.endereco.numero" >
             </div>
             <div id="Rua">
                 <label for="">Bairro</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro" id="bairro" ngModel [(ngModel)]="bairro"
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro" id="bairro" ngModel [(ngModel)]="veterinario.endereco.bairro"
                         required />
             </div>
             <div id="Cidade">
                 <label for="">Cidade</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="cidade" id="cidadde" ngModel
-                        [(ngModel)]="localidade" required />
+                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="localidade" id="localidade" ngModel
+                        [(ngModel)]="veterinario.endereco.cidade" required />
             </div>
             <div id="Estado">
                 <label for="">Estado</label>
-                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="uf" required />
+                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="veterinario.endereco.estado" required />
             </div>
             
             <div id="Complemento">
                 <label for="">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento" ngModel [(ngModel)]="complemento" required />
+                <input type="text" class="form-control" name="complemento" id="complemento" ngModel [(ngModel)]="veterinario.endereco.complemento" required />
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { EnderecoService } from '../../../services/endereco.service';
+import { Endereco } from '../../../models/endereco';
 
 @Component({
   selector: 'app-veterinariosdetails',
@@ -16,7 +17,7 @@ import { EnderecoService } from '../../../services/endereco.service';
 })
 
 export class VeterinariosdetailsComponent {
-  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', null);
+  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', new Endereco(0,'','','','','','',''));
   @Output("retorno") retorno = new EventEmitter<any>();
 
   constructor(
@@ -25,13 +26,6 @@ export class VeterinariosdetailsComponent {
     private veterinarioService: VeterinarioService,
     private enderecoService: EnderecoService // Corrigido para EnderecoService
   ) {}
-
-  cep: any;
-  logradouro: any;
-  localidade: any;
-  bairro: any;
-  uf: any;
-  complemento: any;
 
   ngOnInit() {
     let id = this.router.snapshot.params['id'];
@@ -105,16 +99,17 @@ export class VeterinariosdetailsComponent {
       });
     }
   }
-
+/*
   blur(event: any) {
     this.enderecoService.getCEP(this.cep).subscribe({
       next: novocep => {
+
         console.log(novocep);
-        this.cep = novocep.cep;
+        this.veterinario.cep = novocep.cep;
         this.logradouro = novocep.logradouro;
-        this.localidade = novocep.cidade;
+        this.cidade = novocep.localidade;
         this.bairro = novocep.bairro;
-        this.uf = novocep.estado;
+        this.uf = novocep.uf;
       },
       error: erro => {
         console.log(erro);
@@ -122,21 +117,21 @@ export class VeterinariosdetailsComponent {
     });
   }
 
-  /*
+  */
   blur(event: any) {
     this.enderecoService.getCEP(this.veterinario.endereco.cep).subscribe({
       next: novocep => {
         console.log(novocep);
         this.veterinario.endereco.cep = novocep.cep;
         this.veterinario.endereco.logradouro = novocep.logradouro;
-        this.veterinario.endereco.cidade = novocep.cidade;
+        this.veterinario.endereco.cidade = novocep.localidade;
         this.veterinario.endereco.bairro = novocep.bairro;
-        this.veterinario.endereco.estado = novocep.estado;
+        this.veterinario.endereco.estado = novocep.uf;
         console.log(this.veterinario);
       },
       error: erro => {
         console.log(erro);
       },
     });
-  }*/
+  }
 }
