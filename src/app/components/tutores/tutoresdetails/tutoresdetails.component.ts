@@ -15,6 +15,7 @@ import { EnderecoService } from '../../../services/endereco.service';
   templateUrl: './tutoresdetails.component.html',
   styleUrl: './tutoresdetails.component.scss'
 })
+
 export class TutoresdetailsComponent {
   @Input("tutor") tutor: Tutor = new Tutor(0, '', '', 0, new Endereco(0,'','','','','','',''));
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -25,18 +26,7 @@ export class TutoresdetailsComponent {
   tutorService = inject(TutorService);
   enderecoService = inject(EnderecoService);
 
-  constructor() {
-    /*
-    let id = this.router.snapshot.params['id'];
-    if (id > 0) {
-      this.findById(id);
-    } else {
-      if (this.tutor.id > 0) {
-        this.findById(id);
-      }
-    }
-    */
-  }
+  constructor() {}
 
   findById(id: number) {
     this.tutorService.findById(id).subscribe({
@@ -45,7 +35,7 @@ export class TutoresdetailsComponent {
       },
       error: erro => {
         Swal.fire({
-          title: "Algo deu errado na busca, tente novamente.",
+          title: "Algo deu errado na busca de tutor, tente novamente.",
           icon: "error",
           confirmButtonText: "Ok"
         });
@@ -95,7 +85,7 @@ export class TutoresdetailsComponent {
                         Swal.fire({
                             title: mensagem,
                             confirmButtonColor: '#54B4D3',
-                            text: 'Veterinário salvo com sucesso!',
+                            text: 'Tutor salvo com sucesso!',
                             icon: 'success',
                         });
                         this.router2.navigate(['admin/tutores'], {
