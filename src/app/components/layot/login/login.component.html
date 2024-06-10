@@ -9,11 +9,11 @@
             <div class="input-box">
                 <div class="form-outline" data-mdb-input-init>
                     <h3>Email</h3>
-                    <input (keyup.enter)="logar()" type="email" id="typeEmail" [(ngModel)]="login"/>
+                    <input (keyup.enter)="logar()" type="email" id="typeEmail" [(ngModel)]="login.username" (keyup.enter)="logar()"/>
                 </div>
                 <div class="form-outline" data-mdb-input-init>
                     <h3>Senha</h3>
-                    <input (keyup.enter)="logar()" type="password" id="typePassword" [(ngModel)]="senha"/>
+                    <input (keyup.enter)="logar()" type="password" id="typePassword" [(ngModel)]="login.password" (keyup.enter)="logar()"/>
                 </div>
                 <h5>Esqueceu sua senha?</h5>
             </div>

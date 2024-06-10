@@ -63,24 +63,6 @@ export class VeterinarioslistComponent {
     }
   }
 
-  /*
-  listAll(){
-    console.log("list all esta funcionado")
-    this.veterinarioService.listAll().subscribe({
-      next: lista => {
-        this.lista = lista;
-      },
-      error: erro => {
-        Swal.fire({
-          title: "Ocorreu um erro ao exibir a lista de veterinário",
-          icon: "error",
-          confirmButtonText: "Ok"
-        });
-      }
-    });
-  }
-  */
-
   listAll(){
     console.log("list all esta funcionado");
     this.veterinarioService.listAll().subscribe({
