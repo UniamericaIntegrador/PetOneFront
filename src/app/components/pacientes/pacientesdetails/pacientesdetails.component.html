@@ -24,20 +24,14 @@
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
                 <mat-select [(ngModel)]="paciente.especie.nome">
-                    <mat-option value="Gato">Gato</mat-option>
-                    <mat-option value="Cachorro">Cachorro</mat-option>
-                    <mat-option value="Cavalo">Cavalo</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="input-MAT" style="display: none;">
+        <div class="input-MAT">
             <label for="">Raça</label>
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
                 <mat-select [(ngModel)]="paciente.raca.nome">
-                    <mat-option value="Golden Retriever">Golden Retriever</mat-option>
-                    <mat-option value="Malhado">Malhado</mat-option>
-                    <mat-option value="Mustang">Mustang</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -69,7 +63,7 @@
             <div class="input-MAT">
                 <label for="">Raça</label>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Ex. Thom" value="" [(ngModel)]="paciente.raca">
+                    <input matInput placeholder="Ex. Thom" value="" [(ngModel)]="paciente.raca.nome">
                 </mat-form-field>
             </div>
         }

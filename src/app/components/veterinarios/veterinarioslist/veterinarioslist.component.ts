@@ -86,7 +86,7 @@ export class VeterinarioslistComponent {
     this.veterinarioService.listAll().subscribe({
         next: lista => {
             this.lista = lista;
-            console.log(lista); // Verifique se os dados de endereço estão presentes
+            console.log(lista);
         },
         error: erro => {
             Swal.fire({
@@ -137,10 +137,10 @@ export class VeterinarioslistComponent {
     }
 
     edit(veterinario: Veterinario){
-      this.veterinarioEdit = Object.assign({}, veterinario);
       console.log(veterinario.id)
-      this.veterinarioEdit.endereco = Object.assign({}, veterinario.endereco);
-      console.log("objeto endereco")
+      console.log(veterinario.endereco.id)
+      this.veterinarioEdit = Object.assign({}, veterinario);
+      this.veterinarioEdit.endereco = veterinario.endereco; // Atribuição direta
       this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe, {
         modalClass: 'CustomModal'
       });
@@ -155,6 +155,8 @@ export class VeterinarioslistComponent {
 
     select(veterinario: Veterinario){
       this.retorno.emit(veterinario);
+      console.log(veterinario.id)
+      console.log("deveria ser o end")
     }
 
 }

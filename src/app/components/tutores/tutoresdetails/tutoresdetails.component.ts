@@ -16,7 +16,7 @@ import { EnderecoService } from '../../../services/endereco.service';
   styleUrl: './tutoresdetails.component.scss'
 })
 export class TutoresdetailsComponent {
-  @Input("tutor") tutor: Tutor = new Tutor(0, '', '', 0, null);
+  @Input("tutor") tutor: Tutor = new Tutor(0, '', '', 0, new Endereco(0,'','','','','','',''));
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);
@@ -26,6 +26,7 @@ export class TutoresdetailsComponent {
   enderecoService = inject(EnderecoService);
 
   constructor() {
+    /*
     let id = this.router.snapshot.params['id'];
     if (id > 0) {
       this.findById(id);
@@ -34,14 +35,8 @@ export class TutoresdetailsComponent {
         this.findById(id);
       }
     }
+    */
   }
-
-  cep: any;
-  logradouro: any;
-  localidade: any;
-  bairro: any;
-  uf: any;
-  complemento: any;
 
   findById(id: number) {
     this.tutorService.findById(id).subscribe({
@@ -60,60 +55,84 @@ export class TutoresdetailsComponent {
 
   save() {
     if (this.tutor.id > 0) {
-      this.tutorService.update(this.tutor, this.tutor.id).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            icon: 'success',
-            confirmButtonText: 'Ok',
-          });
-          this.router2.navigate(['admin/tutores'], {
-            state: { tutorNovo: this.tutor },
-          });
-          this.retorno.emit(this.tutor);
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao editar o cadastro do tutor',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
+        this.enderecoService.update(this.tutor.endereco, this.tutor.endereco.id).subscribe({
+            next: enderecoAtualizado => {
+                this.tutorService.update(this.tutor, this.tutor.id).subscribe({
+                    next: mensagem => {
+                        Swal.fire({
+                            title: mensagem,
+                            icon: 'success',
+                            confirmButtonText: 'Ok',
+                        });
+                        this.router2.navigate(['admin/tutores'], {
+                            state: { tutorEditado: this.tutor },
+                        });
+                        this.retorno.emit(this.tutor);
+                    },
+                    error: erro => {
+                        Swal.fire({
+                            title: 'Erro ao editar o cadastro do tutor',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        });
+                    },
+                });
+            },
+            error: erro => {
+                Swal.fire({
+                    title: 'Erro ao atualizar o endereço',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                });
+            },
+        });
     } else {
-      this.tutorService.save(this.tutor).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            confirmButtonColor: '#54B4D3',
-            text: 'Tutor salvo com sucesso!',
-            icon: 'success',
-          });
-          this.router2.navigate(['admin/tutores'], {
-            state: { tutorNovo: this.tutor },
-          });
-          this.retorno.emit(this.tutor);
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao salvar o tutor',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
+        this.enderecoService.save(this.tutor.endereco).subscribe({
+            next: (endereco: Endereco) => {
+                this.tutor.endereco.id = endereco.id;
+                this.tutorService.save(this.tutor).subscribe({
+                    next: mensagem => {
+                        Swal.fire({
+                            title: mensagem,
+                            confirmButtonColor: '#54B4D3',
+                            text: 'Veterinário salvo com sucesso!',
+                            icon: 'success',
+                        });
+                        this.router2.navigate(['admin/tutores'], {
+                            state: { pacienteNovo: this.tutor },
+                        });
+                        this.retorno.emit(this.tutor);
+                    },
+                    error: erro => {
+                        Swal.fire({
+                            title: 'Erro ao salvar o tutor',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        });
+                    },
+                });
+            },
+            error: erro => {
+                Swal.fire({
+                    title: 'Erro ao salvar o endereço',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                });
+            },
+        });
     }
-  }
+}
 
   blur(event: any) {
-    this.enderecoService.getCEP(this.cep).subscribe({
+    this.enderecoService.getCEP(this.tutor.endereco.cep).subscribe({
       next: novocep => {
         console.log(novocep);
-        this.cep = novocep.cep;
-        this.logradouro = novocep.logradouro;
-        this.localidade = novocep.localidade;
-        this.bairro = novocep.bairro;
-        this.uf = novocep.uf;
+        this.tutor.endereco.cep = novocep.cep;
+        this.tutor.endereco.logradouro = novocep.logradouro;
+        this.tutor.endereco.cidade = novocep.localidade;
+        this.tutor.endereco.bairro = novocep.bairro;
+        this.tutor.endereco.estado = novocep.uf;
+        console.log(this.tutor);
       },
       error: erro => {
         console.log(erro);

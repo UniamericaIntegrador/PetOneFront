@@ -26,25 +26,7 @@ export class VeterinariosdetailsComponent {
   veterinarioService = inject(VeterinarioService);
   enderecoService = inject(EnderecoService);
   
-  constructor(
-    //private router: ActivatedRoute,
-    //private router2: Router,
-    //private veterinarioService: VeterinarioService,
-    //private enderecoService: EnderecoService // Corrigido para EnderecoService
-  ) {}
-
-  /*
-  ngOnInit() {
-    console.log('Componente VeterinariosdetailsComponent carregado!')
-    let id = this.router.snapshot.params['id'];
-    
-    if(id > 0){
-      console.log(id)
-      this.findById(id);
-    }
-  }
-  */
-
+  constructor() {}
   
   findById(id: number) {
     console.log(id)

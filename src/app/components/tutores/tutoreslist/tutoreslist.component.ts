@@ -6,6 +6,7 @@ import { TutoresdetailsComponent } from '../tutoresdetails/tutoresdetails.compon
 import { Tutor } from '../../../models/tutor';
 import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
+import { Endereco } from '../../../models/endereco';
 
 @Component({
   selector: 'app-tutoreslist',
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class TutoreslistComponent {
   lista: Tutor[] = [];
-  tutorEdit: Tutor = new Tutor(0,'','',0,null);
+  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -92,8 +93,6 @@ export class TutoreslistComponent {
     }
 
     new(){
-
-      this.tutorEdit = new Tutor(0,'','',0,'');
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });
