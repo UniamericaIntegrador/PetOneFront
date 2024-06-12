@@ -6,6 +6,7 @@ import { TutoresdetailsComponent } from '../tutoresdetails/tutoresdetails.compon
 import { Tutor } from '../../../models/tutor';
 import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
+import { Endereco } from '../../../models/endereco';
 
 @Component({
   selector: 'app-tutoreslist',
@@ -16,7 +17,10 @@ import Swal from 'sweetalert2';
 })
 export class TutoreslistComponent {
   lista: Tutor[] = [];
-  tutorEdit: Tutor = new Tutor(0,'','',0,null);
+  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
+
+  listaEndereco: Endereco[] = [];
+  enderecoEdit: Endereco = new Endereco(0,'','','','','','','');
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -33,8 +37,15 @@ export class TutoreslistComponent {
     let tutorNovo = history.state.tutorNovo;
     let tutorEditado = history.state.tutorEditado;
 
+    let enderecoNovo = history.state.enderecoNovo;
+    let endrecoEditado = history.state.endrecoEditado;
+
     if(tutorNovo != null){
       this.lista.push(tutorNovo);
+    }
+
+    if(enderecoNovo != null){
+      this.listaEndereco.push(enderecoNovo);
     }
 
     if(tutorEditado != null){
@@ -43,20 +54,29 @@ export class TutoreslistComponent {
       });
       this.lista[indice] = tutorEditado;
     }
+
+    if(endrecoEditado != null){
+      let indice = this.listaEndereco.findIndex((x) => {
+        return x.id == endrecoEditado.id;
+      });
+      this.listaEndereco[indice] = endrecoEditado;
+    }
   }
 
   listAll(){
+    console.log("list all esta funcionado");
     this.tutorService.listAll().subscribe({
-      next: lista => {
-        this.lista = lista;
-      },
-      error: erro => {
-        Swal.fire({
-          title: "Ocorreu um erro ao exibir a lista de tutor",
-          icon: "error",
-          confirmButtonText: "Ok"
-        });
-      }
+        next: lista => {
+            this.lista = lista;
+            console.log(lista);
+        },
+        error: erro => {
+            Swal.fire({
+                title: "Ocorreu um erro ao exibir a lista de tutor",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+        }
     });
   }
 
@@ -92,19 +112,17 @@ export class TutoreslistComponent {
     }
 
     new(){
-<<<<<<< HEAD
-      this.tutorEdit = new Tutor(0,'','',0,'');
+      this.tutorEdit = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });
-=======
-      this.tutorEdit = new Tutor(0,'','',0,null);
-      this.modalRef = this.modalService.open(this.modalTutorDetalhe);
->>>>>>> 48b2632fe55d6788702db0fd5a5e09715fb9c48f
     }
 
     edit(tutor: Tutor){
-      this.tutorEdit = Object.assign({}, tutor); //clonando pra evitar referência de objeto
+      console.log(tutor.id)
+      console.log(tutor.endereco.id)
+      this.tutorEdit = Object.assign({}, tutor);
+      this.tutorEdit.endereco = tutor.endereco; // Atribuição direta
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });
@@ -118,5 +136,4 @@ export class TutoreslistComponent {
     select(tutor: Tutor){
       this.retorno.emit(tutor);
     }
-
 }

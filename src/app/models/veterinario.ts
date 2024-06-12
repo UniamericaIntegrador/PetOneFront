@@ -6,7 +6,6 @@ export class Veterinario {
     crmv!: string;
     endereco!: Endereco;
 
-
     constructor(id: number, nome: string, crmv: string, endereco: Endereco | null){
         this.id = id;
         this.nome = nome;

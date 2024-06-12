@@ -21,7 +21,19 @@ export class EnderecoService {
     return this.http.post<Endereco>(`${this.API}/save`, endereco);
   }
 
-  update(endereco: Endereco, id: number): Observable<Endereco> {
-    return this.http.put<Endereco>(`${this.API}/update/${id}`, endereco);
+  update(endereco: Endereco, id: number): Observable<string>{
+    return this.http.put<string>(this.API+"/update/"+id, endereco, {responseType: 'text' as 'json'});
+  }
+
+  findById(id: number): Observable<Endereco>{
+    return this.http.get<Endereco>(this.API+"/findById/"+id);
+  }
+
+  delete(id: number): Observable<string>{
+    return this.http.delete<string>(this.API+"/delete/"+id, {responseType: 'text' as 'json'});
+  }
+
+  listAll(): Observable<Endereco[]> {
+    return this.http.get<Endereco[]>(this.API+"/listAll");
   }
 }

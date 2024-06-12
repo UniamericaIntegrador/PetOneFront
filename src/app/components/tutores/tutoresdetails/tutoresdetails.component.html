@@ -8,99 +8,62 @@
             <p>Nome</p>
             <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
                 [(ngModel)]="tutor.nome" />
+            <p>Idade</p>
+            <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
+                [(ngModel)]="tutor.idade" />
         </div>
-        <div>
+        <div class="container_cpf">
             <p>CPF</p>
             <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
                 [(ngModel)]="tutor.cpf" />
         </div>
     </div>
-
     <div class="input-endereco">
         <h4 class="sub-title">Endereço:</h4>
         <div class="input-holder">
             <div id="CEP">
                 <label for="">CEP</label>
                 <input #buscaCEP type="text" class="form-control" name="cep" id="cep" (blur)="blur($event)" ngModel
-                    [(ngModel)]="cep" required f>
+                    [(ngModel)]="tutor.endereco.cep" required f>
             </div>
             <div id="Rua">
                 <label for="">Logradouro</label>
                 <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="logradouro"
-                    id="logradouro" ngModel [(ngModel)]="logradouro" required />
+                    id="logradouro" ngModel [(ngModel)]="tutor.endereco.logradouro" required />
             </div>
             <div id="Numero">
                 <label for="">Numero</label>
-                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid">
+                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid"
+                    [(ngModel)]="tutor.endereco.numero">
             </div>
             <div id="Rua">
                 <label for="">Bairro</label>
                 <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro"
-                    id="bairro" ngModel [(ngModel)]="bairro" required />
+                    id="bairro" ngModel [(ngModel)]="tutor.endereco.bairro" required />
             </div>
             <div id="Cidade">
                 <label for="">Cidade</label>
                 <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="localidade"
-                    id="localidade" ngModel [(ngModel)]="localidade" required />
+                    id="localidade" ngModel [(ngModel)]="tutor.endereco.cidade" required />
             </div>
             <div id="Estado">
                 <label for="">Estado</label>
-                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="uf" required />
+                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="tutor.endereco.estado"
+                    required />
             </div>
-
             <div id="Complemento">
                 <label for="">Complemento</label>
                 <input type="text" class="form-control" name="complemento" id="complemento" ngModel
-                    [(ngModel)]="complemento" required />
+                    [(ngModel)]="tutor.endereco.complemento" required />
             </div>
         </div>
         <div class="btn-holder">
             <div class="btns">
                 <button style="background-color: #87B6A7; color: aliceblue;" type="button"
-                    class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
-                    Adicionar
-                </button>
-            </div>
-        </div>
-</div>
-
-
-
-    <!--
-    <div class="container">
-    <h3 style="color: #000000">Tutores</h3>
-    <p>Edite o formulário para atualizar a tabela de tutores</p>
-    <div class="card">
-        <div class="card-body centralizarModal">
-            <div class="holder">
-                <div>
-                    Nome
-                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.nome" />
-
-                </div>
-                <div>
-                    Cpf
-                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.cpf" />
-
-                </div>
-                <div>
-                    Idade
-                <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.idade" />
-                </div>
-                <div>
-                    Endereço
-                    <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()" [(ngModel)]="tutor.endereco" />
-                </div>
-                
-
-            </div>
-            <div class="teste">
-                <button style="background-color: #f98948; color: aliceblue;" type="button" class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init
+                    class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init
                     (click)="save()">
                     Adicionar
                 </button>
             </div>
         </div>
     </div>
-</div>
--->
