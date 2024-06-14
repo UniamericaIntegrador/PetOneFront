@@ -1,3 +1,89 @@
+<div class="Edit">
+    <div class="Edit-textos">
+        <div class="titulos">
+            <h2>Procedimentos</h2>
+            <p><b>Edite o formulário</b> para atualizar a tabela de procedimentos</p>
+        </div>
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </div>
+    <div class="procedimentoForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Nome do procedimento</mat-label>
+            <input matInput placeholder="Ex. Pizza" value="Sushi">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Escolha uma data</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Favorite food</mat-label>
+            <mat-select>
+                <option value="volvo">Volvo</option>
+                <option value="volvo">Volvo</option>
+                <option value="volvo">Volvo</option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Favorite food</mat-label>
+            <mat-select>
+                <option value="volvo">Volvo</option>
+                <option value="volvo">Volvo</option>
+                <option value="volvo">Volvo</option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+    <div class="tutor-data-input">
+        <div class="tutor-data-select">
+            <h3>Veterinario:</h3>
+            @if(procedimento.veterinario == null){
+
+            }@else{
+            <button class="" (click)="buscarVeterinario()">
+                <p>Trocar tutor</p>
+            </button>
+            }
+        </div>
+        <div class="tutor-data-view">
+            @if(procedimento.veterinario == null){
+            <button (click)="buscarVeterinario()">
+                <p>Selecionar Veterinario</p>
+            </button>
+            }@else {
+            <div class="patient-data-input">
+                <div class="input-MAT">
+                    <label for="">Nome</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{procedimento.veterinario.nome}}" value="">
+                    </mat-form-field>
+                </div>
+                <div class="input-MAT">
+                    <label for="">CPF</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{procedimento.veterinario.crmv}}" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div>
+        <button (click)="save()">
+            <p>Adicionar</p>
+        </button>
+    </div>
+</div>
+
+<!--
 <div class="container">
     <h3 style="color: #000">PROCEDIMENTO</h3>
     <p>Edite o formulário para atualizar a tabela de procedimentos</p>
@@ -42,6 +128,9 @@
         </div>
     </div>
 </div>
+-->
+
+
 
 <ng-template #modalVeterinarios>
     <div class="modal-header">
