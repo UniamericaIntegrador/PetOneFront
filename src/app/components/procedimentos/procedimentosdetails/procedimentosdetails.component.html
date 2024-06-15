@@ -9,41 +9,45 @@
         </span>
     </div>
     <div class="procedimentoForm">
-        <mat-form-field class="example-full-width">
-            <mat-label>Nome do procedimento</mat-label>
-            <input matInput placeholder="Ex. Pizza" value="Sushi">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Escolha uma data</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
-                <option value="volvo">Volvo</option>
-                <option value="volvo">Volvo</option>
-                <option value="volvo">Volvo</option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
-                <option value="volvo">Volvo</option>
-                <option value="volvo">Volvo</option>
-                <option value="volvo">Volvo</option>
-            </mat-select>
-        </mat-form-field>
-
+        <div class="input-MAT">
+            <mat-form-field class="example-full-width">
+                <mat-label>Nome do procedimento</mat-label>
+                <input matInput placeholder="Ex. Check-up" value="" [(ngModel)]="procedimento.nomeProcedimento">
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="procedimento.data">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="procedimento.resultado">
+                  <mat-option value="Aguardando">Aguardando</mat-option>
+                  <mat-option value="Enviado">Enviado</mat-option>
+                  <mat-option value="Cancelado">Cancelado</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="procedimento.diagnostico">
+                  <mat-option value="Aguardando">Aguardando</mat-option>
+                  <mat-option value="Enviado">Enviado</mat-option>
+                  <mat-option value="Cancelado">Cancelado</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
     </div>
 
-    <div class="tutor-data-input">
-        <div class="tutor-data-select">
+    <div class="procedimento-data-input">
+        <div class="procedimento-data-select">
             <h3>Veterinario:</h3>
             @if(procedimento.veterinario == null){
 
@@ -53,7 +57,7 @@
             </button>
             }
         </div>
-        <div class="tutor-data-view">
+        <div class="procedimento-data-view">
             @if(procedimento.veterinario == null){
             <button (click)="buscarVeterinario()">
                 <p>Selecionar Veterinario</p>
@@ -67,7 +71,7 @@
                     </mat-form-field>
                 </div>
                 <div class="input-MAT">
-                    <label for="">CPF</label>
+                    <label for="">CRMV</label>
                     <mat-form-field class="example-full-width">
                         <input matInput placeholder="{{procedimento.veterinario.crmv}}" value="">
                     </mat-form-field>
