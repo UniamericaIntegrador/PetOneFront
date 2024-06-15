@@ -8,11 +8,16 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit
 import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.component';
 import { VeterinarioslistComponent } from '../../veterinarios/veterinarioslist/veterinarioslist.component';
 import { Veterinario } from '../../../models/veterinario';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-procedimentosdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule, TutoreslistComponent, VeterinarioslistComponent],
+  imports: [FormsModule, MdbModalModule, TutoreslistComponent, VeterinarioslistComponent, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './procedimentosdetails.component.html',
   styleUrl: './procedimentosdetails.component.scss'
 })
