@@ -46,6 +46,7 @@ export class VeterinariosdetailsComponent {
 
   save() {
     if (this.veterinario.id > 0) {
+        console.log(this.veterinario);
         // Atualiza o endereço primeiro, se necessário
         this.enderecoService.update(this.veterinario.endereco, this.veterinario.endereco.id).subscribe({
             next: enderecoAtualizado => {
@@ -81,6 +82,7 @@ export class VeterinariosdetailsComponent {
         });
     } else {
         // Salva o endereço primeiro
+        console.log(this.veterinario.endereco);
         this.enderecoService.save(this.veterinario.endereco).subscribe({
             next: (endereco: Endereco) => {
                 // Atualiza o endereço do veterinário com o ID retornado
@@ -134,5 +136,9 @@ export class VeterinariosdetailsComponent {
         console.log(erro);
       },
     });
+  }
+
+  sair(event: any) {
+    this.retorno.emit(null); // Envia o evento para fechar o modal
   }
 }

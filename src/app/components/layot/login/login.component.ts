@@ -20,6 +20,7 @@ export class LoginComponent {
   router = inject(Router);
 
   logar(){
+    console.log(this.login);
     this.loginService.logar(this.login).subscribe({
       next: token => {
         console.log(token);

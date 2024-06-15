@@ -22,37 +22,31 @@
         <div class="input-MAT">
             <label for="">Especie</label>
             <mat-form-field>
-                <mat-label>Escolha uma opção</mat-label>
-                <mat-select [(ngModel)]="paciente.especie.nome">
+                <mat-select [(ngModel)]="paciente.raca.especie.nome"  >
+                    <option value="Gato">Gato</option>
+                    <option value="Cachorro">Cachorro</option>
+                    <option value="Outra">Outra</option>
                 </mat-select>
-            </mat-form-field>
+              </mat-form-field>
         </div>
+        @if (paciente.raca.especie.nome == "Gato") {
         <div class="input-MAT">
             <label for="">Raça</label>
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
                 <mat-select [(ngModel)]="paciente.raca.nome">
-                </mat-select>
-            </mat-form-field>
-        </div>
-        @if (paciente.especie.nome == "Gato") {
-        <div class="input-MAT">
-            <label for="">Raça</label>
-            <mat-form-field>
-                <mat-label>Escolha uma opção</mat-label>
-                <mat-select>
                     @for (raca of lista; track $index) {
                     <mat-option [value]="raca">{{raca}}</mat-option>
                     }
                 </mat-select>
             </mat-form-field>
         </div>
-        }@else if (paciente.especie.nome == "Cachorro") {
+        }@else if (paciente.raca.especie.nome == "Cachorro") {
             <div class="input-MAT">
                 <label for="">Raça</label>
                 <mat-form-field>
                     <mat-label>Escolha uma opção</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="paciente.raca.nome" >
                         @for (raca of listaDog; track $index) {
                         <mat-option [value]="raca">{{raca}}</mat-option>
                         }

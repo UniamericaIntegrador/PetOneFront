@@ -6,6 +6,8 @@ import { Paciente } from '../../../models/paciente';
 import { PacienteService } from '../../../services/paciente.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { Especie } from '../../../models/especie';
+import { Raca } from '../../../models/raca';
 
 @Component({
   selector: 'app-pacienteslist',
@@ -91,7 +93,7 @@ export class PacienteslistComponent {
     }
 
     new(){
-      this.pacienteEdit = new Paciente(0,'',null,new Date(0),null,null);
+      this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
       this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
         modalClass: 'CustomModal'
       });
