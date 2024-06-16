@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { Veterinario } from '../../../models/veterinario';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,11 +7,25 @@ import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { EnderecoService } from '../../../services/endereco.service';
 import { Endereco } from '../../../models/endereco';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-veterinariosdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MdbModalModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepicker,
+    MatCheckboxModule,
+    MatSelectModule,
+  ],
   templateUrl: './veterinariosdetails.component.html',
   styleUrls: ['./veterinariosdetails.component.scss'] 
 })
