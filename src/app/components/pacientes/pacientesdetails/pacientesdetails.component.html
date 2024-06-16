@@ -22,10 +22,11 @@
         <div class="input-MAT">
             <label for="">Especie</label>
             <mat-form-field>
-                <mat-select [(ngModel)]="paciente.raca.especie.nome"  >
-                    <option value="Gato">Gato</option>
-                    <option value="Cachorro">Cachorro</option>
-                    <option value="Outra">Outra</option>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="paciente.raca.especie.nome">
+                  <mat-option value="Gato">Gato</mat-option>
+                  <mat-option value="Cachorro">Cachorro</mat-option>
+                  <mat-option value="Outra">Outra</mat-option>
                 </mat-select>
               </mat-form-field>
         </div>

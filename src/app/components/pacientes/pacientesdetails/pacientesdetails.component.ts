@@ -35,7 +35,7 @@ import { Raca } from '../../../models/raca';
   templateUrl: './pacientesdetails.component.html',
   styleUrl: './pacientesdetails.component.scss'
 })
-
+//new Especie(0, ''),
 export class PacientesdetailsComponent {
   @Input("paciente") paciente: Paciente = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -88,6 +88,7 @@ export class PacientesdetailsComponent {
   }
 
   save() {
+    //this.racaToEspecie();
     if (this.paciente.id > 0) {
 
       this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
@@ -191,5 +192,10 @@ export class PacientesdetailsComponent {
       }
     });
   }
-  
+  /*
+  racaToEspecie(){
+    this.paciente.especie.nome = this.paciente.raca.especie.nome;
+    console.log(this.paciente);
+  }
+  */
 }
