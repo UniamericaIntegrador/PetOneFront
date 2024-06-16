@@ -37,7 +37,8 @@ import { Raca } from '../../../models/raca';
 })
 //new Especie(0, ''),
 export class PacientesdetailsComponent {
-  @Input("paciente") paciente: Paciente = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+  //@Input("paciente") paciente: Paciente = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+  @Input("paciente") paciente: Paciente = new Paciente(0,'', '', new Date(), '', null);
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);

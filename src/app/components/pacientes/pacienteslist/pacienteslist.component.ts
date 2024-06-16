@@ -19,7 +19,8 @@ import { Raca } from '../../../models/raca';
 //
 export class PacienteslistComponent {
   lista: Paciente[] = [];
-  pacienteEdit: Paciente =  new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+  //pacienteEdit: Paciente =  new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+  pacienteEdit: Paciente =  new Paciente(0,'', '', new Date(), '', null);
 
   modalService = inject(MdbModalService);
   @ViewChild("modalPacienteDetalhe") modalPacienteDetalhe!: TemplateRef<any>;
@@ -94,7 +95,8 @@ export class PacienteslistComponent {
     }
 
     new(){
-      this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+      //this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+      this.pacienteEdit = new Paciente(0,'', '', new Date(), '', null);
       this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
         modalClass: 'CustomModal'
       });

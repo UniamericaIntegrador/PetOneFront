@@ -23,31 +23,31 @@
             <label for="">Especie</label>
             <mat-form-field>
                 <mat-label>Selecione uma opcão</mat-label>
-                <mat-select [(ngModel)]="paciente.raca.especie.nome">
+                <mat-select [(ngModel)]="paciente.especie">
                   <mat-option value="Gato">Gato</mat-option>
                   <mat-option value="Cachorro">Cachorro</mat-option>
                   <mat-option value="Outra">Outra</mat-option>
                 </mat-select>
               </mat-form-field>
         </div>
-        @if (paciente.raca.especie.nome == "Gato") {
+        @if (paciente.especie == "Gato") {
         <div class="input-MAT">
             <label for="">Raça</label>
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
-                <mat-select [(ngModel)]="paciente.raca.nome">
+                <mat-select [(ngModel)]="paciente.raca">
                     @for (raca of lista; track $index) {
                     <mat-option [value]="raca">{{raca}}</mat-option>
                     }
                 </mat-select>
             </mat-form-field>
         </div>
-        }@else if (paciente.raca.especie.nome == "Cachorro") {
+        }@else if (paciente.especie == "Cachorro") {
             <div class="input-MAT">
                 <label for="">Raça</label>
                 <mat-form-field>
                     <mat-label>Escolha uma opção</mat-label>
-                    <mat-select [(ngModel)]="paciente.raca.nome" >
+                    <mat-select [(ngModel)]="paciente.raca" >
                         @for (raca of listaDog; track $index) {
                         <mat-option [value]="raca">{{raca}}</mat-option>
                         }
@@ -58,7 +58,7 @@
             <div class="input-MAT">
                 <label for="">Raça</label>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Ex. Thom" value="" [(ngModel)]="paciente.raca.nome">
+                    <input matInput placeholder="Ex. Thom" value="" [(ngModel)]="paciente.raca">
                 </mat-form-field>
             </div>
         }
