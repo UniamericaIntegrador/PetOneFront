@@ -94,12 +94,16 @@ export class ProcedimentoslistComponent {
 
     new(){
       this.procedimentoEdit = new Procedimento(0,'',new Date(0),'','', null);
-      this.modalRef = this.modalService.open(this.modalProcedimentoDetalhe);
+      this.modalRef = this.modalService.open(this.modalProcedimentoDetalhe, {
+        modalClass: 'CustomModal'
+      });
     }
 
     edit(procedimento: Procedimento){
       this.procedimentoEdit = Object.assign({}, procedimento); 
-      this.modalRef = this.modalService.open(this.modalProcedimentoDetalhe);
+      this.modalRef = this.modalService.open(this.modalProcedimentoDetalhe, {
+        modalClass: 'CustomModal'
+      });
     }
 
     retornoDetalhe(procedimento: Procedimento){

@@ -4,58 +4,75 @@
             <h2>Veterinário</h2>
             <p><b>Edite o formulário</b>&nbsp;para atualizar a tabela de veterinários</p>
         </div>
-        <button _ngcontent-ng-c3955682678="" type="button" aria-label="Close" class="btn-close"></button>
+        <button _ngcontent-ng-c3955682678="" type="button" aria-label="Close" class="btn-close" (click)="sair($event)"></button>
     </div>
     <div class="input-user-data">
-        <div class="input-nome">
+        <div class="input-user">
             <p>Nome completo</p>
-            <input type="text" name="nome" class="form-control formulario" (keyup.enter)="save()"
-                [(ngModel)]="veterinario.nome" />
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Digite seu nome completo" [(ngModel)]="veterinario.nome">
+            </mat-form-field>
         </div>
-        <div class="input-crmv">
+        <div class="input-user">
             <p>CRMV</p>
-            <input type="text" name="nome" class="form-control formulario" (keyup.enter)="save()"
-                [(ngModel)]="veterinario.crmv" />
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Digite seu CRMV" [(ngModel)]="veterinario.crmv">
+            </mat-form-field>
         </div>
     </div>
     <div class="input-endereco">
         <h4 class="sub-title">Endereço:</h4>
         <div class="input-holder">
-            <div id="CEP">
-                <label for="">CEP</label>
-                <input #buscaCEP type="text" class="form-control" name="cep" id="cep" (blur)="blur($event)" ngModel
-                    [(ngModel)]="veterinario.endereco.cep" required f>
+            <div class="cep-logradouro">
+                <div id="CEP">
+                    <label for="">CEP</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput #buscaCEP name="cep" id="cep" (blur)="blur($event)" [(ngModel)]="veterinario.endereco.cep" required>
+                    </mat-form-field>
+                </div>
+                <div id="Rua">
+                    <label for="">Logradouro</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="logradouro" id="logradouro" [(ngModel)]="veterinario.endereco.logradouro" required readonly>
+                    </mat-form-field>
+                </div>
+                <div id="Numero">
+                    <label for="">Número</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="numero" [(ngModel)]="veterinario.endereco.numero" required>
+                    </mat-form-field>
+                </div>
             </div>
-            <div id="Rua">
-                <label for="">Logradouro</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="logradouro" id="logradouro" ngModel
-                        [(ngModel)]="veterinario.endereco.logradouro" required />
-            </div>
-            <div id="Numero">
-                <label for="">Numero</label>
-                <input type="text" id="numero" class="form-control formulario ng-untouched ng-pristine ng-valid" [(ngModel)]="veterinario.endereco.numero" >
-            </div>
-            <div id="Rua">
-                <label for="">Bairro</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="bairro" id="bairro" ngModel [(ngModel)]="veterinario.endereco.bairro"
-                        required />
-            </div>
-            <div id="Cidade">
-                <label for="">Cidade</label>
-                <input type="text" class="form-control formulario ng-untouched ng-pristine ng-valid" name="localidade" id="localidade" ngModel
-                        [(ngModel)]="veterinario.endereco.cidade" required />
-            </div>
-            <div id="Estado">
-                <label for="">Estado</label>
-                <input type="text" class="form-control" name="uf" id="uf" ngModel [(ngModel)]="veterinario.endereco.estado" required />
+            <div class="Cidade-input">
+                <div id="Bairro">
+                    <label for="">Bairro</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="bairro" id="bairro" [(ngModel)]="veterinario.endereco.bairro" required readonly>
+                    </mat-form-field>
+                </div>
+                <div id="Cidade">
+                    <label for="">Cidade</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="localidade" id="localidade" [(ngModel)]="veterinario.endereco.cidade" required readonly>
+                    </mat-form-field>
+                </div>
+                <div id="Estado">
+                    <label for="">Estado</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="uf" id="uf" [(ngModel)]="veterinario.endereco.estado" required readonly>
+                    </mat-form-field>
+                </div>
             </div>
             
             <div id="Complemento">
                 <label for="">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento" ngModel [(ngModel)]="veterinario.endereco.complemento" required />
+                <mat-form-field class="example-full-width">
+                    <input matInput name="complemento" id="complemento" [(ngModel)]="veterinario.endereco.complemento">
+                </mat-form-field>
             </div>
         </div>
     </div>
+    
     <div class="btn-holder">
         <div class="btns">
             <button style="background-color: #87B6A7; color: aliceblue;" type="button"

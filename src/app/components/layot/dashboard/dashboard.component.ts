@@ -5,11 +5,12 @@ import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.comp
 import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslist/procedimentoslist.component';
 import { VeterinarioslistComponent } from '../../veterinarios/veterinarioslist/veterinarioslist.component';
 import { DashboardService } from '../../../services/dashboard.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, PacienteslistComponent, TutoreslistComponent, ProcedimentoslistComponent, VeterinarioslistComponent],
+  imports: [NavbarComponent, PacienteslistComponent, TutoreslistComponent, ProcedimentoslistComponent, VeterinarioslistComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

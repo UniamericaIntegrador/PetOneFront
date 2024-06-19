@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { Veterinario } from '../../../models/veterinario';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,11 +7,25 @@ import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { EnderecoService } from '../../../services/endereco.service';
 import { Endereco } from '../../../models/endereco';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-veterinariosdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MdbModalModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepicker,
+    MatCheckboxModule,
+    MatSelectModule,
+  ],
   templateUrl: './veterinariosdetails.component.html',
   styleUrls: ['./veterinariosdetails.component.scss'] 
 })
@@ -46,6 +60,7 @@ export class VeterinariosdetailsComponent {
 
   save() {
     if (this.veterinario.id > 0) {
+        console.log(this.veterinario);
         // Atualiza o endereço primeiro, se necessário
         this.enderecoService.update(this.veterinario.endereco, this.veterinario.endereco.id).subscribe({
             next: enderecoAtualizado => {
@@ -81,6 +96,7 @@ export class VeterinariosdetailsComponent {
         });
     } else {
         // Salva o endereço primeiro
+        console.log(this.veterinario.endereco);
         this.enderecoService.save(this.veterinario.endereco).subscribe({
             next: (endereco: Endereco) => {
                 // Atualiza o endereço do veterinário com o ID retornado
@@ -134,5 +150,9 @@ export class VeterinariosdetailsComponent {
         console.log(erro);
       },
     });
+  }
+
+  sair(event: any) {
+    this.retorno.emit(null); // Envia o evento para fechar o modal
   }
 }

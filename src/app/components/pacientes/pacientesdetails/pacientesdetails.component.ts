@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Especie } from '../../../models/especie';
+import { Raca } from '../../../models/raca';
 
 @Component({
   selector: 'app-pacientesdetails',
@@ -28,14 +30,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   templateUrl: './pacientesdetails.component.html',
   styleUrl: './pacientesdetails.component.scss'
 })
-
+//new Especie(0, ''),
 export class PacientesdetailsComponent {
-  @Input("paciente") paciente: Paciente = new Paciente(0,'', null, new Date(), null, null);
+  //@Input("paciente") paciente: Paciente = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+  @Input("paciente") paciente: Paciente = new Paciente(0,'', '', new Date(), '', null);
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);
@@ -72,6 +75,7 @@ export class PacientesdetailsComponent {
   findById(id: number) {
     this.pacienteService.findById(id).subscribe({
       next: retorno => {
+        console.log('ENTROU');
         this.paciente = retorno;
       },
       error: erro => {
@@ -85,6 +89,7 @@ export class PacientesdetailsComponent {
   }
 
   save() {
+    //this.racaToEspecie();
     if (this.paciente.id > 0) {
 
       this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
@@ -188,5 +193,10 @@ export class PacientesdetailsComponent {
       }
     });
   }
-  
+  /*
+  racaToEspecie(){
+    this.paciente.especie.nome = this.paciente.raca.especie.nome;
+    console.log(this.paciente);
+  }
+  */
 }

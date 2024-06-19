@@ -1,12 +1,31 @@
-h3{
+h3 {
     display: flex;
     justify-content: center;
 }
 
-p{
+p {
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
+
+label {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+    margin: 0;
+    padding-bottom: 8px;
+}
+
+/*
 
 .fomularioTutor{
     border-radius: 20px;
@@ -234,4 +253,124 @@ label {
     font-style: normal;
     font-weight: 500;
     line-height: 1.25rem;
+}
+
+
+*/
+
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+}
+
+.text h2 {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textos p {
+    justify-content: left;
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text b {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.input-endereco {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-holder {
+    display: flex;
+    flex-direction: column;
+}
+
+.cep-logradouro {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+#CEP {
+    width: 100%;
+    max-width: 130px;
+}
+
+#Rua {
+    width: 100%;
+}
+
+#Numero {
+    width: 100%;
+    max-width: 100px;
+}
+
+.Cidade-input {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+#Estado {
+    width: 100%;
+    max-width: 60px;
+}
+
+#Cidade {
+    width: 100%;
+}
+
+#Bairro {
+    width: 100%;
+}
+
+.container-tutor{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+}
+
+.user {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.tutor {
+    width: 100%;
+}
+
+#Nome {
+    width: 100%;
+}
+
+#CPF {
+    width: 100%;
+}
+
+#idade{
+    width: 100%;
+    max-width: 60px;
 }

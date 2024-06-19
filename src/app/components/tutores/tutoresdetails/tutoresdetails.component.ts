@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { Tutor } from '../../../models/tutor';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,11 +7,23 @@ import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
 import { EnderecoService } from '../../../services/endereco.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-tutoresdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule],
+  imports: [FormsModule, MdbModalModule, FormsModule,
+    ReactiveFormsModule,
+    MdbModalModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepicker,
+    MatCheckboxModule,
+    MatSelectModule,],
   templateUrl: './tutoresdetails.component.html',
   styleUrl: './tutoresdetails.component.scss'
 })
@@ -130,4 +142,8 @@ export class TutoresdetailsComponent {
     });
   }
 
+  calcularIdade(date: Date){
+    var idade = Date.now() - date.getTime();
+    return idade;
+  }
 }

@@ -8,11 +8,17 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit
 import { TutoreslistComponent } from '../../tutores/tutoreslist/tutoreslist.component';
 import { VeterinarioslistComponent } from '../../veterinarios/veterinarioslist/veterinarioslist.component';
 import { Veterinario } from '../../../models/veterinario';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-procedimentosdetails',
   standalone: true,
-  imports: [FormsModule, MdbModalModule, TutoreslistComponent, VeterinarioslistComponent],
+  imports: [FormsModule, MdbModalModule, TutoreslistComponent, VeterinarioslistComponent, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './procedimentosdetails.component.html',
   styleUrl: './procedimentosdetails.component.scss'
 })
@@ -29,6 +35,12 @@ export class ProcedimentosdetailsComponent {
   modalRef!: MdbModalRef<any>;
 
   procedimentoService = inject(ProcedimentoService);
+
+  startDate = new Date(2024, 6, 6);
+
+  novadata!: Date;
+
+  datePipe: DatePipe = new DatePipe('en-US');
 
   constructor(){
     let id = this.router.snapshot.params["id"];
@@ -57,6 +69,11 @@ export class ProcedimentosdetailsComponent {
   }
 
   save() {
+    console.log(this.procedimento);
+    if (this.procedimento.data instanceof Date) {
+      this.procedimento.data = this.datePipe.transform(this.procedimento.data, 'yyyy-MM-dd') as unknown as Date;
+    }
+    console.log(this.procedimento);
     if (this.procedimento.id > 0) {
       this.procedimentoService.update(this.procedimento, this.procedimento.id).subscribe({
         next: mensagem => {
@@ -111,5 +128,14 @@ export class ProcedimentosdetailsComponent {
     this.procedimento.veterinario = veterinario;
     this.modalRef.close();
   }
-
-}
+  /*
+  onDateChange(date: Date) {
+    if (date) {
+      const formattedDate = this.datePipe.transform(date, 'yyyy-MM-dd'); // Format date if not null
+      this.procedimento.data = formattedDate; // Assign formatted date to procedimento.data
+    } else {
+      this.procedimento.data = null; // Handle null case as needed
+    }
+  }
+  */
+  }
