@@ -16,10 +16,11 @@ import { Raca } from '../../../models/raca';
   templateUrl: './pacienteslist.component.html',
   styleUrl: './pacienteslist.component.scss'
 })
-
+//
 export class PacienteslistComponent {
   lista: Paciente[] = [];
-  pacienteEdit: Paciente = new Paciente(0,'',null,new Date(0),null,null);
+  //pacienteEdit: Paciente =  new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+  pacienteEdit: Paciente =  new Paciente(0,'', '', new Date(), '', null);
 
   modalService = inject(MdbModalService);
   @ViewChild("modalPacienteDetalhe") modalPacienteDetalhe!: TemplateRef<any>;
@@ -50,6 +51,7 @@ export class PacienteslistComponent {
     this.pacienteService.listAll().subscribe({
       next: lista => {
         this.lista = lista;
+        console.log(lista);
       },
       error: erro => {
         Swal.fire({
@@ -93,7 +95,8 @@ export class PacienteslistComponent {
     }
 
     new(){
-      this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+      //this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+      this.pacienteEdit = new Paciente(0,'', '', new Date(), '', null);
       this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
         modalClass: 'CustomModal'
       });

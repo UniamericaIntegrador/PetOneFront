@@ -4,20 +4,91 @@
         <p><b>Edite o formulário</b>&nbsp;para atualizar a tabela de tutores</p>
     </div>
     <div class="tutor">
-        <div>
-            <p>Nome</p>
-            <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
-                [(ngModel)]="tutor.nome" />
-            <p>Idade</p>
-            <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
-                [(ngModel)]="tutor.idade" />
-        </div>
-        <div class="container_cpf">
-            <p>CPF</p>
-            <input type="text" name="nome" class="form-control fomularioTutor" (keyup.enter)="save()"
-                [(ngModel)]="tutor.cpf" />
+        <div class="user">
+            <div id="Nome">
+                <label for="">Nome</label>
+                <mat-form-field class="example-full-width">
+                    <input matInput name="nome1" [(ngModel)]="tutor.nome" required>
+                </mat-form-field>
+            </div>
+            <div id="CPF">
+                <label for="">CPF</label>
+                <mat-form-field class="example-full-width">
+                    <input matInput name="nome3" [(ngModel)]="tutor.cpf" required>
+                </mat-form-field>
+            </div>
+            <div id="idade">
+                <label for="">Idade</label>
+                <mat-form-field class="example-full-width">
+                    <input matInput name="nome2" [(ngModel)]="tutor.idade" required>
+                </mat-form-field>
+            </div>
         </div>
     </div>
+    <div class="input-endereco">
+        <h4 class="sub-title">Endereço:</h4>
+        <div class="input-holder">
+            <div class="cep-logradouro">
+                <div id="CEP">
+                    <label for="">CEP</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput #buscaCEP name="cep" id="cep" (blur)="blur($event)"
+                            [(ngModel)]="tutor.endereco.cep" required>
+                    </mat-form-field>
+                </div>
+                <div id="Rua">
+                    <label for="">Logradouro</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="logradouro" id="logradouro" [(ngModel)]="tutor.endereco.logradouro"
+                            required readonly>
+                    </mat-form-field>
+                </div>
+                <div id="Numero">
+                    <label for="">Número</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="numero" [(ngModel)]="tutor.endereco.numero" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Cidade-input">
+                <div id="Bairro">
+                    <label for="">Bairro</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="bairro" id="bairro" [(ngModel)]="tutor.endereco.bairro" required readonly>
+                    </mat-form-field>
+                </div>
+                <div id="Cidade">
+                    <label for="">Cidade</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="localidade" id="localidade" [(ngModel)]="tutor.endereco.cidade" required
+                            readonly>
+                    </mat-form-field>
+                </div>
+                <div id="Estado">
+                    <label for="">Estado</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="uf" id="uf" [(ngModel)]="tutor.endereco.estado" required readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div id="Complemento">
+                <label for="">Complemento</label>
+                <mat-form-field class="example-full-width">
+                    <input matInput name="complemento" id="complemento" [(ngModel)]="tutor.endereco.complemento">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="btn-holder">
+        <div class="btns">
+            <button style="background-color: #87B6A7; color: aliceblue;" type="button"
+                class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+                Adicionar
+            </button>
+        </div>
+    </div>
+    <!--
     <div class="input-endereco">
         <h4 class="sub-title">Endereço:</h4>
         <div class="input-holder">
@@ -67,3 +138,5 @@
             </div>
         </div>
     </div>
+
+-->

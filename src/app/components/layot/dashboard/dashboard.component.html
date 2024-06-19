@@ -55,25 +55,25 @@
             </div>
         </div>
         <div class="interaction">
-            <button class="addbtn">
+            <button class="addbtn" [routerLink]="['/admin/pacientes/new']" routerLinkActive="router-link-active" >
                 <span class="material-symbols-outlined">
                     add
                     </span>
                 <h5>Novo Paciente</h5>
             </button>
-            <button class="addbtn">
+            <button class="addbtn" [routerLink]="['/admin/tutores/new']" routerLinkActive="router-link-active">
                 <span class="material-symbols-outlined">
                     add
                     </span>
                 <h5>Novo Tutor</h5>
             </button>
-            <button class="addbtn">
+            <button class="addbtn" [routerLink]="['/admin/procedimentos/new']">
                 <span class="material-symbols-outlined">
                     add
                     </span>
                 <h5>Novo Procedimento</h5>
             </button>
-            <button class="addbtn">
+            <button class="addbtn" [routerLink]="['/admin/veterinarios/new']">
                 <span class="material-symbols-outlined">
                     add
                     </span>

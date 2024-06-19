@@ -19,9 +19,9 @@
             <mat-form-field>
                 <mat-label>Escolha uma data</mat-label>
                 <input matInput [matDatepicker]="picker" [(ngModel)]="procedimento.data">
-                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-hint>YYYY/MM/DD</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
             </mat-form-field>
         </div>
         <div class="input-MAT">
