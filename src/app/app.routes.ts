@@ -10,11 +10,12 @@ import { ProcedimentosdetailsComponent } from './components/procedimentos/proced
 import { TutoresdetailsComponent } from './components/tutores/tutoresdetails/tutoresdetails.component';
 import { VeterinariosdetailsComponent } from './components/veterinarios/veterinariosdetails/veterinariosdetails.component';
 import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
+import { loginGuard } from './auth/login.guard';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
     { path: "login", component: LoginComponent },
-    { path: "admin", component: PrincipalComponent, children: [
+    { path: "admin", component: PrincipalComponent, canActivate: [loginGuard], children: [
       { path: "dashboard", component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
       { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },
