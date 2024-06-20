@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <div class="container">
     <div style="color: azure;" class="row topo">
         <div class="col-lg-4 teste">
@@ -17,6 +18,65 @@
             <div class="centralizar espacamento">
                 <button type="button" class="btn btn-light btn-rounded" data-mdb-ripple-init
                     (click)="logar()">Entrar</button>
+=======
+<div class="login">
+    <img src="assets/Hero.svg" width="450px" height="100%">
+    <div [ngClass]="{ 'padding-zero': !modoLogin }" class="container">
+        <div class="form-box">
+            <div class="text-box">
+                <h2>Bem vindo!</h2>
+                <span *ngIf="modoLogin"><b>Crie uma conta</b> ou entre para começar a usar o Pet One</span>
+                <span *ngIf="!modoLogin"><b>Crie sua conta</b> para começar a usa o Pet One</span> <!-- Exibição ao clicar em Cadastre-se -->
+            </div>
+            <div class="input-box">
+                <!-- Formulário de login -->
+                <div *ngIf="modoLogin" class="form-outline" data-mdb-input-init>
+                    <h3>Email</h3>
+                    <input (keyup.enter)="logar()" type="email" id="typeEmail" [(ngModel)]="login.username" (keyup.enter)="logar()"/>
+                </div>
+                <div *ngIf="modoLogin" class="form-outline" data-mdb-input-init>
+                    <h3>Senha</h3>
+                    <input (keyup.enter)="logar()" type="password" id="typePassword" [(ngModel)]="login.password" (keyup.enter)="logar()"/>
+                </div>
+                <h5 *ngIf="modoLogin">Esqueceu sua senha?</h5>
+                
+                <!-- Formulário de cadastro -->
+                 <div *ngIf="!modoLogin" style="display: flex;
+                 width: 100%;
+                 gap: 2rem;">
+
+                    <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
+                        <h3>Nome Completo </h3>
+                        <input type="text" id="typeNewEmail"/>
+                    </div>
+                    <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
+                        <h3>CPF</h3>
+                        <input type="text" id="typeNewPassword"/>
+                    </div>
+
+                 </div>
+
+               
+                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
+                    <h3>Email</h3>
+                    <input type="email" id="typeNewPassword"/>
+                </div>
+                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
+                    <h3>Senha</h3>
+                    <input type="password" id="typeNewPassword"/>
+                </div>
+                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
+                    <h3>Confirme sua Senha</h3>
+                    <input type="password" id="typeNewPassword"/>
+                </div>
+                <button *ngIf="modoLogin" class="btn-1" (click)="logar()">Entrar</button>
+            </div>
+            <div class="btn-box">
+                <h5 *ngIf="modoLogin">ou</h5>
+                <button *ngIf="modoLogin" class="btn-2" (click)="toggleModo()">Cadastre-se</button>
+                <button *ngIf="!modoLogin" class="btn-1" (click)="reloadPage()">Cadastrar</button>
+
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
