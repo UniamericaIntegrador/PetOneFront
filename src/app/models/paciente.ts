@@ -7,17 +7,17 @@ export class Paciente {
     id!: number;
     nome!: string;
     //especie!: Especie;
-    especie!: string;
+    //especie!: string;
     dataNascimento!: Date;
-    //raca!: Raca;
-    raca!: string;
+    raca!: Raca;
+    //raca!: string;
     tutor!: Tutor;
     procedimentos: Procedimento[] = [];
 
-    constructor(id: number, nome: string, especie: string, dataNascimento: Date, raca: string, tutor: Tutor | null){
+    constructor(id: number, nome: string, dataNascimento: Date, raca: Raca | null, tutor: Tutor | null){
         this.id = id;
         this.nome = nome;
-        this.especie = especie;
+        //this.especie = especie;
         this.dataNascimento = dataNascimento;
         if(raca) this.raca = raca;
         if(tutor) this.tutor = tutor;
