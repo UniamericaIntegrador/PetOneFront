@@ -36,7 +36,7 @@ import { RacaService } from '../../../services/raca.service';
   templateUrl: './pacientesdetails.component.html',
   styleUrl: './pacientesdetails.component.scss'
 })
-//new Especie(0, ''),
+
 export class PacientesdetailsComponent {
   //@Input("paciente") paciente: Paciente = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
   //@Input("paciente") paciente: Paciente = new Paciente(0,'', '', new Date(), '', null);
@@ -60,12 +60,31 @@ export class PacientesdetailsComponent {
   lista: string[] = [];
   listaDog: string[] = [];
 
-  Gatos: boolean = false;
-  Cachorros: boolean = false;
+  listaEspecie: Especie[] = [];
+  
+
+  //Gatos: boolean = false;
+  //Cachorros: boolean = false;
+
+  //Gatos: string = "Gato";
+  //Cachorros: string = "Cachorro";
+
+  
 
   constructor() {
+
+    setTimeout(() => {
+      console.log(this.paciente);
+
+    }, 1000);
+    
     this.carregarRacas();
     this.carregarRacasDog();
+    this.carregarEspecie();
+
+
+    
+    /*
     let id = this.router.snapshot.params['id'];
     if (id > 0) {
       this.findById(id);
@@ -74,6 +93,7 @@ export class PacientesdetailsComponent {
         this.findById(id);
       }
     }
+    */
   }
 
   findById(id: number) {
@@ -92,283 +112,109 @@ export class PacientesdetailsComponent {
     });
   }
 
-  /*
   save() {
-    if (this.paciente.id > 0) {
-      this.racaService.update(this.paciente.raca, this.paciente.raca.id).subscribe({
-        next: racaAtualizada => {
-          this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
-            next: mensagem => {
-              Swal.fire({
-                title: mensagem,
-                icon: 'success',
-                confirmButtonText: 'Ok',
-              });
-              this.router2.navigate(['admin/pacientes'], {
-                state: { pacienteEditado: this.paciente },
-              });
-              this.retorno.emit(this.paciente);
-            },
-            error: erro => {
-              Swal.fire({
-                title: 'Erro ao editar o cadastro da raça',
-                icon: 'error',
-                confirmButtonText: 'Ok',
-              });
-            },
-          });
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao atualizar a raça',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    }else{
-      this.racaService.save(this.paciente.raca).subscribe({
-        next: (raca: Raca) => {
-          this.paciente.raca.id = raca.id;
-          this.pacienteService.save(this.paciente).subscribe({
-            next: mensagem =>{
-              Swal.fire({
-                title: mensagem,
-                confirmButtonColor: '#54B4D3',
-                text: 'Paciente salvo com sucesso!',
-                icon: 'success',
-              });
-              this.router2.navigate(['admin/pacientes'],{
-                state: {pacienteNovo: this.paciente},
-              });
-              this.retorno.emit(this.paciente);
-            },
-            error: erro=>{
-              Swal.fire({
-                title: 'Erro ao salvar o paciente',
-                icon: 'error',
-                confirmButtonText: 'Ok',
-              });
-            },
-          });
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao salvar a raça',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    }
+  if (this.paciente.id > 0) {
+    // Atualiza Espécie
+    this.especieService.update(this.paciente.raca.especie, this.paciente.raca.especie.id).subscribe({
+      next: especieAtualizada => {
+        // Atualiza Raça
+        this.racaService.update(this.paciente.raca, this.paciente.raca.id).subscribe({
+          next: racaAtualizada => {
+            // Atualiza Paciente
+            this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
+              next: mensagem => {
+                Swal.fire({
+                  title: mensagem,
+                  icon: 'success',
+                  confirmButtonText: 'Ok',
+                });
+                this.router2.navigate(['admin/pacientes'], {
+                  state: { pacienteEditado: this.paciente },
+                });
+                this.retorno.emit(this.paciente);
+              },
+              error: erro => {
+                Swal.fire({
+                  title: 'Erro ao editar o cadastro do paciente',
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                });
+              },
+            });
+          },
+          error: erro => {
+            Swal.fire({
+              title: 'Erro ao atualizar a raça',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+            });
+          },
+        });
+      },
+      error: erro => {
+        Swal.fire({
+          title: 'Erro ao atualizar a espécie',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        });
+      },
+    });
+  } else {
+    // Salva Espécie
+    this.especieService.save(this.paciente.raca.especie).subscribe({
+      next: (especie) => {
+        this.paciente.raca.especie.id = especie.id;
+        console.log("aaaa")
+        console.log(especie.id)
+        // Salva Raça
+        this.racaService.save(this.paciente.raca).subscribe({
+          next: (raca: Raca) => {
+            this.paciente.raca.id = raca.id;
+            console.log("bbbb")
+            console.log(raca.id)
+
+            // Salva Paciente
+            this.pacienteService.save(this.paciente).subscribe({
+              next: mensagem => {
+                Swal.fire({
+                  title: mensagem,
+                  confirmButtonColor: '#54B4D3',
+                  text: 'Paciente salvo com sucesso!',
+                  icon: 'success',
+                });
+                this.router2.navigate(['admin/pacientes'], {
+                  state: { pacienteNovo: this.paciente },
+                });
+                this.retorno.emit(this.paciente);
+              },
+              error: erro => {
+                Swal.fire({
+                  title: 'Erro ao salvar o paciente',
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                });
+              },
+            });
+          },
+          error: erro => {
+            Swal.fire({
+              title: 'Erro ao salvar a raça',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+            });
+          },
+        });
+      },
+      error: erro => {
+        Swal.fire({
+          title: 'Erro ao salvar a espécie',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        });
+      },
+    });
   }
-  */
-
-
-  /*
-  save() {
-    //this.racaToEspecie();
-    if (this.paciente.id > 0) {
- 
-      this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            icon: 'success',
-            confirmButtonText: 'Ok',
-          });
-          this.router2.navigate(['admin/pacientes'], {
-            state: { pacienteEditado: this.paciente },
-          });
-          this.retorno.emit(this.paciente);
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao editar o cadastro do paciente',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    } else {
-      this.pacienteService.save(this.paciente).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            confirmButtonColor: '#54B4D3',
-            text: 'Paciente salvo com sucesso!',
-            icon: 'success',
-          });
-          this.router2.navigate(['admin/pacientes'], {
-            state: { pacienteNovo: this.paciente },
-          });
-          this.retorno.emit(this.paciente);
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao salvar o paciente',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    }
-  }
-  */
-
-
-  /*
-  save() {
-    //this.racaToEspecie();
-    if (this.paciente.id > 0) {
- 
-      this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            icon: 'success',
-            confirmButtonText: 'Ok',
-          });
-          this.router2.navigate(['admin/pacientes'], {
-            state: { pacienteEditado: this.paciente },
-          });
-          this.retorno.emit(this.paciente);
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao editar o cadastro do paciente',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    } else {
-      this.pacienteService.save(this.paciente).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            confirmButtonColor: '#54B4D3',
-            text: 'Paciente salvo com sucesso!',
-            icon: 'success',
-          });
-          this.router2.navigate(['admin/pacientes'], {
-            state: { pacienteNovo: this.paciente },
-          });
-          this.retorno.emit(this.paciente);
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao salvar o paciente',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    }
-  }
-  */
-
-  save() {
-    if (this.paciente.id > 0) {
-      // Atualiza Espécie
-      this.especieService.update(this.paciente.raca.especie, this.paciente.raca.especie.id).subscribe({
-        next: especieAtualizada => {
-          // Atualiza Raça
-          this.racaService.update(this.paciente.raca, this.paciente.raca.id).subscribe({
-            next: racaAtualizada => {
-              // Atualiza Paciente
-              this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
-                next: mensagem => {
-                  Swal.fire({
-                    title: mensagem,
-                    icon: 'success',
-                    confirmButtonText: 'Ok',
-                  });
-                  this.router2.navigate(['admin/pacientes'], {
-                    state: { pacienteEditado: this.paciente },
-                  });
-                  this.retorno.emit(this.paciente);
-                },
-                error: erro => {
-                  Swal.fire({
-                    title: 'Erro ao editar o cadastro do paciente',
-                    icon: 'error',
-                    confirmButtonText: 'Ok',
-                  });
-                },
-              });
-            },
-            error: erro => {
-              Swal.fire({
-                title: 'Erro ao atualizar a raça',
-                icon: 'error',
-                confirmButtonText: 'Ok',
-              });
-            },
-          });
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao atualizar a espécie',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    } else {
-      // Salva Espécie
-      this.especieService.save(this.paciente.raca.especie).subscribe({
-        next: (especie: Especie) => {
-          this.paciente.raca.especie.id = especie.id;
-          // Salva Raça
-          this.racaService.save(this.paciente.raca).subscribe({
-            next: (raca: Raca) => {
-              this.paciente.raca.id = raca.id;
-              // Salva Paciente
-              this.pacienteService.save(this.paciente).subscribe({
-                next: mensagem => {
-                  Swal.fire({
-                    title: mensagem,
-                    confirmButtonColor: '#54B4D3',
-                    text: 'Paciente salvo com sucesso!',
-                    icon: 'success',
-                  });
-                  this.router2.navigate(['admin/pacientes'], {
-                    state: { pacienteNovo: this.paciente },
-                  });
-                  this.retorno.emit(this.paciente);
-                },
-                error: erro => {
-                  Swal.fire({
-                    title: 'Erro ao salvar o paciente',
-                    icon: 'error',
-                    confirmButtonText: 'Ok',
-                  });
-                },
-              });
-            },
-            error: erro => {
-              Swal.fire({
-                title: 'Erro ao salvar a raça',
-                icon: 'error',
-                confirmButtonText: 'Ok',
-              });
-            },
-          });
-        },
-        error: erro => {
-          Swal.fire({
-            title: 'Erro ao salvar a espécie',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        },
-      });
-    }
-  }
-
-
-
+}
 
   buscarTutor() {
     this.modalRef = this.modalService.open(this.modalTutores, { modalClass: 'modal-lg' });
@@ -404,7 +250,7 @@ export class PacientesdetailsComponent {
       },
       error: erro => {
         Swal.fire({
-          title: "Ocorreu um erro ao exibir a lista de raças",
+          title: "Ocorreu um erro ao exibir a lista de raças de gatos",
           icon: "error",
           confirmButtonText: "Ok"
         });
@@ -419,12 +265,27 @@ export class PacientesdetailsComponent {
       },
       error: erro => {
         Swal.fire({
-          title: "Ocorreu um erro ao exibir a lista de raças",
+          title: "Ocorreu um erro ao exibir a lista de raças de cachorros",
           icon: "error",
           confirmButtonText: "Ok"
         });
       }
     });
+  }
+
+  carregarEspecie(){
+    this.especieService.listAll().subscribe({
+      next: data => {
+        this.listaEspecie = data;
+      },
+      error: erro => {
+        Swal.fire({
+          title: "Ocorreu um erro ao exibir a lista de espécies",
+          icon: "error",
+          confirmButtonText: "Ok"
+        });
+      }
+    })
   }
   /*
   racaToEspecie(){

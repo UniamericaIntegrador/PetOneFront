@@ -28,21 +28,23 @@
             <mat-form-field>
                 <mat-label>Selecione uma opcão</mat-label>
                 <mat-select [(ngModel)]="procedimento.resultado">
-                  <mat-option value="Aguardando">Aguardando</mat-option>
-                  <mat-option value="Enviado">Enviado</mat-option>
-                  <mat-option value="Cancelado">Cancelado</mat-option>
+                    <mat-option value="hourglass_empty">Aguardando</mat-option>
+                    <mat-option value="schedule_send">Enviado</mat-option>
+                    <mat-option value="close_small">Cancelado</mat-option>
+                    <mat-option value="done_all">Finalizado</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
         <div class="input-MAT">
             <mat-form-field>
                 <mat-label>Selecione uma opcão</mat-label>
                 <mat-select [(ngModel)]="procedimento.diagnostico">
-                  <mat-option value="Aguardando">Aguardando</mat-option>
-                  <mat-option value="Enviado">Enviado</mat-option>
-                  <mat-option value="Cancelado">Cancelado</mat-option>
+                    <mat-option value="hourglass_empty">Aguardando</mat-option>
+                    <mat-option value="schedule_send">Enviado</mat-option>
+                    <mat-option value="close_small">Cancelado</mat-option>
+                    <mat-option value="done_all">Finalizado</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
     </div>
 

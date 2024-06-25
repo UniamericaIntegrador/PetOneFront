@@ -23,11 +23,11 @@ export class EspecieService {
     }
 
     save(especie: Especie): Observable<Especie> {
-        return this.http.post<Especie>(this.API + "/save", especie, { responseType: 'text' as 'json' });
+        return this.http.post<Especie>(this.API + "/save", especie);
     }
 
-    update(especie: Especie, id: number): Observable<string> {
-        return this.http.put<string>(this.API + "/update/" + id, especie, { responseType: 'text' as 'json' });
+    update(especie: Especie, id: number): Observable<Especie> {
+        return this.http.put<Especie>(this.API + "/update/" + id, especie);
     }
 
     findById(id: number): Observable<Especie> {

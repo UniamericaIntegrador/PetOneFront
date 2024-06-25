@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-veterinariosdetails',
@@ -39,6 +40,7 @@ export class VeterinariosdetailsComponent {
 
   veterinarioService = inject(VeterinarioService);
   enderecoService = inject(EnderecoService);
+  loginService = inject(LoginService)
   
   constructor() {}
   

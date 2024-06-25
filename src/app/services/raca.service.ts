@@ -25,11 +25,11 @@ export class RacaService {
     }
 
     save(raca: Raca): Observable<Raca> {
-        return this.http.post<Raca>(this.API + "/save", raca, { responseType: 'text' as 'json' });
+        return this.http.post<Raca>(this.API + "/save", raca);
     }
 
-    update(raca: Raca, id: number): Observable<string> {
-        return this.http.put<string>(this.API + "/update/" + id, raca, { responseType: 'text' as 'json' });
+    update(raca: Raca, id: number): Observable<Raca> {
+        return this.http.put<Raca>(this.API + "/update/" + id, raca);
     }
 
     findById(id: number): Observable<Raca> {
