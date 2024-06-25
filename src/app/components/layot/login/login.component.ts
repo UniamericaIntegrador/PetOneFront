@@ -2,12 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-<<<<<<< Updated upstream
-=======
 import { Login } from '../../../auth/login';
 import { LoginService } from '../../../auth/login.service';
 import { CommonModule } from '@angular/common';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-login',
@@ -18,8 +15,6 @@ import { CommonModule } from '@angular/common';
 })
 
 export class LoginComponent {
-<<<<<<< Updated upstream
-=======
   login: Login = new Login ();
 
   loginService = inject(LoginService);
@@ -57,8 +52,9 @@ export class LoginComponent {
     window.location.reload(); // Função para recarregar a página
   }
   
-  /*
->>>>>>> Stashed changes
+}
+
+/*
   login!: string;
   senha!: string;
 
@@ -83,4 +79,4 @@ export class LoginComponent {
       });
     }
   }
-}
+*/

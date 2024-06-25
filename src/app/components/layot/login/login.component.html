@@ -1,27 +1,6 @@
-<<<<<<< Updated upstream
-<div class="container">
-    <div style="color: azure;" class="row topo">
-        <div class="col-lg-4 teste">
-            <div class="centralizar espacamento logo">
-                <i class="fa-solid fa-otter"></i> Pet One
-            </div>
-            <div class="espacamento">
-                <i class="fa-solid fa-user"></i>
-                Usuário
-                <input type="text" name="login" (keyup.enter)="logar()" class="form-control" [(ngModel)]="login" />
-            </div>
-            <div class="espacamento">
-                <i class="fa-solid fa-lock"></i>
-            Senha
-            <input type="password" (keyup.enter)="logar()" name="senha" class="form-control" [(ngModel)]="senha" />
-            </div>
-            <div class="centralizar espacamento">
-                <button type="button" class="btn btn-light btn-rounded" data-mdb-ripple-init
-                    (click)="logar()">Entrar</button>
-=======
 <div class="login">
     <img src="assets/Hero.svg" width="450px" height="100%">
-    <div [ngClass]="{ 'padding-zero': !modoLogin }" class="container">
+    <div [ngClass]="{ 'padding-zero': !modoLogin }" class="`">
         <div class="form-box">
             <div class="text-box">
                 <h2>Bem vindo!</h2>
@@ -76,7 +55,6 @@
                 <button *ngIf="modoLogin" class="btn-2" (click)="toggleModo()">Cadastre-se</button>
                 <button *ngIf="!modoLogin" class="btn-1" (click)="reloadPage()">Cadastrar</button>
 
->>>>>>> Stashed changes
             </div>
         </div>
     </div>
