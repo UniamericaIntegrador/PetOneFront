@@ -8,10 +8,12 @@
     <span class="material-symbols-outlined icon">space_dashboard</span>
     Dashboard
   </a>
-  <a href="admin/veterinarios" class="sidebar-button">
-    <span class="material-symbols-outlined icon">stethoscope</span>
-    Veterinários
-  </a>
+  @if(loginService.hasPermission("ADMIN")){
+    <a href="admin/veterinarios" class="sidebar-button">
+      <span class="material-symbols-outlined icon">stethoscope</span>
+      Veterinários
+    </a>
+  }
   <a href="admin/pacientes" class="sidebar-button">
     <span class="material-symbols-outlined icon">pets</span>
     Pacientes

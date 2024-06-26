@@ -13,8 +13,8 @@ export class PacienteService {
   http = inject(HttpClient);
   
   API = "http://localhost:8080/api/paciente";
-  CATAPI = "https://api.thecatapi.com/v1/breeds";
-  DOGAPI = "https://api.thedogapi.com/v1/breeds";
+  //CATAPI = "https://api.thecatapi.com/v1/breeds";
+  //DOGAPI = "https://api.thedogapi.com/v1/breeds";
 
   constructor() { }
 
@@ -38,6 +38,7 @@ export class PacienteService {
     return this.http.get<Paciente>(this.API+"/findById/"+id);
   }
 
+  /*
   getRacas(): Observable<string[]>{
     return this.http.get<any[]>(this.CATAPI).pipe(
       map(breeds => breeds.map(breed => breed.name))
@@ -49,4 +50,5 @@ export class PacienteService {
       map(breeds => breeds.map(breed => breed.name))
     );
   }
+  */
 }

@@ -4,7 +4,7 @@ export class Especie {
     
 
     constructor(id: number, nome: string){
-        id = this.id;
-        nome = this.nome;
+        this.id = id;
+        this.nome = nome;
     }
 }

@@ -17,19 +17,19 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
   return next(request).pipe(
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
-	  
-	  
+
+
         if (err.status === 401) {
-          alert('401 - tratar aqui');
+          alert('401 - usuário não autenticado');
           router.navigate(['/login']);
         } else if (err.status === 403) {
-          alert('403 - tratar aqui');
-		  router.navigate(['/login']);
+          alert('403 - usuário não autorizado');
+          router.navigate(['/login']);
         } else {
           console.error('HTTP error:', err);
         }
-		
-		
+
+
       } else {
         console.error('An error occurred:', err);
       }

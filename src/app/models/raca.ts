@@ -7,8 +7,8 @@ export class Raca {
     
 
     constructor(id: number, nome: string, especie: Especie | null){
-        id = this.id;
-        nome = this.nome;
-        if(especie) this.especie = especie;
+        this.id = id;
+        this.nome = nome;
+        if(especie) this.especie = especie; 
     }
 }

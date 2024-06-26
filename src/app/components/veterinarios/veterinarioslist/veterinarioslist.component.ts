@@ -64,7 +64,7 @@ export class VeterinarioslistComponent {
   }
 
   listAll(){
-    console.log("list all esta funcionado");
+    console.log("list all veterinario esta funcionado");
     this.veterinarioService.listAll().subscribe({
         next: lista => {
             this.lista = lista;

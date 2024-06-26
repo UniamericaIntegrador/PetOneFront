@@ -23,46 +23,47 @@
             <label for="">Especie</label>
             <mat-form-field>
                 <mat-label>Selecione uma opcão</mat-label>
-                <mat-select [(ngModel)]="paciente.especie">
-                  <mat-option value="Gato">Gato</mat-option>
-                  <mat-option value="Cachorro">Cachorro</mat-option>
-                  <mat-option value="Outra">Outra</mat-option>
+                <mat-select [(ngModel)]="paciente.raca.especie">
+                    @for (especie of listaEspecie; track $index) {
+                    <mat-option [value]="especie">{{especie.nome}}</mat-option>
+                    }
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
-        @if (paciente.especie == "Gato") {
+
+        @if (paciente.raca.especie.id == 1) {
         <div class="input-MAT">
             <label for="">Raça</label>
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
-                <mat-select [(ngModel)]="paciente.raca">
+                <mat-select [(ngModel)]="paciente.raca.nome">
                     @for (raca of lista; track $index) {
                     <mat-option [value]="raca">{{raca}}</mat-option>
                     }
                 </mat-select>
             </mat-form-field>
         </div>
-        }@else if (paciente.especie == "Cachorro") {
-            <div class="input-MAT">
-                <label for="">Raça</label>
-                <mat-form-field>
-                    <mat-label>Escolha uma opção</mat-label>
-                    <mat-select [(ngModel)]="paciente.raca" >
-                        @for (raca of listaDog; track $index) {
-                        <mat-option [value]="raca">{{raca}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-            </div>
+        }@else if (paciente.raca.especie.id == 2) {
+        <div class="input-MAT">
+            <label for="">Raça</label>
+            <mat-form-field>
+                <mat-label>Escolha uma opção</mat-label>
+                <mat-select [(ngModel)]="paciente.raca.nome">
+                    @for (raca of listaDog; track $index) {
+                    <mat-option [value]="raca">{{raca}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
         }@else {
-            <div class="input-MAT">
-                <label for="">Raça</label>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Ex. Thom" value="" [(ngModel)]="paciente.raca">
-                </mat-form-field>
-            </div>
+        <div class="input-MAT">
+            <label for="">Raça</label>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ex. Thom" value="" required="" [(ngModel)]="paciente.raca.nome">
+            </mat-form-field>
+        </div>
         }
-        
+
         <div class="input-MAT">
             <label for="">Data de nascimento</label>
             <mat-form-field>
@@ -179,222 +180,6 @@
         </div>
     </div>
 </div>
-
-
-
-<!--
-
-    isso aqui é para as APIs de raça
-
-  
--->
-
-
-
-
-
-<!--
-<div class="modalholder">
-    <div class="title">
-        <div class="text">
-            <h2>Pacientes</h2>
-            <span><b>Edite o formulário</b> para atualizar a tabela de veterinários</span>
-        </div>
-    </div>
-    <div class="inputholder">
-        <div class="input-patient">
-            <div class="inpit">
-                <p>Nome</p>
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                    [(ngModel)]="paciente.nome" />
-
-            </div>
-            <div class="inpit">
-                <p>Especie:</p>
-                <select class="form-select" aria-label="Default select example" [(ngModel)]="paciente.especie">
-                    <option selected>Selecione a espécie</option>
-                    <option value="Gato">Gato</option>
-                    <option value="Cachorro">Cachorro</option>
-                </select>
-            </div>
-            <div class="inpit">
-                <p>Raça</p>
-                <select class="form-select" aria-label="Default select example" [(ngModel)]="paciente.raca">
-                    <option selected>Selecione a raça</option>
-                    <option value="Malhado">Malhado</option>
-                    <option value="Golden Retriever">Golden Retriever</option>
-                </select>
-            </div>
-        </div>
-        <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="paciente.dataNascimento">
-            <mat-hint>DD/MM/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-        </mat-form-field>
-
-    </div>
-
-    <div class="btn-buscas">
-        <div>
-            @if(paciente.tutor == null){
-            <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded" mdbRipple
-                (click)="buscarTutor()">
-                Buscar tutor</button>
-            }@else {
-            <div class="row">
-                <div class="col-lg-8">
-                    <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
-                    <p>{{paciente.tutor.cpf}}</p>
-                </div>
-                <div class="col-lg-4">
-                    <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
-                        Trocar Tutor
-                    </button>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-</div>
-<div class="procedimento-form">
-    <table border="1" class="procedimento">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (procedimento of paciente.procedimentos; track $index) {
-            <tr>
-                <td>{{ procedimento.id }}</td>
-                <td>{{ procedimento.nomeProcedimento }}</td>
-                <td class="direita">
-                    <button type="button" class="btn btn-danger btn-rounded btnmargin" mdbRipple
-                        (click)="desvincularProcedimentoPaciente(procedimento)">
-                        Deletar
-                    </button>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-    <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded" mdbRipple
-        (click)="buscarProcedimentos()">
-        Buscar Procedimento
-    </button>
-</div>
-
-<button type="button" style="background-color: #B6174B; color: aliceblue;" class="btn btn-info btn-rounded"
-    (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
-    Adicionar
-</button>
--->
-
-<!--Formulario anterior-->
-<!--
-<div class="container">
-    <h3 style="color: #000000">PACIENTE</h3>
-    <p>Edite o formulário para atualizar a tabela de pacientes</p>
-    <div class="card">
-        <div class="card-body centralizarModal">
-            <div>
-                <div>
-                    Nome
-                    <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                        [(ngModel)]="paciente.nome" />
-
-                </div>
-                <div>
-                    Especie
-                    <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                        [(ngModel)]="paciente.especie" />
-
-                </div>
-
-                <div>
-                    Data de Nascimento
-                    <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                        [(ngModel)]="paciente.dataNascimento" />
-                </div>
-
-                <div>
-                    Raça
-                    <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                        [(ngModel)]="paciente.raca" />
-                </div>
-
-
-
-                <div class="btn-buscas">
-                    <div>
-                        @if(paciente.tutor == null){
-                        <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded"
-                            mdbRipple (click)="buscarTutor()">
-                            Buscar tutor</button>
-                        }@else {
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
-                            </div>
-                            <div class="col-lg-4">
-                                <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
-                                    Trocar Tutor
-                                </button>
-                            </div>
-                        </div>
-                        }
-                    </div>
-    
-                    <div class="teste">
-                        <button type="button" style="background-color: #87B6A7; color: aliceblue;" class="btn btn-rounded"
-                            mdbRipple (click)="buscarProcedimentos()">
-                            Buscar Procedimento
-                        </button>
-                    </div>
-                </div>
-
-                <table border="1" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (procedimento of paciente.procedimentos; track $index) {
-                        <tr>
-                            <td>{{ procedimento.id }}</td>
-                            <td>{{ procedimento.nomeProcedimento }}</td>
-                            <td class="direita">
-                                <button type="button" class="btn btn-danger btn-rounded" mdbRipple
-                                    (click)="desvincularProcedimentoPaciente(procedimento)">
-                                    Deletar
-                                </button>
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
-
-
-            </div>
-
-
-
-            <button type="button" style="background-color: #B6174B; color: aliceblue;" class="btn btn-info btn-rounded"
-                (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
-                Adicionar
-            </button>
-        </div>
-        <div class="col-lg-4"></div>
-    </div>
-</div>
--->
 
 
 <ng-template #modalTutores>
