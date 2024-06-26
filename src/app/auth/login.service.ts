@@ -20,8 +20,14 @@ export class LoginService {
     return this.http.post<string>(this.API, login, {responseType: 'text' as 'json'});
   }
 
+  /*
   cadastrar(usuario: Usuario): Observable<any> {
     return this.http.post<any>(this.API2, usuario);
+  }
+  */
+
+  cadastrar(usuario: Usuario): Observable<string> {
+    return this.http.post<string>(this.API2, usuario, { responseType: 'text' as 'json' });
   }
 
   addToken(token: string) {
@@ -30,6 +36,7 @@ export class LoginService {
 
   removerToken() {
     localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   getToken() {
@@ -55,5 +62,4 @@ export class LoginService {
   getUsuarioLogado() {
     return this.jwtDecode() as Usuario;
   }
-
 }
