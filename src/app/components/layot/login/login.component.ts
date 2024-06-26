@@ -12,21 +12,23 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent {
-  login: Login = new Login ();
-  usuario: Usuario = new Usuario ();
+  login: Login = new Login();
+  usuario: Usuario = new Usuario();
 
   loginService = inject(LoginService);
   router = inject(Router);
+
+  modoLogin: boolean = true; // Variável para controlar o modo de exibição inicial (true para login, false para cadastro)
 
   constructor() {
     this.loginService.removerToken();
   }
 
-  logar(){
+  logar() {
     this.loginService.logar(this.login).subscribe({
       next: token => {
         if (token) {
@@ -40,7 +42,7 @@ export class LoginComponent {
         }
       },
       error: erro => {
-        alert('deu erro');
+        alert('Erro ao tentar fazer login');
       }
     });
   }
@@ -48,53 +50,37 @@ export class LoginComponent {
   cadastrar(): void {
     this.loginService.cadastrar(this.usuario).subscribe({
       next: token => {
-        console.log(token);
-        this.loginService.addToken(token);
-        this.router.navigate(['/admin/dashboard']);
+        if (token) {
+          Swal.fire({
+            title: 'Cadastro realizado com sucesso!',
+            text: 'Deseja permanecer logado?',
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.loginService.addToken(token);
+              if (this.loginService.hasPermission("ADMIN")) {
+                this.router.navigate(['/admin/dashboard']);
+              } else if (this.loginService.hasPermission("USER")) {
+                this.router.navigate(['/admin/pacientes']);
+              }
+            } else {
+              this.router.navigate(['/login']);
+            }
+          });
+        } else {
+          alert('Erro ao tentar cadastrar 1');
+        }
       },
-      error: (erro: any) => {
-        Swal.fire({
-          title: "Erro",
-          confirmButtonColor: "",
-          confirmButtonText: "Tentar novamente",
-          text: "Erro ao cadastrar usuário.",
-          icon: "error"
-        });
+      error: erro => {
+        alert('Erro ao tentar cadastrar 2');
       }
     });
   }
 
-  modoLogin: boolean = true; // Variável para controlar o modo de exibição inicial (true para login, false para cadastro)
-
   toggleModo(): void {
     this.modoLogin = !this.modoLogin; // Alternar entre login e cadastro ao clicar no botão "Cadastre-se"
   }
-  
 }
-
-/*
-  login!: string;
-  senha!: string;
-
-  router = inject(Router);
-
-  logar(){
-    if(this.login == "admin" && this.senha == "admin"){
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.router.navigate(['admin/pacientes']);
-    }else{
-      Swal.fire({
-        title: "Erro",
-        confirmButtonColor: "",
-        confirmButtonText: "Tentar novamente",
-        text: "Login ou senha incorreta.",
-        icon: "error"
-      });
-    }
-  }
-*/

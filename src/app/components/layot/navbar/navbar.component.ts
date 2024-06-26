@@ -15,8 +15,10 @@ import { Usuario } from '../../../auth/usuario';
 export class NavbarComponent implements OnInit {
   title: string = '';  // Inicialização direta
   
-  loginService = inject(LoginService);
+  
   usuario!: Usuario;
+
+  loginService = inject(LoginService);
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.usuario = this.loginService.getUsuarioLogado();
