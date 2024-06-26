@@ -1,28 +1,29 @@
 <div class="container">
-
     <div class="card">
         <div class="card-body">
             <div class="alinhamentoListagem">
                 <div>
-                    <h3 style="color: #54B4D3;">Listagem de tutores</h3>
+                    <h3 class="head title">Listagem de tutores</h3>
                 </div>
                 <div class="alinharDireita">
                     
-                    <button (click)="new()" type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init><i
-                            class="fa-solid fa-square-plus"></i>
-                        Novo</button>
+                    <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
+                            data-mdb-ripple-init>
+                            <p>Novo</p>
+                    </button>
                 </div>
             </div>
         </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">ID</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Nome</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">CPF</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Idade</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Endereço</th>
-                    <th style="background-color: antiquewhite;" class="centralizar" scope="col">Ação</th>
+                    <th class="centralizar" scope="col">ID</th>
+                    <th class="centralizar" scope="col">Nome</th>
+                    <th class="centralizar" scope="col">CPF</th>
+                    <th class="centralizar" scope="col">Idade</th>
+                    <th class="centralizar" scope="col">Cidade</th>
+                    <th class="centralizar" scope="col">Estado</th>
+                    <th class="centralizar" scope="col">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,24 +33,29 @@
                     <td class="centralizar">{{tutor.nome}}</td>
                     <td class="centralizar">{{tutor.cpf}}</td>
                     <td class="centralizar">{{tutor.idade}}</td>
-                    <td class="centralizar">{{tutor.endereco}}</td>
+                    <td class="centralizar">{{tutor.endereco.cidade}}</td>
+                    <td class="centralizar">{{tutor.endereco.estado}}</td>
                     <td>
                         @if(esconderBotoes){
-                            <button type="button" class="btn btn-primary btn-rounded" mdbRipple
-                                (click)="select(tutor)">
-                                Selecionar
-                            </button>
-                            }@else{
-                            <button (click)="edit(tutor)" type="button" type="button"
-                                class="btn btn-outline-warning btn-rounded" data-mdb-ripple-init
-                                data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                Editar</button>
-                            <button (click)="delete(tutor)" type="button" class="btn btn-outline-danger btn-rounded"
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple
+                            (click)="select(tutor)">
+                            Selecionar
+                        </button>
+                        }@else{
+                        <div class="centralizar actionbtn">
+                            <button (click)="edit(tutor)" type="button" type="button" class="actionbtns info"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Deletar</button>
-                            }
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+                            <button (click)="delete(tutor)" type="button" class="actionbtns danger"
+                                data-mdb-ripple-init data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span></button>
+                        </div>
+                        }
                         <div class="centralizar">
                         </div>
                     </td>
@@ -59,9 +65,8 @@
         </table>
     </div>
 </div>
-
 <ng-template #modalTutorDetalhe>
-    <div style="background-color: #54B4D3;" class="modal-header">
+    <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
     </div>
     <div class="modal-body">

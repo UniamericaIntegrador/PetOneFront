@@ -1,9 +1,101 @@
+<div class="Edit">
+    <div class="Edit-textos">
+        <div class="titulos">
+            <h2>Procedimentos</h2>
+            <p><b>Edite o formulário</b> para atualizar a tabela de procedimentos</p>
+        </div>
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </div>
+    <div class="procedimentoForm">
+        <div class="input-MAT">
+            <mat-form-field class="example-full-width">
+                <mat-label>Nome do procedimento</mat-label>
+                <input matInput placeholder="Ex. Check-up" value="" [(ngModel)]="procedimento.nomeProcedimento">
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="procedimento.data">
+                <mat-hint>YYYY/MM/DD</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="procedimento.resultado">
+                    <mat-option value="hourglass_empty">Aguardando</mat-option>
+                    <mat-option value="schedule_send">Enviado</mat-option>
+                    <mat-option value="close_small">Cancelado</mat-option>
+                    <mat-option value="done_all">Finalizado</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="procedimento.diagnostico">
+                    <mat-option value="hourglass_empty">Aguardando</mat-option>
+                    <mat-option value="schedule_send">Enviado</mat-option>
+                    <mat-option value="close_small">Cancelado</mat-option>
+                    <mat-option value="done_all">Finalizado</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="procedimento-data-input">
+        <div class="procedimento-data-select">
+            <h3>Veterinario:</h3>
+            @if(procedimento.veterinario == null){
+
+            }@else{
+            <button class="" (click)="buscarVeterinario()">
+                <p>Trocar tutor</p>
+            </button>
+            }
+        </div>
+        <div class="procedimento-data-view">
+            @if(procedimento.veterinario == null){
+            <button (click)="buscarVeterinario()">
+                <p>Selecionar Veterinario</p>
+            </button>
+            }@else {
+            <div class="patient-data-input">
+                <div class="input-MAT">
+                    <label for="">Nome</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{procedimento.veterinario.nome}}" value="">
+                    </mat-form-field>
+                </div>
+                <div class="input-MAT">
+                    <label for="">CRMV</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{procedimento.veterinario.crmv}}" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div>
+        <button (click)="save()">
+            <p>Adicionar</p>
+        </button>
+    </div>
+</div>
+
+<!--
 <div class="container">
-    <h3 style="color: #54b4d3">CADASTRO DE PROCEDIMENTOS</h3>
+    <h3 style="color: #000">PROCEDIMENTO</h3>
+    <p>Edite o formulário para atualizar a tabela de procedimentos</p>
     <div class="card">
         <div class="card-body">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
+            <div class="holder">
                 Procedimento
                 <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
                     [(ngModel)]="procedimento.nomeProcedimento" />
@@ -13,17 +105,17 @@
                 Resultado
                 <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
                     [(ngModel)]="procedimento.resultado" />
-                Diagnostico
+                Diagnostico 
                 <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
                     [(ngModel)]="procedimento.diagnostico" />
                 <div>
                     @if(procedimento.veterinario == null){
-                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarVeterinario()">
+                    <button style="background-color: #87B6A7; color: white;" type="button" class="btn btn-rounded" mdbRipple (click)="buscarVeterinario()">
                         Buscar veterinario</button>
                     }@else {
                     <div class="row">
                         <div class="col-lg-8">
-                            <p class="text-primary alert-primary">Tutor: {{procedimento.veterinario.nome}}</p>
+                            <p class="text-primary alert-primary">Veterinário: {{procedimento.veterinario.nome}}</p>
                         </div>
                         <div class="col-lg-4">
                             <button type="button" class="btn btn-warning btn-rounded" mdbRipple
@@ -34,16 +126,17 @@
                     </div>
                     }
                 </div>
-                <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
+                <button type="button" style="background-color: #dfaeb5;" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
                     (click)="save()">
-                    <i class="fa-solid fa-floppy-disk"></i>
-                    Salvar
+                    Adicionar
                 </button>
             </div>
-            <div class="col-lg-4"></div>
         </div>
     </div>
 </div>
+-->
+
+
 
 <ng-template #modalVeterinarios>
     <div class="modal-header">

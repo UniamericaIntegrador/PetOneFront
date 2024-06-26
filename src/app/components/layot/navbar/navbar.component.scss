@@ -1,0 +1,92 @@
+.header-container {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: rgb(79, 79, 79);
+  font-size: 1.5rem;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-icon {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.icon-background {
+  width: 3.5rem;
+  height: 3.5rem;
+  position: absolute;
+  background: linear-gradient(225deg, #CFE2FF 0%, #E0CFFC 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-letter {
+  color: white;
+  font-size: 1.6875rem;
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  color: #525252;
+  font-size: 0.75rem;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+}
+
+.user-role {
+  color: #7A7A7A;
+  font-size: 0.625rem;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+}
+
+.icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  position: relative;
+}
+
+.settings-icon,
+.notifications-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: #E9ECEF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-icon::before,
+.notifications-icon::before {
+  content: '';
+  width: 1.375rem;
+  height: 1.375rem;
+  background: #ADB5BD;
+}

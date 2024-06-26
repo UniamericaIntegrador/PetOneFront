@@ -14,7 +14,6 @@ export class LoginService {
   API = "http://localhost:8080/api/login";
   API2 = "http://localhost:8080/api/login/cadastro";
 
-
   constructor() { }
 
   logar(login: Login): Observable<string> {
@@ -53,5 +52,8 @@ export class LoginService {
       return false;
   }
 
+  getUsuarioLogado() {
+    return this.jwtDecode() as Usuario;
+  }
 
 }

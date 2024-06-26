@@ -4,32 +4,34 @@
 
 <div class="sidebar">
   <img src="assets/logo.svg" alt="Logo" class="top-image">
-  <a href="#" class="sidebar-button">
-    <img src="assets/dashboard.svg" alt="Dashboard Icon" class="icon">
+  <a href="admin/dashboard" class="sidebar-button">
+    <span class="material-symbols-outlined icon">space_dashboard</span>
     Dashboard
   </a>
-  <a href="admin/veterinarios" class="sidebar-button">
-    <img src="assets/estetoscopio.svg" alt="Veterinários Icon" class="icon">
-    Veterináriosd
-  </a>
+  @if(loginService.hasPermission("ADMIN")){
+    <a href="admin/veterinarios" class="sidebar-button">
+      <span class="material-symbols-outlined icon">stethoscope</span>
+      Veterinários
+    </a>
+  }
   <a href="admin/pacientes" class="sidebar-button">
-    <img src="assets/pata.svg" alt="Pacientes Icon" class="icon">
+    <span class="material-symbols-outlined icon">pets</span>
     Pacientes
   </a>
   <a href="admin/tutores" class="sidebar-button">
-    <img src="assets/paciente.svg" alt="Tutores Icon" class="icon">
+    <span class="material-symbols-outlined icon">person</span>
     Tutores
   </a>
   <a href="admin/procedimentos" class="sidebar-button">
-    <img src="assets/procedimento.svg" alt="Procedimentos Icon" class="icon">
+    <span class="material-symbols-outlined icon">medication</span>
     Procedimentos
   </a>
   <a href="#" class="sidebar-button">
-    <img src="assets/config.svg" alt="Configurações Icon" class="icon">
+    <span class="material-symbols-outlined icon">settings</span>
     Configurações
   </a>
   <a href="#" class="sidebar-button">
-    <img src="assets/relogio.svg" alt="Logs Icon" class="icon">
+    <span class="material-symbols-outlined icon">schedule</span>
     Logs
   </a>
   <a href="login" class="logout-button">Sair</a>

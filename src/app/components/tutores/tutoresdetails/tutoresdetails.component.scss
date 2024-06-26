@@ -1,0 +1,376 @@
+h3 {
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+label {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+    margin: 0;
+    padding-bottom: 8px;
+}
+
+/*
+
+.fomularioTutor{
+    border-radius: 20px;
+    width: 470px;
+    
+}
+.centralizarModal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.teste{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    margin-top: 10px;
+}
+
+.holder {
+    display: flex;
+    gap: 20px;
+}
+
+.modal {
+    --mdb-modal-width: 64.125rem;
+}
+
+.container-tutor {
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+}
+
+.Titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+}
+
+.text h2 {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textos p {
+    justify-content: left;
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text b {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+input {
+    border-radius: 0.5625rem;
+    border: 1px solid var(--Gray-300, #DEE2E6);
+}
+
+.tutor {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9375rem;
+    align-self: stretch;
+}
+
+.input-nome {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+}
+
+.input-nome p {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+    margin: 0;
+    padding-bottom: 8px;
+}
+
+.input-cpf {
+    display: flex;
+    max-width: 350px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+}
+
+.input-cpf p {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+    margin: 0;
+    padding-bottom: 8px;
+}
+
+.input-endereco {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    align-self: stretch;
+}
+
+.input-endereco h4 {
+    color: #000;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+}
+
+.input-holder {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+#CEP {
+    display: flex;
+    min-width: 9.375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    flex: 1 0 0;
+    max-width: 200px;
+}
+
+#Rua {
+    display: flex;
+    min-width: 25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    flex: 1 0 0;
+}
+
+#Numero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    flex: 1 0 0;
+    max-width: 96px;
+}
+
+#Cidade {
+    display: flex;
+    min-width: 23.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    flex: 1 0 0;
+}
+
+#Estado {
+    display: flex;
+    max-width: 12.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    flex: 1 0 0;
+}
+
+.btn-holder {
+    display: flex;
+    height: 2.75rem;
+    max-height: 2.75rem;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    align-self: stretch;
+}
+
+label {
+    color: #000;
+    font-family: Inter;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+}
+
+
+*/
+
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+}
+
+.text h2 {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textos p {
+    justify-content: left;
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text b {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.input-endereco {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-holder {
+    display: flex;
+    flex-direction: column;
+}
+
+.cep-logradouro {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+#CEP {
+    width: 100%;
+    max-width: 130px;
+}
+
+#Rua {
+    width: 100%;
+}
+
+#Numero {
+    width: 100%;
+    max-width: 100px;
+}
+
+.Cidade-input {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+#Estado {
+    width: 100%;
+    max-width: 60px;
+}
+
+#Cidade {
+    width: 100%;
+}
+
+#Bairro {
+    width: 100%;
+}
+
+.container-tutor{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+}
+
+.user {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.tutor {
+    width: 100%;
+}
+
+#Nome {
+    width: 100%;
+}
+
+#CPF {
+    width: 100%;
+}
+
+#idade{
+    width: 100%;
+    max-width: 60px;
+}

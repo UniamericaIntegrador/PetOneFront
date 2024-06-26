@@ -1,0 +1,95 @@
+h3 {
+    margin: 0;
+}
+
+.card {
+    --mdb-card-box-shadow: none;
+}
+
+th {
+    color: #272833;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.alinhamentoListagem {
+    color: var(--34312-d, #87b6a7);
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.head {
+    color: rgb(79, 79, 79);
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.actionbtn {
+    display: flex;
+    padding: 0rem 0.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.danger {
+    background: var(---Status-Color-Danger, #DC3545);
+}
+
+.info {
+    background: var(---Status-Color-Info, #17A2B8);
+}
+
+.actionbtns {
+    display: flex;
+    border-radius: 0.375rem;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    padding: 8px;
+}
+
+td {
+    color: #272833;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+button p {
+    color: var(--Default-White, var(--ffffff, #FFF));
+    font-family: Inter;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.125rem;
+    margin: 0;
+}
+
+.newbtn {
+    display: flex;
+    height: 2.375rem;
+    max-height: 2.375rem;
+    padding: 1rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #92133C;
+}
+
+.alinhamentoListagem {
+    align-items: center;
+}
+

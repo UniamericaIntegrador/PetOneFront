@@ -22,22 +22,25 @@ export class LoginComponent {
   loginService = inject(LoginService);
   router = inject(Router);
 
+  constructor() {
+    this.loginService.removerToken();
+  }
+
   logar(){
-    console.log(this.login);
     this.loginService.logar(this.login).subscribe({
       next: token => {
-        console.log(token);
-        this.loginService.addToken(token);
-        this.router.navigate(['/admin/dashboard']);
+        if (token) {
+          this.loginService.addToken(token);
+          if (this.loginService.hasPermission("ADMIN"))
+            this.router.navigate(['/admin/dashboard']);
+          else if (this.loginService.hasPermission("USER"))
+            this.router.navigate(['/admin/pacientes']);
+        } else {
+          alert('Usuário ou senha incorretos!');
+        }
       },
       error: erro => {
-        Swal.fire({
-          title: "Erro",
-          confirmButtonColor: "",
-          confirmButtonText: "Tentar novamente",
-          text: "Login ou senha incorreta.",
-          icon: "error"
-        });
+        alert('deu erro');
       }
     });
   }
@@ -69,3 +72,29 @@ export class LoginComponent {
   
 }
 
+/*
+  login!: string;
+  senha!: string;
+
+  router = inject(Router);
+
+  logar(){
+    if(this.login == "admin" && this.senha == "admin"){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.router.navigate(['admin/pacientes']);
+    }else{
+      Swal.fire({
+        title: "Erro",
+        confirmButtonColor: "",
+        confirmButtonText: "Tentar novamente",
+        text: "Login ou senha incorreta.",
+        icon: "error"
+      });
+    }
+  }
+*/

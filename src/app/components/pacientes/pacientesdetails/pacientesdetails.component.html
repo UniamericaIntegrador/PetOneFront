@@ -1,83 +1,186 @@
-<div class="container">
-    <h3 style="color: #54b4d3">CADASTRO DE PACIENTES</h3>
-    <div class="card">
-        <div class="card-body">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                Nome
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                    [(ngModel)]="paciente.nome" />
-                Especie
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                    [(ngModel)]="paciente.especie" />
-                Data de Nascimento
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                    [(ngModel)]="paciente.dataNascimento" />
-                Raça
-                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
-                    [(ngModel)]="paciente.raca" />
-                <div>
-                    @if(paciente.tutor == null){
-                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarTutor()">
-                        Buscar tutor</button>
-                    }@else {
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <p class="text-primary alert-primary">Tutor: {{paciente.tutor.nome}}</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarTutor()">
-                                Trocar Tutor
-                            </button>
-                        </div>
-                    </div>
-                    }
-                </div>
-
-                <div>
-                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarProcedimentos()">
-                        Buscar Procedimento
-                    </button>
-                </div>
-
-                <table border="1" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (procedimento of paciente.procedimentos; track $index) {
-                        <tr>
-                            <td>{{ procedimento.id }}</td>
-                            <td>{{ procedimento.nomeProcedimento }}</td>
-                            <td class="direita">
-                                <button type="button" class="btn btn-danger btn-rounded" mdbRipple
-                                    (click)="desvincularProcedimentoPaciente(procedimento)">
-                                    Deletar
-                                </button>
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
-
-
+<div class="modal-holder">
+    <div class="textos">
+        <div class="title">
+            <h2>Pacientes</h2>
+            <span><b>Edite o formulário </b>para atualizar a tabela de veterinários</span>
+        </div>
+        <div class="btn-holder">
+            <div class="btns">
+                <button (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+                    <p>Adicionar</p>
+                </button>
             </div>
+        </div>
+    </div>
+    <div class="patient-data-input">
+        <div class="input-MAT">
+            <label for="">Nome do animal</label>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ex. Thom" value="" [(ngModel)]="paciente.nome">
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <label for="">Especie</label>
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="paciente.raca.especie">
+                    @for (especie of listaEspecie; track $index) {
+                    <mat-option [value]="especie">{{especie.nome}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
 
+        @if (paciente.raca.especie.id == 1) {
+        <div class="input-MAT">
+            <label for="">Raça</label>
+            <mat-form-field>
+                <mat-label>Escolha uma opção</mat-label>
+                <mat-select [(ngModel)]="paciente.raca.nome">
+                    @for (raca of lista; track $index) {
+                    <mat-option [value]="raca">{{raca}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        }@else if (paciente.raca.especie.id == 2) {
+        <div class="input-MAT">
+            <label for="">Raça</label>
+            <mat-form-field>
+                <mat-label>Escolha uma opção</mat-label>
+                <mat-select [(ngModel)]="paciente.raca.nome">
+                    @for (raca of listaDog; track $index) {
+                    <mat-option [value]="raca">{{raca}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        }@else {
+        <div class="input-MAT">
+            <label for="">Raça</label>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ex. Thom" value="" required="" [(ngModel)]="paciente.raca.nome">
+            </mat-form-field>
+        </div>
+        }
 
+        <div class="input-MAT">
+            <label for="">Data de nascimento</label>
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="paciente.dataNascimento">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="tutor-data-input">
+        <div class="tutor-data-select">
+            <h3>Tutor:</h3>
+            @if(paciente.tutor == null){
 
-            <button type="button" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
-                (click)="save()">
-                <i class="fa-solid fa-floppy-disk"></i>
-                Salvar
+            }@else{
+            <button class="" (click)="buscarTutor()">
+                <p>Trocar tutor</p>
+            </button>
+            }
+        </div>
+        <div class="tutor-data-view">
+            @if(paciente.tutor == null){
+            <button (click)="buscarTutor()">
+                <p>Selecionar Tutor</p>
+            </button>
+            }@else {
+            <div class="patient-data-input">
+                <div class="input-MAT">
+                    <label for="">Nome</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{paciente.tutor.nome}}" value="">
+                    </mat-form-field>
+                </div>
+                <div class="input-MAT">
+                    <label for="">CPF</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{paciente.tutor.cpf}}" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="procedimento-data-input">
+        <div class="procedimento-data-select">
+            <h3>Procedimentos:</h3>
+            <button (click)="buscarProcedimentos()">
+                <p>Novo procedimento</p>
             </button>
         </div>
-        <div class="col-lg-4"></div>
+        <table class="procedimento-table">
+            <thead>
+                <tr class="table-head">
+                    <th id="ID">
+                        <div class="rowcell">
+                            <p>ID</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="rowcell">
+                            <p>Procedimentos</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="rowcell">
+                            <p>Data de agendamento</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="rowcell">
+                            <p>Ações</p>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (procedimento of paciente.procedimentos; track $index) {
+                <tr class="table-body">
+                    <th id="ID">
+                        <div class="rowcell">
+                            <p>{{procedimento.id}}</p>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="rowcell">
+                            <p>{{ procedimento.nomeProcedimento }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="rowcell">
+                            <p>{{ procedimento.data }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="rowcell">
+                            <button type="button" class="btn" mdbRipple
+                                (click)="desvincularProcedimentoPaciente(procedimento)">
+                                Deletar
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="btn-holder" style="display: none;">
+        <div class="btns">
+            <button (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+                <p>Adicionar</p>
+            </button>
+        </div>
     </div>
 </div>
+
 
 <ng-template #modalTutores>
     <div class="modal-header">

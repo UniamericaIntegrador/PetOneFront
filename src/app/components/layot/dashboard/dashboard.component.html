@@ -1,0 +1,83 @@
+<div class="dashboard">
+    <div class="cards">
+        <div class="card red">
+            <div class="card-body">
+                <h5 class="card-title">Pacientes cadastrados</h5>
+                <h4>{{PacienteCount}}</h4>
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="card-body">
+                <h5 class="card-title">Tutores cadastrados</h5>
+                <h4>{{TutorCount}}</h4>
+            </div>
+        </div>
+        <div class="card green">
+            <div class="card-body">
+                <h5 class="card-title">Veterinários cadastrados</h5>
+                <h4>{{VeterinarioCount}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="chart">
+            <div class="caption">
+                <p>0</p>
+                <p>10</p>
+                <p>20</p>
+                <p>30</p>
+                <p>40</p>
+                <p>50</p>
+                <p>60</p>
+                <p>70</p>
+                <p>80</p>
+                <p>90</p>
+                <p>100</p>
+            </div>
+            <div class="chartholder">
+                <div class="barchart">
+                    <div class="bar" [style.height.px]="calcular(VeterinarioCount)">
+                    </div>
+                    <div class="bar" [style.height.px]="calcular(ProcedimentoCount)">
+                    </div>
+                    <div class="bar" [style.height.px]="calcular(PacienteCount)">
+                    </div>
+                    <div class="bar" [style.height.px]="calcular(TutorCount)">
+                    </div>
+                                                      
+                </div>
+                <div class="title">
+                    <p>Veterinários</p>
+                    <p>Procedimentos</p>
+                    <p>Pacientes</p>
+                    <p>Tutores</p>
+                </div>
+            </div>
+        </div>
+        <div class="interaction">
+            <button class="addbtn" [routerLink]="['/admin/pacientes/new']" routerLinkActive="router-link-active" >
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Paciente</h5>
+            </button>
+            <button class="addbtn" [routerLink]="['/admin/tutores/new']" routerLinkActive="router-link-active">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Tutor</h5>
+            </button>
+            <button class="addbtn" [routerLink]="['/admin/procedimentos/new']">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Procedimento</h5>
+            </button>
+            <button class="addbtn" [routerLink]="['/admin/veterinarios/new']">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Veterinário</h5>
+            </button>
+        </div>
+    </div>

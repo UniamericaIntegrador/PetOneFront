@@ -14,3 +14,22 @@
     display: flex;
     justify-content: space-between;
 }
+
+*{
+    font-family: Inter;
+}
+
+.CustomModal{
+    --mdb-modal-width: 65rem;
+}
+
+.modal-header{
+    display: none;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-mdc-form-field {
+    width: 100%;
+}
