@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Login } from '../../../auth/login';
+import { Usuario } from '../../../auth/usuario';
 import { LoginService } from '../../../auth/login.service';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
 
 export class LoginComponent {
   login: Login = new Login ();
+  usuario: Usuario = new Usuario ();
 
   loginService = inject(LoginService);
   router = inject(Router);
@@ -43,16 +45,29 @@ export class LoginComponent {
     });
   }
 
-  modoLogin: boolean = true; // Variável para controlar o modo de exibição inicial (true para login, false para cadastro)
+  cadastrar(): void {
+    this.loginService.cadastrar(this.usuario).subscribe({
+      next: token => {
+        console.log(token);
+        this.loginService.addToken(token);
+        this.router.navigate(['/admin/dashboard']);
+      },
+      error: (erro: any) => {
+        Swal.fire({
+          title: "Erro",
+          confirmButtonColor: "",
+          confirmButtonText: "Tentar novamente",
+          text: "Erro ao cadastrar usuário.",
+          icon: "error"
+        });
+      }
+    });
+  }
 
-  // Outros métodos e propriedades do seu componente
+  modoLogin: boolean = true; // Variável para controlar o modo de exibição inicial (true para login, false para cadastro)
 
   toggleModo(): void {
     this.modoLogin = !this.modoLogin; // Alternar entre login e cadastro ao clicar no botão "Cadastre-se"
-  }
-
-  reloadPage(): void {
-    window.location.reload(); // Função para recarregar a página
   }
   
 }
