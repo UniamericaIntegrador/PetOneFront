@@ -12,7 +12,7 @@
                 <!-- Formulário de login -->
                 <div *ngIf="modoLogin" class="form-outline" data-mdb-input-init>
                     <h3>Email</h3>
-                    <input (keyup.enter)="logar()" type="email" id="typeEmail" [(ngModel)]="login.username" (keyup.enter)="logar()"/>
+                    <input (keyup.enter)="logar()" type="email" id="typeEmail" [(ngModel)]="login.email" (keyup.enter)="logar()"/>
                 </div>
                 <div *ngIf="modoLogin" class="form-outline" data-mdb-input-init>
                     <h3>Senha</h3>
