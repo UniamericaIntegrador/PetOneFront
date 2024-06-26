@@ -12,12 +12,16 @@ export class LoginService {
 
   http = inject(HttpClient);
   API = "http://localhost:8080/api/login";
-
+  API2 = "http://localhost:8080/api/login/cadastro";
 
   constructor() { }
 
   logar(login: Login): Observable<string> {
     return this.http.post<string>(this.API, login, {responseType: 'text' as 'json'});
+  }
+
+  cadastrar(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.API2, usuario);
   }
 
   addToken(token: string) {
@@ -51,6 +55,5 @@ export class LoginService {
   getUsuarioLogado() {
     return this.jwtDecode() as Usuario;
   }
-
 
 }
