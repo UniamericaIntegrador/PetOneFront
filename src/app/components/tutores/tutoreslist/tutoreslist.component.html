@@ -6,11 +6,14 @@
                     <h3 class="head title">Listagem de tutores</h3>
                 </div>
                 <div class="alinharDireita">
-                    
-                    <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                        <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
                             data-mdb-ripple-init>
                             <p>Novo</p>
                     </button>
+
+                    }
+                    
                 </div>
             </div>
         </div>
@@ -23,7 +26,10 @@
                     <th class="centralizar" scope="col">Idade</th>
                     <th class="centralizar" scope="col">Cidade</th>
                     <th class="centralizar" scope="col">Estado</th>
-                    <th class="centralizar" scope="col">Ação</th>
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                        <th class="centralizar" scope="col">Ação</th>
+                    }
+                    
                 </tr>
             </thead>
             <tbody>
@@ -43,17 +49,24 @@
                         </button>
                         }@else{
                         <div class="centralizar actionbtn">
-                            <button (click)="edit(tutor)" type="button" type="button" class="actionbtns info"
+                            @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                                <button (click)="edit(tutor)" type="button" type="button" class="actionbtns info"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            <button (click)="delete(tutor)" type="button" class="actionbtns danger"
+                            }
+                            
+                            @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                                <button (click)="delete(tutor)" type="button" class="actionbtns danger"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <span class="material-symbols-outlined">
                                     delete
-                                </span></button>
+                                </span>
+                            </button>
+                            }
+                            
                         </div>
                         }
                         <div class="centralizar">

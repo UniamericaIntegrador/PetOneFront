@@ -10,6 +10,8 @@ import { Especie } from '../../../models/especie';
 import { Raca } from '../../../models/raca';
 import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
+import { LoginService } from '../../../auth/login.service';
+import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-pacienteslist',
@@ -21,8 +23,6 @@ import { RacaService } from '../../../services/raca.service';
 //
 export class PacienteslistComponent {
   lista: Paciente[] = [];
-  //pacienteEdit: Paciente =  new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
-  //pacienteEdit: Paciente =  new Paciente(0,'', '', new Date(), '', null);
   pacienteEdit: Paciente = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
 
   listaEspecie: Especie[] = [];
@@ -36,53 +36,12 @@ export class PacienteslistComponent {
   especieService = inject(EspecieService);
   racaService = inject(RacaService);
 
+  loginService = inject(LoginService);
+  usuario!: Usuario;
+
   constructor(){
+    this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
-/*
-    let pacienteNovo = history.state.pacienteNovo;
-    let pacienteEditado = history.state.pacienteEditado;
-
-    let especieNovo = history.state.especieNovo;
-    let especieEditado = history.state.especieEditado;
-
-    let racaNovo = history.state.racaNovo;
-    let racaEditado = history.state.racaEditado;
-
-    
-    if(pacienteNovo != null){
-      this.lista.push(pacienteNovo);
-    }
-
-    if(especieNovo != null){
-      this.listaEspecie.push(especieNovo);
-    }
-
-    if(racaNovo != null){
-      this.listaRaca.push(racaNovo);
-    }
-
-    if(pacienteEditado != null){
-      let indice = this.lista.findIndex((x) => {
-        return x.id == pacienteEditado.id;
-      });
-      this.lista[indice] = pacienteEditado;
-    }
-
-    if(especieEditado != null){
-      let indice = this.listaEspecie.findIndex((x) => {
-        return x.id == especieEditado.id;
-      });
-      this.listaEspecie[indice] = especieEditado;
-    }
-
-    if(racaEditado != null){
-      let indice = this.listaRaca.findIndex((x) => {
-        return x.id == racaEditado.id;
-      });
-      this.listaRaca[indice] = racaEditado;
-    }
-    */
-    
   }
 
   listAll(){

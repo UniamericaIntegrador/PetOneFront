@@ -6,6 +6,8 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit
 import { Procedimento } from '../../../models/procedimento';
 import { ProcedimentoService } from '../../../services/procedimento.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../../auth/login.service';
+import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-procedimentoslist',
@@ -28,7 +30,12 @@ export class ProcedimentoslistComponent {
 
   procedimentoService = inject(ProcedimentoService);
 
+  loginService = inject(LoginService);
+  usuario!: Usuario;
+
   constructor(){
+    this.usuario = this.loginService.getUsuarioLogado();
+    
     this.listAll();
 
     let procedimentoNovo = history.state.procedimentoNovo;
