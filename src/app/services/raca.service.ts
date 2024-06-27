@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Raca } from '../models/raca';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export class RacaService {
 
     http = inject(HttpClient);
 
-    API = "http://localhost:8080/api/raca";
+    API = environment.SERVIDOR+"/api/raca";
     CATAPI = "https://api.thecatapi.com/v1/breeds";
     DOGAPI = "https://api.thedogapi.com/v1/breeds";
 

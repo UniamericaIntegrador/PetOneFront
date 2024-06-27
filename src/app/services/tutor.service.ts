@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tutor } from '../models/tutor';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Tutor } from '../models/tutor';
 export class TutorService {
   http = inject(HttpClient);
   
-  API = "http://localhost:8080/api/tutor";
+  API = environment.SERVIDOR+"/api/tutor";
 
   constructor() { }
   listAll(): Observable<Tutor[]>{

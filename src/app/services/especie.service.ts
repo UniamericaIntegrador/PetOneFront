@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Especie } from '../models/especie';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -9,8 +10,7 @@ import { Especie } from '../models/especie';
 export class EspecieService {
 
     http = inject(HttpClient);
-
-    API = "http://localhost:8080/api/especie";
+    API = environment.SERVIDOR+"/api/especie";
 
     constructor() { }
 
