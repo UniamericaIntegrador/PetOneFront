@@ -1,0 +1,22 @@
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Operação</th>
+                <th>Descrição</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (log of lista; track $index) {
+                <tr>
+                    <td>{{log.id}}</td>
+                    <td>{{log.operacao}}</td>
+                    <td>{{log.descricao}}</td>
+                    <td>{{log.data}}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
