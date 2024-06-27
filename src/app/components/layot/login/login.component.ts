@@ -18,6 +18,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   login: Login = new Login();
   usuario: Usuario = new Usuario();
+  senha!: string;
+  senhaconfirma!: string;
 
   loginService = inject(LoginService);
   router = inject(Router);
@@ -48,6 +50,15 @@ export class LoginComponent {
   }
 
   cadastrar(): void {
+    if(this.senha != this.senhaconfirma){
+      Swal.fire({
+        title: 'Senhas não conferem. Tente novamente',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      })
+      return;
+    }
+    this.usuario.password = this.senha;
     this.loginService.cadastrar(this.usuario).subscribe({
       next: token => {
         if (token) {

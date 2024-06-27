@@ -7,6 +7,8 @@ import { Tutor } from '../../../models/tutor';
 import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
+import { LoginService } from '../../../auth/login.service';
+import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-tutoreslist',
@@ -31,7 +33,11 @@ export class TutoreslistComponent {
 
   tutorService = inject(TutorService);
 
+  loginService = inject(LoginService);
+  usuario!: Usuario;
+
   constructor(){
+    this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
 
     let tutorNovo = history.state.tutorNovo;

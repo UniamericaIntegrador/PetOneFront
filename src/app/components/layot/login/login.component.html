@@ -50,12 +50,12 @@
                 <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
                     <h3>Senha</h3>
                     <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
-                        [(ngModel)]="usuario.password" (keyup.enter)="cadastrar()" />
+                        [(ngModel)]="senha" (keyup.enter)="cadastrar()" />
                 </div>
                 <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
                     <h3>Confirme sua Senha</h3>
                     <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
-                        [(ngModel)]="usuario.password" (keyup.enter)="cadastrar()" />
+                        [(ngModel)]="senhaconfirma" (keyup.enter)="cadastrar()" />
                 </div>
                 <button *ngIf="modoLogin" class="btn-1" (click)="logar()">Entrar</button>
             </div>

@@ -8,7 +8,7 @@
     <span class="material-symbols-outlined icon">space_dashboard</span>
     Dashboard
   </a>
-  @if(loginService.hasPermission("ADMIN")){
+  @if(loginService.hasPermission("ADMIN") || ("USER")){
     <a href="admin/veterinarios" class="sidebar-button">
       <span class="material-symbols-outlined icon">stethoscope</span>
       Veterinários

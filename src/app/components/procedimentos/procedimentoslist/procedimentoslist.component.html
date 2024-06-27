@@ -8,10 +8,12 @@
                 </div>
                 <div class="alinharDireita">
                     <div class="alinharDireita">
-                        <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
+                        @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
+                            <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
                             data-mdb-ripple-init>
                             <p>Novo</p>
                         </button>
+                        }
                     </div>
                 </div>
             </div>
@@ -21,10 +23,14 @@
                 <tr>
                     <th class="centralizar" scope="col">ID</th>
                     <th class="centralizar" scope="col">Procedimento</th>
-                    <th class="centralizar" scope="col">Data</th>
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
+                        <th class="centralizar" scope="col">Data</th>
                     <th class="centralizar" scope="col">Resultado</th>
                     <th class="centralizar" scope="col">Diagnostico</th>
                     <th class="centralizar" scope="col">Ação</th>
+
+                    }
+                    
                 </tr>
             </thead>
             <tbody>
@@ -32,9 +38,22 @@
                 <tr>
                     <th class="centralizar" scope="row">{{procedimento.id}}</th>
                     <td class="centralizar">{{procedimento.nomeProcedimento}}</td>
-                    <td class="centralizar">{{procedimento.data}}</td>
-                    <td class="centralizar"><span class="material-symbols-outlined">{{procedimento.resultado}}</span></td>
-                    <td class="centralizar"><span class="material-symbols-outlined">{{procedimento.diagnostico}}</span></td>
+                    
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
+                        <td class="centralizar">{{procedimento.data}}</td>
+                    <td class="centralizar"><span class="material-symbols-outlined">{{procedimento.resultado}}</span>
+                    </td>
+                    <td class="centralizar"><span class="material-symbols-outlined">{{procedimento.diagnostico}}</span>
+                    </td>
+
+
+
+                    }
+
+
+
+
+                    
                     <td>
                         @if(esconderBotoes){
                         <button type="button" class="btn btn-primary btn-rounded" mdbRipple
@@ -43,18 +62,23 @@
                         </button>
                         }@else{
                         <div class="centralizar actionbtn">
+                            @if (loginService.hasPermission("USERVET") || loginService.hasPermission("ADMIN")) {
                             <button (click)="edit(procedimento)" type="button" type="button" class="actionbtns info"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
+                            }
 
-                            <button (click)="delete(procedimento)" type="button" class="actionbtns danger"
+                            @if (loginService.hasPermission("USERVET") || loginService.hasPermission("ADMIN")) {
+                                <button (click)="delete(procedimento)" type="button" class="actionbtns danger"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <span class="material-symbols-outlined">
                                     delete
-                                </span></button>
+                                </span>
+                            </button>
+                                }
                         </div>
 
                         }

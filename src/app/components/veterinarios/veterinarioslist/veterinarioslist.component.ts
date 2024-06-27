@@ -7,6 +7,8 @@ import { Veterinario } from '../../../models/veterinario';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
+import { LoginService } from '../../../auth/login.service';
+import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-veterinarioslist',
@@ -31,7 +33,11 @@ export class VeterinarioslistComponent {
 
   veterinarioService = inject(VeterinarioService);
 
+  loginService = inject(LoginService);
+  usuario!: Usuario;
+
   constructor(){
+    this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
 
     let veterinarioNovo = history.state.veterinarioNovo;
