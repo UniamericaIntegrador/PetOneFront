@@ -11,6 +11,8 @@ import { TutoresdetailsComponent } from './components/tutores/tutoresdetails/tut
 import { VeterinariosdetailsComponent } from './components/veterinarios/veterinariosdetails/veterinariosdetails.component';
 import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
 import { loginGuard } from './auth/login.guard';
+import { EspecielistComponent } from './components/especies/especielist/especielist.component';
+import { Title } from 'chart.js';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
@@ -18,6 +20,7 @@ export const routes: Routes = [
     { path: "admin", component: PrincipalComponent, canActivate: [loginGuard], children: [
       { path: "dashboard", component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
+      { path: "especies", component: EspecielistComponent, data: { title: 'Especies'}},
       { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },
       { path: "tutores", component: TutoreslistComponent, data: { title: 'Tutores' } },
       { path: "veterinarios", component: VeterinarioslistComponent, data: { title: 'Veterinários' } },

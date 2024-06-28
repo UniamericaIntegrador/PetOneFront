@@ -76,11 +76,9 @@ export class ProcedimentosdetailsComponent {
   }
 
   save() {
-    console.log(this.procedimento);
     if (this.procedimento.data instanceof Date) {
       this.procedimento.data = this.datePipe.transform(this.procedimento.data, 'yyyy-MM-dd') as unknown as Date;
     }
-    console.log(this.procedimento);
     if (this.procedimento.id > 0) {
       this.procedimentoService.update(this.procedimento, this.procedimento.id).subscribe({
         next: mensagem => {
