@@ -38,7 +38,7 @@ export class LoginComponent {
           if (this.loginService.hasPermission("ADMIN"))
             this.router.navigate(['/admin/dashboard']);
           else if (this.loginService.hasPermission("USER"))
-            this.router.navigate(['/admin/pacientes']);
+            this.router.navigate(['/admin/dashboard']);
         } else {
           alert('Usuário ou senha incorretos!');
         }
@@ -75,7 +75,7 @@ export class LoginComponent {
               if (this.loginService.hasPermission("ADMIN")) {
                 this.router.navigate(['/admin/dashboard']);
               } else if (this.loginService.hasPermission("USER")) {
-                this.router.navigate(['/admin/pacientes']);
+                this.router.navigate(['/admin/dashboard']);
               }
             } else {
               this.router.navigate(['/login']);
