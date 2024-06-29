@@ -36,10 +36,10 @@ export class VeterinarioslistComponent {
   veterinarioService = inject(VeterinarioService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
 
     let veterinarioNovo = history.state.veterinarioNovo;

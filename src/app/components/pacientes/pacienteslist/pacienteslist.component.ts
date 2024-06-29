@@ -39,11 +39,11 @@ export class PacienteslistComponent {
   racaService = inject(RacaService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
   busca: string = "";
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
   }
 

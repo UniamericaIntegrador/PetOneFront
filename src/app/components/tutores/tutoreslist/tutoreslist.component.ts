@@ -12,6 +12,7 @@ import { Usuario } from '../../../auth/usuario';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 
+
 @Component({
   selector: 'app-tutoreslist',
   standalone: true,
@@ -21,7 +22,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 })
 export class TutoreslistComponent {
   lista: Tutor[] = [];
-  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
+  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
 
   listaEndereco: Endereco[] = [];
   enderecoEdit: Endereco = new Endereco(0,'','','','','','','');
@@ -36,10 +37,10 @@ export class TutoreslistComponent {
   tutorService = inject(TutorService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
 
     let tutorNovo = history.state.tutorNovo;
@@ -120,7 +121,7 @@ export class TutoreslistComponent {
     }
 
     new(){
-      this.tutorEdit = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
+      this.tutorEdit = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });

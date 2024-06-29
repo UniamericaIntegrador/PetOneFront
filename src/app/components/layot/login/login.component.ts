@@ -3,9 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Login } from '../../../auth/login';
-import { Usuario } from '../../../auth/usuario';
 import { LoginService } from '../../../auth/login.service';
 import { CommonModule } from '@angular/common';
+import { Tutor } from '../../../models/tutor';
+import { Endereco } from '../../../models/endereco';
+import { EnderecoService } from '../../../services/endereco.service';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +20,15 @@ import { CommonModule } from '@angular/common';
 
 export class LoginComponent {
   login: Login = new Login();
-  usuario: Usuario = new Usuario();
+  //usuario: Usuario = new Usuario();
   senha!: string;
   senhaconfirma!: string;
+  tutor: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
 
   loginService = inject(LoginService);
   router = inject(Router);
+  enderecoService = inject(EnderecoService);
+  tutorService = inject(TutorService);
 
   modoLogin: boolean = true; // Variável para controlar o modo de exibição inicial (true para login, false para cadastro)
 
@@ -40,7 +46,12 @@ export class LoginComponent {
           else if (this.loginService.hasPermission("USER"))
             this.router.navigate(['/admin/dashboard']);
         } else {
-          alert('Usuário ou senha incorretos!');
+          Swal.fire({
+            title: 'Usuário ou senha incorretos!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ok'
+          })
         }
       },
       error: erro => {
@@ -48,7 +59,6 @@ export class LoginComponent {
       }
     });
   }
-
   cadastrar(): void {
     if(this.senha != this.senhaconfirma){
       Swal.fire({
@@ -58,8 +68,8 @@ export class LoginComponent {
       })
       return;
     }
-    this.usuario.password = this.senha;
-    this.loginService.cadastrar(this.usuario).subscribe({
+    this.tutor.password = this.senha;
+    this.loginService.cadastrar(this.tutor).subscribe({
       next: token => {
         if (token) {
           Swal.fire({
@@ -88,6 +98,24 @@ export class LoginComponent {
       error: erro => {
         alert('Erro ao tentar cadastrar 2');
       }
+    });
+  }
+
+
+  blur(event: any) {
+    this.enderecoService.getCEP(this.tutor.endereco.cep).subscribe({
+      next: novocep => {
+        console.log(novocep);
+        this.tutor.endereco.cep = novocep.cep;
+        this.tutor.endereco.logradouro = novocep.logradouro;
+        this.tutor.endereco.cidade = novocep.localidade;
+        this.tutor.endereco.bairro = novocep.bairro;
+        this.tutor.endereco.estado = novocep.uf;
+        console.log(this.tutor);
+      },
+      error: erro => {
+        console.log(erro);
+      },
     });
   }
 

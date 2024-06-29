@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +10,9 @@ import { Usuario } from '../../../auth/usuario';
 })
 export class MenuComponent {
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor() {
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
   }
 }

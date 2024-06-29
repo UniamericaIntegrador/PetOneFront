@@ -15,7 +15,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-procedimentosdetails',
@@ -33,7 +32,7 @@ export class ProcedimentosdetailsComponent {
   router2 = inject(Router);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   modalService = inject(MdbModalService);
   @ViewChild('modalVeterinarios') modalVeterinarios!: TemplateRef<any>;
@@ -48,7 +47,7 @@ export class ProcedimentosdetailsComponent {
   datePipe: DatePipe = new DatePipe('en-US');
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     
     let id = this.router.snapshot.params["id"];
     if(id > 0){

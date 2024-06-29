@@ -33,10 +33,10 @@ export class ProcedimentoslistComponent {
   procedimentoService = inject(ProcedimentoService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     
     this.listAll();
 
