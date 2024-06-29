@@ -8,11 +8,14 @@ import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
 import { LoginService } from '../../../auth/login.service';
+import { Usuario } from '../../../auth/usuario';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-veterinarioslist',
   standalone: true,
-  imports: [FormsModule, RouterLink, MdbModalModule,VeterinariosdetailsComponent],
+  imports: [FormsModule, RouterLink, MdbModalModule,VeterinariosdetailsComponent, MatFormField, MatInputModule, MatFormFieldModule],
   templateUrl: './veterinarioslist.component.html',
   styleUrl: './veterinarioslist.component.scss'
 })
@@ -144,6 +147,23 @@ export class VeterinarioslistComponent {
       this.retorno.emit(veterinario);
       console.log(veterinario.id)
       console.log("deveria ser o end")
+    }
+
+    busca: string = "";
+
+    buscar(): void {
+      if(this.busca == "" || this.busca == null){
+        this.listAll();
+      }else{
+        this.veterinarioService.findByNome(this.busca).subscribe({
+          next: resultado =>{
+            this.lista = resultado;
+          },
+          error: () =>{
+            console.log("Não foi encontrado!");
+          }
+        });
+      }
     }
 
 }

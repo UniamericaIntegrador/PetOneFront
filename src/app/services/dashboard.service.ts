@@ -31,4 +31,6 @@ export class DashboardService {
     return this.http.get<number>(this.API+"/procedimento/count");
   }
 
+  
+
 }
