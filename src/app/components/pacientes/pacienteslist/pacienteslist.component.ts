@@ -12,11 +12,13 @@ import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
 import { LoginService } from '../../../auth/login.service';
 import { Usuario } from '../../../auth/usuario';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-pacienteslist',
   standalone: true,
-  imports: [FormsModule, RouterLink, MdbModalModule, PacientesdetailsComponent],
+  imports: [FormsModule, RouterLink, MdbModalModule, PacientesdetailsComponent, MatFormFieldModule, MatFormField, MatInputModule, FormsModule],
   templateUrl: './pacienteslist.component.html',
   styleUrl: './pacienteslist.component.scss'
 })
@@ -38,6 +40,7 @@ export class PacienteslistComponent {
 
   loginService = inject(LoginService);
   usuario!: Usuario;
+  busca: string = "";
 
   constructor(){
     this.usuario = this.loginService.getUsuarioLogado();
@@ -113,4 +116,21 @@ export class PacienteslistComponent {
       this.listAll();
       this.modalRef.close();
     }
+
+    buscar(): void {
+      if(this.busca == "" || this.busca == null){
+        this.listAll();
+      }else{
+        this.pacienteService.findByNome(this.busca).subscribe({
+          next: resultado =>{
+            this.lista = resultado;
+          },
+          error: () =>{
+            console.log("Não foi encontrado!");
+          }
+        });
+      }
+    }
+
+
   }
