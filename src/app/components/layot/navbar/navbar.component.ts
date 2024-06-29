@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
+import { Tutor } from '../../../models/tutor';
 
 @Component({
   selector: 'app-navbar',
@@ -16,12 +16,14 @@ export class NavbarComponent implements OnInit {
   title: string = '';  // Inicialização direta
   
   
-  usuario!: Usuario;
+  //usuario!: Usuario;
+
+  tutor!: Tutor;
 
   loginService = inject(LoginService);
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
   }
 
   ngOnInit(): void {

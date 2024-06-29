@@ -1,5 +1,5 @@
 
-export class Usuario {
+/*export class Usuario {
   id!: number;
   nome!: string;
   cpf!: string;
@@ -8,3 +8,4 @@ export class Usuario {
   password!: string;
   role!: string;
 }
+*/

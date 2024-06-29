@@ -21,9 +21,12 @@ export class TutorService {
     return this.http.delete<string>(this.API+"/delete/"+id, {responseType: 'text' as 'json'});
   }
 
+  /*
   save(tutor: Tutor): Observable<string>{
     return this.http.post<string>(this.API+"/save", tutor, {responseType: 'text' as 'json'});
   }
+  */
+  
 
   update(tutor: Tutor, id: number): Observable<string>{
     return this.http.put<string>(this.API+"/update/"+id, tutor, {responseType: 'text' as 'json'});
