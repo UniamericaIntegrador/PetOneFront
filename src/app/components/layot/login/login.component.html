@@ -30,23 +30,89 @@
 
                     <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
                         <h3>Nome Completo </h3>
-                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewEmail" [(ngModel)]="usuario.nome"
+                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewEmail" [(ngModel)]="tutor.nome"
                             (keyup.enter)="cadastrar()" />
                     </div>
                     <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
                         <h3>CPF</h3>
-                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewPassword" [(ngModel)]="usuario.cpf"
+                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewPassword" [(ngModel)]="tutor.cpf"
+                            (keyup.enter)="cadastrar()" />
+                    </div>
+                    <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
+                        <h3>Idade</h3>
+                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewPassword" [(ngModel)]="tutor.idade"
                             (keyup.enter)="cadastrar()" />
                     </div>
 
                 </div>
-
+                
 
                 <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
                     <h3>Email</h3>
-                    <input (keyup.enter)="cadastrar()" type="email" id="typeNewPassword" [(ngModel)]="usuario.email"
+                    <input (keyup.enter)="cadastrar()" type="email" id="typeNewPassword" [(ngModel)]="tutor.email"
                         (keyup.enter)="cadastrar()" />
                 </div>
+
+                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
+                    <h3>Endereço:</h3>
+                    <div>
+                        <label for="">CEP</label>
+                        <input matInput #buscaCEP name="cep" id="cep" (blur)="blur($event)"
+                            [(ngModel)]="tutor.endereco.cep" required>
+                    </div>
+
+                    <div>
+                        <label for="">Logradouro</label>
+                        <input matInput name="logradouro" id="logradouro" [(ngModel)]="tutor.endereco.logradouro"
+                            required readonly>
+                    </div>
+
+                    <div>
+                        <label for="">Número</label>
+                        <input matInput id="numero" [(ngModel)]="tutor.endereco.numero" required>
+                    </div>
+
+                    <div>
+                        <label for="">Bairro</label>
+                        <input matInput name="bairro" id="bairro" [(ngModel)]="tutor.endereco.bairro" required readonly>
+                    </div>
+
+                    <div>
+                        <label for="">Cidade</label>
+                        <input matInput name="localidade" id="localidade" [(ngModel)]="tutor.endereco.cidade" required
+                            readonly>
+                    </div>
+
+                    <div>
+                        <label for="">Estado</label>
+                        <input matInput name="uf" id="uf" [(ngModel)]="tutor.endereco.estado" required readonly>
+                    </div>
+
+                    <div>
+                        <label for="">Complemento</label>
+                    <input matInput name="complemento" id="complemento" [(ngModel)]="tutor.endereco.complemento">
+                    </div>   
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
+
                 <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
                     <h3>Senha</h3>
                     <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"

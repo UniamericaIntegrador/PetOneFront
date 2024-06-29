@@ -8,7 +8,6 @@ import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-tutoreslist',
@@ -19,7 +18,7 @@ import { Usuario } from '../../../auth/usuario';
 })
 export class TutoreslistComponent {
   lista: Tutor[] = [];
-  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
+  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
 
   listaEndereco: Endereco[] = [];
   enderecoEdit: Endereco = new Endereco(0,'','','','','','','');
@@ -34,10 +33,10 @@ export class TutoreslistComponent {
   tutorService = inject(TutorService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
 
     let tutorNovo = history.state.tutorNovo;
@@ -118,7 +117,7 @@ export class TutoreslistComponent {
     }
 
     new(){
-      this.tutorEdit = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''));
+      this.tutorEdit = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });

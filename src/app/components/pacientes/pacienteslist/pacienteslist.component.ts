@@ -11,7 +11,6 @@ import { Raca } from '../../../models/raca';
 import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-pacienteslist',
@@ -37,10 +36,10 @@ export class PacienteslistComponent {
   racaService = inject(RacaService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
   }
 
