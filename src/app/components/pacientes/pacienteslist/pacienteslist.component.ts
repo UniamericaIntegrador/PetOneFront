@@ -13,6 +13,7 @@ import { RacaService } from '../../../services/raca.service';
 import { LoginService } from '../../../auth/login.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
+import { Tutor } from '../../../models/tutor';
 
 @Component({
   selector: 'app-pacienteslist',

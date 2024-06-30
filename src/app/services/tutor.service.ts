@@ -39,10 +39,8 @@ export class TutorService {
 
   findByEmail(email: string): Observable<Tutor>{
     return this.http.get<Tutor>(this.API+"/findByEmail/"+email);
-
+  }
   findByNome(nome: string): Observable<Tutor[]>{
     return this.http.get<Tutor[]>(this.API+"/findByTrechoNome/"+nome);
-
   }
-
 }
