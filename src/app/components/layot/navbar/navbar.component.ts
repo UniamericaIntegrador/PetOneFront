@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LoginService } from '../../../auth/login.service';
 import { Tutor } from '../../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,10 +21,15 @@ export class NavbarComponent implements OnInit {
 
   tutor!: Tutor;
 
+  usuario!: Tutor;
+  
   loginService = inject(LoginService);
 
+  tutorService = inject(TutorService);
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    //this.usuario = this.loginService.getUsuarioLogado();
+    this.tutor = this.loginService.getUsuarioLogado();
+    this.reloadUser();
   }
 
   ngOnInit(): void {
@@ -43,6 +49,14 @@ export class NavbarComponent implements OnInit {
       route = route.firstChild;
     }
     this.title = route?.snapshot.data['title'] ?? 'Default Title';
+  }
+
+  reloadUser(){
+    this.tutorService.findByEmail(this.tutor.username).subscribe({
+      next: retorno => {
+        this.usuario = retorno;
+      }
+    })
   }
 
   
