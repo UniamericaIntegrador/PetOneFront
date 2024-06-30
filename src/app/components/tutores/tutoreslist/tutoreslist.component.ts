@@ -14,14 +14,13 @@ import { LoginService } from '../../../auth/login.service';
   standalone: true,
   imports: [FormsModule, RouterLink, MdbModalModule, TutoresdetailsComponent],
   templateUrl: './tutoreslist.component.html',
-  styleUrl: './tutoreslist.component.scss'
+  styleUrls: ['./tutoreslist.component.scss']
 })
 export class TutoreslistComponent {
   lista: Tutor[] = [];
-  tutorEdit: Tutor = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
-
+  tutorEdit: Tutor = new Tutor(0, '', '', 0, new Endereco(0, '', '', '', '', '', '', ''), '', '', '', '');
   listaEndereco: Endereco[] = [];
-  enderecoEdit: Endereco = new Endereco(0,'','','','','','','');
+  enderecoEdit: Endereco = new Endereco(0, '', '', '', '', '', '', '');
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -31,13 +30,30 @@ export class TutoreslistComponent {
   modalRef!: MdbModalRef<any>;
 
   tutorService = inject(TutorService);
-
   loginService = inject(LoginService);
-  //usuario!: Usuario;
 
-  constructor(){
-    //this.usuario = this.loginService.getUsuarioLogado();
-    this.listAll();
+  tutor!: Tutor; // Atribua o Tutor logado
+
+  constructor() {
+    this.tutor = this.loginService.getUsuarioLogado(); // Obtenha o usuário logado
+
+    if (this.loginService.hasPermission("USER")) {
+      // Se for um "USER", filtre a lista para mostrar apenas o tutor logado
+      this.tutorService.findById(this.tutor.id).subscribe({
+        next: tutorLogado => {
+          this.lista = [tutorLogado];
+        },
+        error: erro => {
+          Swal.fire({
+            title: "Ocorreu um erro ao exibir os dados do tutor",
+            icon: "error",
+            confirmButtonText: "Ok"
+          });
+        }
+      });
+    } else {
+      this.listAll();
+    }
 
     let tutorNovo = history.state.tutorNovo;
     let tutorEditado = history.state.tutorEditado;
@@ -45,47 +61,44 @@ export class TutoreslistComponent {
     let enderecoNovo = history.state.enderecoNovo;
     let endrecoEditado = history.state.endrecoEditado;
 
-    if(tutorNovo != null){
+    if (tutorNovo != null) {
       this.lista.push(tutorNovo);
     }
 
-    if(enderecoNovo != null){
+    if (enderecoNovo != null) {
       this.listaEndereco.push(enderecoNovo);
     }
 
-    if(tutorEditado != null){
-      let indice = this.lista.findIndex((x) => {
-        return x.id == tutorEditado.id;
-      });
+    if (tutorEditado != null) {
+      let indice = this.lista.findIndex((x) => x.id == tutorEditado.id);
       this.lista[indice] = tutorEditado;
     }
 
-    if(endrecoEditado != null){
-      let indice = this.listaEndereco.findIndex((x) => {
-        return x.id == endrecoEditado.id;
-      });
+    if (endrecoEditado != null) {
+      let indice = this.listaEndereco.findIndex((x) => x.id == endrecoEditado.id);
       this.listaEndereco[indice] = endrecoEditado;
     }
   }
 
-  listAll(){
-    console.log("list all esta funcionado");
+  listAll() {
+    console.log("list all está funcionando");
+
     this.tutorService.listAll().subscribe({
-        next: lista => {
-            this.lista = lista;
-            console.log(lista);
-        },
-        error: erro => {
-            Swal.fire({
-                title: "Ocorreu um erro ao exibir a lista de tutor",
-                icon: "error",
-                confirmButtonText: "Ok"
-            });
-        }
+      next: lista => {
+        this.lista = lista;
+        console.log(lista);
+      },
+      error: erro => {
+        Swal.fire({
+          title: "Ocorreu um erro ao exibir a lista de tutor",
+          icon: "error",
+          confirmButtonText: "Ok"
+        });
+      }
     });
   }
 
-  delete(tutor: Tutor){
+  delete(tutor: Tutor) {
     Swal.fire({
       title: 'Tem certeza que deseja deletar este registro?',
       icon: 'warning',
@@ -94,7 +107,7 @@ export class TutoreslistComponent {
       confirmButtonText: 'Sim',
       cancelButtonText: 'Não',
     }).then((result) => {
-      if (result.isConfirmed){
+      if (result.isConfirmed) {
         this.tutorService.delete(tutor.id).subscribe({
           next: mensagem => {
             Swal.fire({
@@ -106,7 +119,7 @@ export class TutoreslistComponent {
           },
           error: erro => {
             Swal.fire({
-              title: "Occoreu um erro",
+              title: "Ocorreu um erro",
               icon: "error",
               confirmButtonText: "Ok"
             });
@@ -114,31 +127,79 @@ export class TutoreslistComponent {
         });
       }
     });
-    }
+  }
 
-    new(){
-      this.tutorEdit = new Tutor(0,'','',0,new Endereco(0,'','','','','','',''),'','','','');
-      this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
-        modalClass: 'CustomModal'
+  new() {
+    if (this.loginService.hasPermission("USER")) {
+      Swal.fire({
+        title: 'Você não tem permissão para criar um novo tutor!',
+        icon: 'error',
+        confirmButtonText: 'Ok'
       });
+      return;
     }
 
-    edit(tutor: Tutor){
-      console.log(tutor.id)
-      console.log(tutor.endereco.id)
+    this.tutorEdit = new Tutor(0, '', '', 0, new Endereco(0, '', '', '', '', '', '', ''), '', '', '', '');
+    this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
+      modalClass: 'CustomModal'
+    });
+  }
+
+  edit(tutor: Tutor) {
+    console.log('ID do Tutor:', tutor.id); // Logar o ID do Tutor
+    console.log('ID do Endereco do Tutor:', tutor.endereco.id); // Logar o ID do Endereco
+    console.log('Usuário Logado:', this.tutor); // Logar o Tutor Logado
+    console.log('ID do Usuário Logado:', this.tutor.id); // Logar o ID do Usuário Logado
+
+    // Se o usuário logado for um "USER", carregue os dados do próprio tutor logado
+    if (this.loginService.hasPermission("USER") && this.tutor.id === tutor.id) {
+      this.tutorService.findById(this.tutor.id).subscribe({
+        next: tutorLogado => {
+          this.tutorEdit = Object.assign({}, tutorLogado);
+          this.tutorEdit.endereco = tutorLogado.endereco; // Atribuição direta
+          this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
+            modalClass: 'CustomModal'
+          });
+        },
+        error: erro => {
+          Swal.fire({
+            title: "Ocorreu um erro ao carregar os dados do tutor",
+            icon: "error",
+            confirmButtonText: "Ok"
+          });
+        }
+      });
+    } else {
+      // Se for um "ADMIN", permite a edição de qualquer tutor
       this.tutorEdit = Object.assign({}, tutor);
       this.tutorEdit.endereco = tutor.endereco; // Atribuição direta
       this.modalRef = this.modalService.open(this.modalTutorDetalhe, {
         modalClass: 'CustomModal'
       });
     }
+  }
 
-    retornoDetalhe(tutor: Tutor){
-      this.listAll();
-      this.modalRef.close();
+  retornoDetalhe(tutor: Tutor) {
+    this.listAll();
+    this.modalRef.close();
+  }
+
+  select(tutor: Tutor) {
+    console.log('ID do Tutor:', tutor.id); // Logar o ID do Tutor
+    console.log('ID do Endereco do Tutor:', tutor.endereco.id); // Logar o ID do Endereco
+    console.log('Usuário Logado:', this.tutor); // Logar o Tutor Logado
+    console.log('ID do Usuário Logado:', this.tutor.id);
+
+    // Se o usuário logado for um "USER" e o tutor selecionado for diferente do tutor logado, não permite a seleção
+    if (this.loginService.hasPermission("USER") && this.tutor.id !== tutor.id) {
+      Swal.fire({
+        title: 'Você não tem permissão para selecionar este tutor!',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+      return;
     }
 
-    select(tutor: Tutor){
-      this.retorno.emit(tutor);
-    }
+    this.retorno.emit(tutor);
+  }
 }

@@ -12,6 +12,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-tutoresdetails',
@@ -38,9 +39,15 @@ export class TutoresdetailsComponent {
   tutorService = inject(TutorService);
   enderecoService = inject(EnderecoService);
 
-  constructor() {}
+  loginService = inject(LoginService);
+
+
+  constructor() {
+    this.tutor = this.loginService.getUsuarioLogado();
+  }
 
   findById(id: number) {
+    this.loginService.getUsuarioLogado();
     this.tutorService.findById(id).subscribe({
       next: retorno => {
         this.tutor = retorno;
