@@ -7,11 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
+//import { Usuario } from '../../../auth/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EspecieService } from '../../../services/especie.service';
 import Swal from 'sweetalert2';
 import { state } from '@angular/animations';
+import { Tutor } from '../../../models/tutor';
 
 @Component({
   selector: 'app-especiedetails',
@@ -30,7 +31,7 @@ export class EspeciedetailsComponent {
   especieService = inject(EspecieService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  usuario!: Tutor;
 
   constructor() {
 

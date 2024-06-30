@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { Especie } from '../../../models/especie';
 import { EspeciedetailsComponent } from '../especiedetails/especiedetails.component';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { EspecieService } from '../../../services/especie.service';
 import Swal from 'sweetalert2';
+import { Tutor } from '../../../models/tutor';
 
 @Component({
   selector: 'app-especielist',
@@ -27,7 +27,7 @@ export class EspecielistComponent {
 
   especieService = inject(EspecieService);
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  usuario!: Tutor;
 
   constructor() {
     this.usuario = this.loginService.getUsuarioLogado();
