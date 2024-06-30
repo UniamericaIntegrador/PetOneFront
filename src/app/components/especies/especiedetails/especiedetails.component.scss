@@ -1,0 +1,78 @@
+
+.mat-mdc-form-field {
+    width: 100%;
+}
+
+
+button {
+    display: flex;
+    max-width: 19.375rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    border: none;
+    border-radius: 1.625rem;
+    background: var(--87-b-6-a-7, #87B6A7);
+}
+
+button p {
+    color: var(--Default-White, var(--ffffff, #FFF));
+    text-align: center;
+    font-family: Inter;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.125rem;
+    margin: 0;
+}
+
+.Edit {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.Edit-textos {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.titulos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+}
+
+.titulos h2 {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.titulos p {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.titulos b {
+    color: #18191B;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

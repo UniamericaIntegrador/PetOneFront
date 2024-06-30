@@ -18,6 +18,12 @@
                 </div>
             </div>
         </div>
+        <div class="search">
+            <mat-form-field class="example-full-width">
+                <mat-label>Pesquisar</mat-label>
+                <input matInput placeholder="Ex. Cachorro" value="" (input)="buscar()" [(ngModel)]="busca" > 
+              </mat-form-field>
+        </div>
         <table class="table">
             <thead>
                 <tr>
