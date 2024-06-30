@@ -7,11 +7,13 @@ import { Procedimento } from '../../../models/procedimento';
 import { ProcedimentoService } from '../../../services/procedimento.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../../auth/login.service';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-procedimentoslist',
   standalone: true,
-  imports: [FormsModule, RouterLink, MdbModalModule, ProcedimentosdetailsComponent],
+  imports: [FormsModule, RouterLink, MdbModalModule, ProcedimentosdetailsComponent, MatFormField, MatInputModule],
   templateUrl: './procedimentoslist.component.html',
   styleUrl: './procedimentoslist.component.scss'
 })
@@ -30,7 +32,7 @@ export class ProcedimentoslistComponent {
   procedimentoService = inject(ProcedimentoService);
 
   loginService = inject(LoginService);
-  //usuario!: Usuario;
+  //usuario!: Tutor;
 
   constructor(){
     //this.usuario = this.loginService.getUsuarioLogado();
@@ -119,6 +121,23 @@ export class ProcedimentoslistComponent {
 
     select(procedimento: Procedimento){
       this.retorno.emit(procedimento);
+    }
+
+    busca: string = "";
+
+    buscar(): void {
+      if(this.busca == "" || this.busca == null){
+        this.listAll();
+      }else{
+        this.procedimentoService.findByNome(this.busca).subscribe({
+          next: resultado =>{
+            this.lista = resultado;
+          },
+          error: () =>{
+            console.log("Não foi encontrado!");
+          }
+        });
+      }
     }
 
 }

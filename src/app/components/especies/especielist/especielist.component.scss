@@ -91,3 +91,15 @@ button p {
 .alinhamentoListagem{
     align-items: center;
 }
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: white;
+}
+
+.mdc-text-field--filled{
+    background-color: white;
+}
+
+mat-form-field{
+    background-color: white;
+}

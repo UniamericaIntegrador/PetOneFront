@@ -8,11 +8,13 @@ import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
 import { LoginService } from '../../../auth/login.service';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-tutoreslist',
   standalone: true,
-  imports: [FormsModule, RouterLink, MdbModalModule, TutoresdetailsComponent],
+  imports: [FormsModule, RouterLink, MdbModalModule, TutoresdetailsComponent, MatFormField, MatInputModule],
   templateUrl: './tutoreslist.component.html',
   styleUrl: './tutoreslist.component.scss'
 })
@@ -33,7 +35,7 @@ export class TutoreslistComponent {
   tutorService = inject(TutorService);
 
   loginService = inject(LoginService);
-  //usuario!: Usuario;
+  //usuario!: Tutor;
 
   constructor(){
     //this.usuario = this.loginService.getUsuarioLogado();
@@ -141,4 +143,22 @@ export class TutoreslistComponent {
     select(tutor: Tutor){
       this.retorno.emit(tutor);
     }
+
+    busca: string = "";
+
+    buscar(): void {
+      if(this.busca == "" || this.busca == null){
+        this.listAll();
+      }else{
+        this.tutorService.findByNome(this.busca).subscribe({
+          next: resultado =>{
+            this.lista = resultado;
+          },
+          error: () =>{
+            console.log("Não foi encontrado!");
+          }
+        });
+      }
+    }
+
 }
