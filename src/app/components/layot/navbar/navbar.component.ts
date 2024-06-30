@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LoginService } from '../../../auth/login.service';
 import { Tutor } from '../../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,14 +20,21 @@ export class NavbarComponent implements OnInit {
   //usuario!: Usuario;
 
   tutor!: Tutor;
+  pfp: string = "U";
 
   loginService = inject(LoginService);
 
+  tutorService = inject(TutorService);
+
+  usuario!: Tutor;
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    //this.usuario = this.loginService.getUsuarioLogado();
+    this.tutor = this.loginService.getUsuarioLogado();
+    this.reloadTutor();
   }
 
   ngOnInit(): void {
+    this.tutor = this.loginService.getUsuarioLogado();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -35,6 +43,15 @@ export class NavbarComponent implements OnInit {
 
     // Atualiza o título na inicialização
     this.updateTitle();
+  }
+
+  reloadTutor(){
+    this.tutorService.findByEmail(this.tutor.username).subscribe({
+      next: retorno =>{
+        this.usuario = retorno;
+      }
+    });
+    //this.pfp = this.usuario.nome.substring(0,1);
   }
 
   updateTitle() {

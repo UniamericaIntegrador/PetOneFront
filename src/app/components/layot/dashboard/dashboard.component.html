@@ -90,22 +90,16 @@
 
     @if (loginService.hasPermission("USER")) {
         <div class="cards">
-            <div class="card red">
+            <button class="card red" [routerLink]="['/admin/pacientes/new']" routerLinkActive="router-link-active">
                 <div class="card-body">
                     <h5 class="card-title">Novo Paciente</h5>
-                    <button [routerLink]="['/admin/paciente/new']" routerLinkActive="router-link-active">
-                        Novo
-                    </button>
                 </div>
-            </div>
-            <div class="card green">
+            </button>
+            <button class="card green" [routerLink]="['/admin/procedimentos/new']" routerLinkActive="router-link-active">
                 <div class="card-body">
                     <h5 class="card-title">Novo agendamento</h5>
-                    <button [routerLink]="['/admin/procedimentos/new']" routerLinkActive="router-link-active">
-                        Novo
-                    </button>
                 </div>
-            </div>
+            </button>
         </div>
         <div class="chartsTutor">
             <div class="Pacientes">
@@ -120,9 +114,10 @@
                             <th class="centralizar" scope="col">Raça</th>  
                         </tr>
                     </thead>
-                    @if (first == false) {
+                    <!--@if (first == false) {}-->
                     <tbody>
                         @for (paciente of lista; track $index) {
+                        @if (paciente.tutor.id == tutor.id) {}
                         <tr>
                             <th class="centralizar" scope="row">{{paciente.id}}</th>
                             <td class="centralizar">{{paciente.nome}}</td>
@@ -132,9 +127,9 @@
                         </tr>
                         }
                     </tbody>
-                    }
+                    
                 </table>
-                @if(first == true){
+                <!--@if(first == true){}
                     <div>
                         <h3>Voce ainda não tem nenhum bichinho cadastrado!</h3>
                         <h4>Cadastre o primeiro!</h4>
@@ -145,7 +140,7 @@
                             <h5>Novo Paciente</h5>
                         </button>
                     </div>
-                }
+                -->
             </div> 
             <div class="Procedimentos">
                 <h2>Seus procedimentos:</h2>
@@ -157,18 +152,20 @@
                             <th class="centralizar" scope="col">data</th>
                         </tr>
                     </thead>
-                    @if (first == false) {
+                    <!--@if (first == false) {}-->
                     <tbody>
                         @for (paciente of lista; track $index) {
                         <tr>
-                            <th class="centralizar" scope="row">{{paciente.procedimentos}}</th>
+                            <th class="centralizar" scope="row">{{paciente.tutor.email}}</th>
                             <td class="centralizar">{{paciente.nome}}</td>
                             <td class="centralizar">{{paciente.raca.especie.nome}}</td>
                         </tr>
                         }
                     </tbody>
-                    }
+                    
                 </table>
+                <!--
+                
                 @if(first == true){
                     <div>
                         <h3>Voce ainda não tem nenhum procedimento cadastrado!</h3>
@@ -181,6 +178,7 @@
                         </button>
                     </div>
                 }
+                -->
             </div>
         </div>
 

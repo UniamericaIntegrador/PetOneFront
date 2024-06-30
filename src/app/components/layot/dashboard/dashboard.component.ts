@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { LoginService } from '../../../auth/login.service';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
+import { Tutor } from '../../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,20 +26,27 @@ export class DashboardComponent {
   TutorCount!: number;
   ProcedimentoCount!: number;
 
-  loginService = inject(LoginService);
-
+  tutorService = inject(TutorService);
   pacienteService = inject(PacienteService);
 
   lista: Paciente[] = [];
 
-  first: boolean = true;
 
-  //usuario!: Usuario;
+  listaPacientesTutor: Paciente[] = [];
+
+  //first: boolean = true;
+
+  usuario!: Tutor;
+
+  tutor!: Tutor;
+
+  loginService = inject(LoginService);
+
 
   constructor(private dashboardService: DashboardService) { 
-    //this.usuario = this.loginService.getUsuarioLogado();
-    //this.listarPacientesUser(this.usuario.id);
-
+    this.tutor = this.loginService.getUsuarioLogado();
+    this.reloadTutor();
+    this.listarPacientesUser();
   }
 
   ngOnInit() {
@@ -66,19 +75,33 @@ export class DashboardComponent {
     );
   }
 
+  reloadTutor(){
+    this.tutorService.findByEmail(this.tutor.username).subscribe({
+      next: retorno =>{
+        this.usuario = retorno;
+      }
+    });
+  }
+
   calcular(count: number){
     return count = count * 5;
   }
-
-  listarPacientesUser(id: number){
-    this.pacienteService.findByUser(id).subscribe({
+  
+  listarPacientesUser(){
+    this.pacienteService.listAll().subscribe({
       next: resultado =>{
         this.lista = resultado;
-      },
-      error: erro =>{
-        this.first = true;
       }
     });
+    
+    /*
+    for(let i = 0; i < this.lista.length; i++){
+      if(this.lista[i].tutor.username == this.tutor.username){
+        this.listaPacientesTutor.push(this.lista[i]);
+        console.log(this.listaPacientesTutor);
+      }
+    }
+    */
   }
 
 }
