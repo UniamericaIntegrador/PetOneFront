@@ -11,7 +11,6 @@ import { Raca } from '../../../models/raca';
 import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 
@@ -22,7 +21,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
   templateUrl: './pacienteslist.component.html',
   styleUrl: './pacienteslist.component.scss'
 })
-//
+
 export class PacienteslistComponent {
   lista: Paciente[] = [];
   pacienteEdit: Paciente = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
@@ -39,11 +38,11 @@ export class PacienteslistComponent {
   racaService = inject(RacaService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
   busca: string = "";
+  usuario!: Tutor;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
   }
 

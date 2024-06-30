@@ -7,7 +7,6 @@ import { Procedimento } from '../../../models/procedimento';
 import { ProcedimentoService } from '../../../services/procedimento.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -33,10 +32,10 @@ export class ProcedimentoslistComponent {
   procedimentoService = inject(ProcedimentoService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Tutor;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     
     this.listAll();
 

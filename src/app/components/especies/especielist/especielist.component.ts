@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { Especie } from '../../../models/especie';
 import { EspeciedetailsComponent } from '../especiedetails/especiedetails.component';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
@@ -9,6 +8,7 @@ import Swal from 'sweetalert2';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { Tutor } from '../../../models/tutor';
 
 @Component({
   selector: 'app-especielist',
@@ -31,8 +31,8 @@ export class EspecielistComponent {
 
   especieService = inject(EspecieService);
   loginService = inject(LoginService);
-  usuario!: Usuario;
   busca: string = "";
+  usuario!: Tutor;
 
   constructor() {
     this.usuario = this.loginService.getUsuarioLogado();

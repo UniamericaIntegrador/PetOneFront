@@ -179,7 +179,46 @@ input {
     font-weight: 600;
     line-height: 1.125rem; /* 112.5% */
 }
-
 .holder{
+    width: 100%;
+}
+
+.fechado{
+    display: none;
+}
+
+.endereco{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+.endereco input{
+    width: 100%;
+}
+
+.enderecoinput{
+    width: auto;
+}
+ 
+#form3 {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+}
+
+.senha{
+    display: flex;
+    width: 100%;
+}
+
+#form1{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.usuario{
+    display: flex;
     width: 100%;
 }

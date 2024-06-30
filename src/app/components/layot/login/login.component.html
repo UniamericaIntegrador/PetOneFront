@@ -24,46 +24,109 @@
                 <h5 *ngIf="modoLogin">Esqueceu sua senha?</h5>
 
                 <!-- Formulário de cadastro -->
+                <mat-progress-bar *ngIf="!modoLogin" mode="determinate" value={{progresso}}></mat-progress-bar>
                 <div *ngIf="!modoLogin" style="display: flex;
                  width: 100%;
                  gap: 2rem;">
+                    
+                    @if (passos == 0) {
+                    <div id="form1">
+                        <div *ngIf="!modoLogin" class="form-outline usuario" data-mdb-input-init style="width: 100%;">
+                            <h3>Nome Completo </h3>
+                            <input (keyup.enter)="cadastrar()" type="text" id="typeNewEmail" [(ngModel)]="tutor.nome"
+                                (keyup.enter)="cadastrar()" />
+                        </div>
+                        <div *ngIf="!modoLogin" class="form-outline usuario" data-mdb-input-init style="width: 100%;">
+                            <h3>CPF</h3>
+                            <input (keyup.enter)="cadastrar()" type="text" id="typeNewPassword" [(ngModel)]="tutor.cpf"
+                                (keyup.enter)="cadastrar()" />
+                        </div>
+                        <div *ngIf="!modoLogin" class="form-outline usuario" data-mdb-input-init style="width: 100%;">
+                            <h3>Idade</h3>
+                            <input (keyup.enter)="cadastrar()" type="text" id="typeNewPassword"
+                                [(ngModel)]="tutor.idade" (keyup.enter)="cadastrar()" />
+                        </div>
 
-                    <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
-                        <h3>Nome Completo </h3>
-                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewEmail" [(ngModel)]="usuario.nome"
-                            (keyup.enter)="cadastrar()" />
+                        <div *ngIf="!modoLogin" class="form-outline usuario" data-mdb-input-init>
+                            <h3>Email</h3>
+                            <input (keyup.enter)="cadastrar()" type="email" id="typeNewPassword"
+                                [(ngModel)]="tutor.email" (keyup.enter)="cadastrar()" />
+                        </div>
                     </div>
-                    <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init style="width: 100%;">
-                        <h3>CPF</h3>
-                        <input (keyup.enter)="cadastrar()" type="text" id="typeNewPassword" [(ngModel)]="usuario.cpf"
-                            (keyup.enter)="cadastrar()" />
+                    }
+                    @if (passos == 1) {
+                    <div id="form2">
+                        <h3>Endereço:</h3>
+                        <div *ngIf="!modoLogin" class="endereco" data-mdb-input-init style="display: flex;">
+                            <div class="enderecoinput">
+                                <label for="">CEP</label>
+                                <input matInput #buscaCEP name="cep" id="cep" (blur)="blur($event)"
+                                    [(ngModel)]="tutor.endereco.cep" required>
+                            </div>
+
+                            <div class="enderecoinput">
+                                <label for="">Logradouro</label>
+                                <input matInput name="logradouro" id="logradouro"
+                                    [(ngModel)]="tutor.endereco.logradouro" required readonly>
+                            </div>
+
+                            <div class="enderecoinput">
+                                <label for="">Número</label>
+                                <input matInput id="numero" [(ngModel)]="tutor.endereco.numero" required>
+                            </div>
+
+                            <div class="enderecoinput">
+                                <label for="">Bairro</label>
+                                <input matInput name="bairro" id="bairro" [(ngModel)]="tutor.endereco.bairro" required
+                                    readonly>
+                            </div>
+
+                            <div class="enderecoinput">
+                                <label for="">Cidade</label>
+                                <input matInput name="localidade" id="localidade" [(ngModel)]="tutor.endereco.cidade"
+                                    required readonly>
+                            </div>
+
+                            <div class="enderecoinput">
+                                <label for="">Estado</label>
+                                <input matInput name="uf" id="uf" [(ngModel)]="tutor.endereco.estado" required readonly>
+                            </div>
+
+                            <div class="enderecoinput">
+                                <label for="">Complemento</label>
+                                <input matInput name="complemento" id="complemento"
+                                    [(ngModel)]="tutor.endereco.complemento">
+                            </div>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
-                    <h3>Email</h3>
-                    <input (keyup.enter)="cadastrar()" type="email" id="typeNewPassword" [(ngModel)]="usuario.email"
-                        (keyup.enter)="cadastrar()" />
-                </div>
-                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
-                    <h3>Senha</h3>
-                    <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
-                        [(ngModel)]="senha" (keyup.enter)="cadastrar()" />
-                </div>
-                <div *ngIf="!modoLogin" class="form-outline" data-mdb-input-init>
-                    <h3>Confirme sua Senha</h3>
-                    <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
-                        [(ngModel)]="senhaconfirma" (keyup.enter)="cadastrar()" />
+                    }
+                    @if (passos == 2) {
+                    <div id="form3">
+                        <div *ngIf="!modoLogin" class="form-outline senha" data-mdb-input-init>
+                            <h3>Senha</h3>
+                            <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword" [(ngModel)]="senha"
+                                (keyup.enter)="cadastrar()" />
+                        </div>
+                        <div *ngIf="!modoLogin" class="form-outline senha" data-mdb-input-init>
+                            <h3>Confirme sua Senha</h3>
+                            <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
+                                [(ngModel)]="senhaconfirma" (keyup.enter)="cadastrar()" />
+                        </div>
+                    </div>
+                    }
                 </div>
                 <button *ngIf="modoLogin" class="btn-1" (click)="logar()">Entrar</button>
-            </div>
-            <div class="btn-box">
-                <h5 *ngIf="modoLogin">ou</h5>
-                <button *ngIf="modoLogin" class="btn-2" (click)="toggleModo()">Cadastre-se</button>
-                <button *ngIf="!modoLogin" class="btn-1" (click)="cadastrar()">Cadastrar</button>
+                <div class="btn-box">
+                    <h5 *ngIf="modoLogin">ou</h5>
+                    <button *ngIf="modoLogin" class="btn-2" (click)="toggleModo()">Cadastre-se</button>
+                    <!--<button *ngIf="!modoLogin" class="btn-1" (click)="cadastrar()">Cadastrar</button> -->
+                    @if(passos == 2){
+                        <button *ngIf="!modoLogin" class="btn-1" (click)="cadastrar()">Cadastrar</button>
+                        <button *ngIf="!modoLogin" class="btn-1" (click)="voltar()">Voltar</button>
+                    }@else if (passos < 2) {
+                    <button *ngIf="!modoLogin" class="btn-1" (click)="proximo()">Proximo</button>
+                    <button *ngIf="!modoLogin" class="btn-1" (click)="voltar()">Voltar</button>
+                    }
             </div>
         </div>
     </div>
-</div>

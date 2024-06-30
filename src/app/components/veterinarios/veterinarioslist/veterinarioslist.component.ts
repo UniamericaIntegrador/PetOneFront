@@ -8,7 +8,6 @@ import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -36,10 +35,10 @@ export class VeterinarioslistComponent {
   veterinarioService = inject(VeterinarioService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(){
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
 
     let veterinarioNovo = history.state.veterinarioNovo;

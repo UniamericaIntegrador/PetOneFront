@@ -3,8 +3,8 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { Login } from './login';
-import { Usuario } from './usuario';
 import { environment } from '../../environments/environment';
+import { Tutor } from '../models/tutor';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class LoginService {
   http = inject(HttpClient);
   
   API = environment.SERVIDOR+"/api/login";
-  API2 = environment.SERVIDOR+"/api/login/cadastro";
+  API2 = environment.SERVIDOR+"/api/login/cadastroTutor";
 
   constructor() { }
 
@@ -28,8 +28,8 @@ export class LoginService {
   }
   */
 
-  cadastrar(usuario: Usuario): Observable<string> {
-    return this.http.post<string>(this.API2, usuario, { responseType: 'text' as 'json' });
+  cadastrar(tutor: Tutor): Observable<string> {
+    return this.http.post<string>(this.API2, tutor, { responseType: 'text' as 'json' });
   }
 
   addToken(token: string) {
@@ -54,7 +54,7 @@ export class LoginService {
   }
 
   hasPermission(role: string) {
-    let user = this.jwtDecode() as Usuario;
+    let user = this.jwtDecode() as Tutor;
     if (user.role == role)
       return true;
     else
@@ -62,6 +62,6 @@ export class LoginService {
   }
 
   getUsuarioLogado() {
-    return this.jwtDecode() as Usuario;
+    return this.jwtDecode() as Tutor;
   }
 }
