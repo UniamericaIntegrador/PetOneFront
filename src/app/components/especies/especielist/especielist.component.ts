@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { Especie } from '../../../models/especie';
 import { EspeciedetailsComponent } from '../especiedetails/especiedetails.component';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
@@ -31,11 +30,11 @@ export class EspecielistComponent {
 
   especieService = inject(EspecieService);
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
   busca: string = "";
 
   constructor() {
-    this.usuario = this.loginService.getUsuarioLogado();
+    //his.usuario = this.loginService.getUsuarioLogado();
 
     this.listAll();
 

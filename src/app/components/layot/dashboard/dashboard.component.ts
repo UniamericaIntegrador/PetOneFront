@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
 import { LoginService } from '../../../auth/login.service';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
-import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,11 +32,11 @@ export class DashboardComponent {
 
   first: boolean = true;
 
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor(private dashboardService: DashboardService) { 
-    this.usuario = this.loginService.getUsuarioLogado();
-    this.listarPacientesUser(this.usuario.id);
+    //this.usuario = this.loginService.getUsuarioLogado();
+    //this.listarPacientesUser(this.usuario.id);
 
   }
 

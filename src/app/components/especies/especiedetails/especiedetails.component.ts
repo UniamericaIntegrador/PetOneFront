@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EspecieService } from '../../../services/especie.service';
 import Swal from 'sweetalert2';
@@ -30,11 +29,11 @@ export class EspeciedetailsComponent {
   especieService = inject(EspecieService);
 
   loginService = inject(LoginService);
-  usuario!: Usuario;
+  //usuario!: Usuario;
 
   constructor() {
 
-    this.usuario = this.loginService.getUsuarioLogado();
+    //this.usuario = this.loginService.getUsuarioLogado();
 
     let id = this.router.snapshot.params["id"];
     if (id > 0) {

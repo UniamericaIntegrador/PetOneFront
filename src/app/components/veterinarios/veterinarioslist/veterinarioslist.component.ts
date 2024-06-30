@@ -8,7 +8,6 @@ import { VeterinarioService } from '../../../services/veterinario.service';
 import Swal from 'sweetalert2';
 import { Endereco } from '../../../models/endereco';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 

@@ -7,7 +7,6 @@ import { Procedimento } from '../../../models/procedimento';
 import { ProcedimentoService } from '../../../services/procedimento.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../../auth/login.service';
-import { Usuario } from '../../../auth/usuario';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
