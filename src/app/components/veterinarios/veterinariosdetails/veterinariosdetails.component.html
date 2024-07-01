@@ -13,12 +13,43 @@
                 <input matInput placeholder="Digite seu nome completo" [(ngModel)]="veterinario.nome">
             </mat-form-field>
         </div>
+
+        <div class="input-user">
+            <p>CPF</p>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Digite seu CPF" [(ngModel)]="veterinario.cpf">
+            </mat-form-field>
+        </div>
+
+        <div class="input-user">
+            <p>Email</p>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Digite seu email" [(ngModel)]="veterinario.email">
+            </mat-form-field>
+        </div>
+
         <div class="input-user">
             <p>CRMV</p>
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Digite seu CRMV" [(ngModel)]="veterinario.crmv">
             </mat-form-field>
         </div>
+
+        
+            <div class="form-outline" data-mdb-input-init>
+                <h3>Senha</h3>
+                <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
+                    [(ngModel)]="senha" (keyup.enter)="cadastrar()" />
+            </div>
+            <div  class="form-outline" data-mdb-input-init>
+                <h3>Confirme sua Senha</h3>
+                <input (keyup.enter)="cadastrar()" type="password" id="typeNewPassword"
+                    [(ngModel)]="senhaconfirma" (keyup.enter)="cadastrar()" />
+            </div>
+
+        
+        
+
     </div>
     <div class="input-endereco">
         <h4 class="sub-title">Endereço:</h4>
@@ -76,7 +107,7 @@
     <div class="btn-holder">
         <div class="btns">
             <button style="background-color: #87B6A7; color: aliceblue;" type="button"
-                class="btn btn-rounded centralizarBotao" (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
+                class="btn btn-rounded centralizarBotao" (keyup.enter)="cadastrar()" data-mdb-ripple-init (click)="cadastrar()">
                 Adicionar
             </button>
         </div>

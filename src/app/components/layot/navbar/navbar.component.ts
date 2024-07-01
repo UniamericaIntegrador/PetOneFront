@@ -15,15 +15,11 @@ import { Tutor } from '../../../models/tutor';
 export class NavbarComponent implements OnInit {
   title: string = '';  // Inicialização direta
   
-  
-  //usuario!: Usuario;
-
   tutor!: Tutor;
 
   loginService = inject(LoginService);
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    //this.usuario = this.loginService.getUsuarioLogado();
     this.tutor = this.loginService.getUsuarioLogado();
   }
 

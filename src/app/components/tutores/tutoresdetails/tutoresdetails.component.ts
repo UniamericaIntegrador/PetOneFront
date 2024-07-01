@@ -62,7 +62,8 @@ export class TutoresdetailsComponent {
     });
   }
 
-  /*
+  
+  
   save() {
     if (this.tutor.id > 0) {
         this.enderecoService.update(this.tutor.endereco, this.tutor.endereco.id).subscribe({
@@ -132,7 +133,7 @@ export class TutoresdetailsComponent {
         });
     }
 }
-*/
+
 
   blur(event: any) {
     this.enderecoService.getCEP(this.tutor.endereco.cep).subscribe({

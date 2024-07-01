@@ -32,7 +32,7 @@ import { LoginService } from '../../../auth/login.service';
 })
 
 export class VeterinariosdetailsComponent {
-  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', new Endereco(0,'','','','','','',''));
+  @Input("veterinario") veterinario: Veterinario = new Veterinario(0, '', '', new Endereco(0,'','','','','','',''),'','','','','');
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);
@@ -41,6 +41,9 @@ export class VeterinariosdetailsComponent {
   veterinarioService = inject(VeterinarioService);
   enderecoService = inject(EnderecoService);
   loginService = inject(LoginService)
+
+  senha!: string;
+  senhaconfirma!: string;
   
   constructor() {}
   
@@ -60,7 +63,41 @@ export class VeterinariosdetailsComponent {
     });
   }
 
-  save() {
+  logar() {
+    this.veterinarioService.logar(this.veterinario).subscribe({
+      next: token => {
+        if (token) {
+          this.veterinarioService.addToken(token);
+          if (this.loginService.hasPermission("USERVET")) {
+            this.router2.navigate(['/admin/dashboard']);
+          } 
+        } else {
+          Swal.fire({
+            title: 'Usuário ou senha incorretos!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ok'
+          });
+        }
+      },
+      error: erro => {
+        alert('Erro ao tentar fazer login');
+      }
+    });
+  }
+
+
+  cadastrar() {
+    if(this.senha != this.senhaconfirma){
+      Swal.fire({
+        title: 'Senhas não conferem. Tente novamente',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      })
+      return;
+    }
+
+
     if (this.veterinario.id > 0) {
         console.log(this.veterinario);
         // Atualiza o endereço primeiro, se necessário
@@ -97,45 +134,40 @@ export class VeterinariosdetailsComponent {
             },
         });
     } else {
-        // Salva o endereço primeiro
-        console.log(this.veterinario.endereco);
-        this.enderecoService.save(this.veterinario.endereco).subscribe({
-            next: (endereco: Endereco) => {
-                // Atualiza o endereço do veterinário com o ID retornado
-                this.veterinario.endereco.id = endereco.id;
-                // Após o endereço ser salvo, salva o veterinário
-                this.veterinarioService.save(this.veterinario).subscribe({
-                    next: mensagem => {
-                        Swal.fire({
-                            title: mensagem,
-                            confirmButtonColor: '#54B4D3',
-                            text: 'Veterinário salvo com sucesso!',
-                            icon: 'success',
-                        });
-                        this.router2.navigate(['admin/veterinarios'], {
-                            state: { pacienteNovo: this.veterinario },
-                        });
-                        this.retorno.emit(this.veterinario);
-                    },
-                    error: erro => {
-                        Swal.fire({
-                            title: 'Erro ao salvar o veterinário',
-                            icon: 'error',
-                            confirmButtonText: 'Ok',
-                        });
-                    },
-                });
-            },
-            error: erro => {
-                Swal.fire({
-                    title: 'Erro ao salvar o endereço',
-                    icon: 'error',
-                    confirmButtonText: 'Ok',
-                });
-            },
-        });
+
+      this.veterinario.password = this.senha;
+      this.veterinarioService.cadastrar(this.veterinario).subscribe({
+        next: token => {
+          if (token) {
+            Swal.fire({
+              title: 'Cadastro realizado com sucesso!',
+              text: 'Deseja permanecer logado?',
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonText: 'Sim',
+              cancelButtonText: 'Não'
+            }).then((result) => {
+              if(result.isConfirmed){
+                this.veterinarioService.addToken(token);
+                if(this.veterinarioService.hasPermission("ADMIN")){
+                  this.router2.navigate(['/admin/dashboard']);
+                }else if (this.veterinarioService.hasPermission("USERVET")){
+                  this.router2.navigate(['/admin/veterinarios']);
+                }
+              }else{
+                this.router2.navigate(['/login']);
+              }
+            });
+          }else{
+            alert('Erro ao tentar cadastrar 1');
+          }
+        },
+        error: erro => {
+          alert('Erro ao tentar cadastrar 2');
+        }
+      });
     }
-}
+  }
 
   blur(event: any) {
     this.enderecoService.getCEP(this.veterinario.endereco.cep).subscribe({

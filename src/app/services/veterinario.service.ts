@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Veterinario } from '../models/veterinario';
 import { Endereco } from '../models/endereco';
 import { environment } from '../../environments/environment';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class VeterinarioService {
   http = inject(HttpClient);
   
   API = environment.SERVIDOR+"/api/veterinario";
+  API2 = environment.SERVIDOR+"/api/login/cadastroVeterinario";
+  API3 = environment.SERVIDOR+"/api/login";
   
   APIENDERECO = "http://localhost:8080/api/endereco";
 
@@ -39,6 +42,47 @@ export class VeterinarioService {
 
   findByIdEndereco(id: number): Observable<Endereco>{
     return this.http.get<Endereco>(this.API+"/findById/"+id);
+  }
+
+  logar(veterinario: Veterinario): Observable<string> {
+    return this.http.post<string>(this.API3, veterinario, {responseType: 'text' as 'json'});
+  }
+
+  cadastrar(veterinario: Veterinario): Observable<string> {
+    return this.http.post<string>(this.API2, veterinario, { responseType: 'text' as 'json' });
+  }
+
+  addToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  removerToken() {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  jwtDecode() {
+    let token = this.getToken();
+    if (token) {
+      return jwtDecode<JwtPayload>(token);
+    }
+    return "";
+  }
+
+  hasPermission(role: string) {
+    let user = this.jwtDecode() as Veterinario;
+    if (user.role == role)
+      return true;
+    else
+      return false;
+  }
+
+  getUsuarioLogado() {
+    return this.jwtDecode() as Veterinario;
   }
 
 
