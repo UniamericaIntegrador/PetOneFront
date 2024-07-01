@@ -1,4 +1,5 @@
 .dashboard {
+    height: 100%;
     padding: 16px;
     align-items: flex-start;
     align-content: flex-start;
@@ -171,4 +172,22 @@ table {
     line-height: normal;
     text-align: center;
     line-height: normal;
+}
+
+.holder2{
+    display: flex;
+    flex-direction: row-reverse;    
+    gap: 32px;
+}
+
+#show {
+    width: 100%;
+}
+
+.cards2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 600px;
+    gap: 32px;
 }

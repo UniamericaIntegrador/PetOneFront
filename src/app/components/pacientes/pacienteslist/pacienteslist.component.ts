@@ -14,6 +14,7 @@ import { LoginService } from '../../../auth/login.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { Tutor } from '../../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-pacienteslist',
@@ -25,10 +26,10 @@ import { Tutor } from '../../../models/tutor';
 
 export class PacienteslistComponent {
   lista: Paciente[] = [];
-  pacienteEdit: Paciente = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
+  pacienteEdit: Paciente = new Paciente(0, '', new Date(), new Raca(0, '', new Especie(0, '')), null);
 
   listaEspecie: Especie[] = [];
-  listaRaca: Raca [] = [];
+  listaRaca: Raca[] = [];
 
   modalService = inject(MdbModalService);
   @ViewChild("modalPacienteDetalhe") modalPacienteDetalhe!: TemplateRef<any>;
@@ -37,17 +38,21 @@ export class PacienteslistComponent {
   pacienteService = inject(PacienteService);
   especieService = inject(EspecieService);
   racaService = inject(RacaService);
+  tutorService = inject(TutorService);
 
   loginService = inject(LoginService);
   busca: string = "";
   usuario!: Tutor;
 
-  constructor(){
-    //this.usuario = this.loginService.getUsuarioLogado();
+  show: boolean = true;
+
+  constructor() {
+    this.usuario = this.loginService.getUsuarioLogado();
     this.listAll();
+    this.ReloadUser();
   }
 
-  listAll(){
+  listAll() {
     this.pacienteService.listAll().subscribe({
       next: lista => {
         this.lista = lista;
@@ -63,7 +68,7 @@ export class PacienteslistComponent {
     });
   }
 
-  delete(paciente: Paciente){
+  delete(paciente: Paciente) {
     Swal.fire({
       title: 'Tem certeza que deseja deletar este registro?',
       icon: 'warning',
@@ -72,7 +77,7 @@ export class PacienteslistComponent {
       confirmButtonText: 'Sim',
       cancelButtonText: 'Não',
     }).then((result) => {
-      if (result.isConfirmed){
+      if (result.isConfirmed) {
         this.pacienteService.delete(paciente.id).subscribe({
           next: mensagem => {
             Swal.fire({
@@ -92,45 +97,55 @@ export class PacienteslistComponent {
         });
       }
     });
-    }
-
-    new(){
-      //this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
-      this.pacienteEdit = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
-      this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
-        modalClass: 'CustomModal'
-      });
-    }
-
-    edit(paciente: Paciente){
-      this.pacienteEdit = Object.assign({}, paciente); //clonando pra evitar referência de objeto
-      //this.pacienteEdit.raca.especie = paciente.raca.especie;
-      this.pacienteEdit.raca = paciente.raca;
-      this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
-        modalClass: 'CustomModal'
-      });
-    }
-
-
-    retornoDetalhe(paciente: Paciente){
-      this.listAll();
-      this.modalRef.close();
-    }
-
-    buscar(): void {
-      if(this.busca == "" || this.busca == null){
-        this.listAll();
-      }else{
-        this.pacienteService.findByNome(this.busca).subscribe({
-          next: resultado =>{
-            this.lista = resultado;
-          },
-          error: () =>{
-            console.log("Não foi encontrado!");
-          }
-        });
-      }
-    }
-
-
   }
+
+  new() {
+    //this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
+    this.pacienteEdit = new Paciente(0, '', new Date(), new Raca(0, '', new Especie(0, '')), null);
+    this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
+      modalClass: 'CustomModal'
+    });
+  }
+
+  edit(paciente: Paciente) {
+    this.pacienteEdit = Object.assign({}, paciente); //clonando pra evitar referência de objeto
+    //this.pacienteEdit.raca.especie = paciente.raca.especie;
+    this.pacienteEdit.raca = paciente.raca;
+    this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
+      modalClass: 'CustomModal'
+    });
+  }
+
+
+  retornoDetalhe(paciente: Paciente) {
+    this.listAll();
+    this.modalRef.close();
+  }
+
+  buscar(): void {
+    if (this.busca == "" || this.busca == null) {
+      this.listAll();
+    } else {
+      this.pacienteService.findByNome(this.busca).subscribe({
+        next: resultado => {
+          this.lista = resultado;
+        },
+        error: () => {
+          console.log("Não foi encontrado!");
+        }
+      });
+    }
+  }
+
+
+  UserId!: Tutor;
+
+  ReloadUser() {
+    this.tutorService.findByEmail(this.usuario.username).subscribe({
+      next: retorno => {
+        this.UserId = retorno;
+      }
+    });
+  }
+
+}

@@ -42,6 +42,11 @@ export class PacienteService {
     return this.http.get<Paciente[]>(this.API+"/findByPart/"+nome);
   }
 
+  findByTutor(id: number): Observable<Paciente[]>{
+    return this.http.get<Paciente[]>(this.API+"/pacientes/tutor/"+id);
+  }
+
+
   /*
   getRacas(): Observable<string[]>{
     return this.http.get<any[]>(this.CATAPI).pipe(

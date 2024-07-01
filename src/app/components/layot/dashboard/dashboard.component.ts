@@ -6,6 +6,11 @@ import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslis
 import { VeterinarioslistComponent } from '../../veterinarios/veterinarioslist/veterinarioslist.component';
 import { DashboardService } from '../../../services/dashboard.service';
 import { RouterModule } from '@angular/router';
+import { Tutor } from '../../../models/tutor';
+import { LoginService } from '../../../auth/login.service';
+import { PacienteService } from '../../../services/paciente.service';
+import { Paciente } from '../../../models/paciente';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +26,21 @@ export class DashboardComponent {
   TutorCount!: number;
   ProcedimentoCount!: number;
 
-  constructor(private dashboardService: DashboardService) { }
+  usuario!: Tutor;
+  
+  usuarioService = inject(LoginService);
+
+  tutorService = inject(TutorService);
+
+  pacienteService = inject(PacienteService);
+
+  lista: Paciente[] = [];
+
+
+  constructor(private dashboardService: DashboardService) { 
+    this.usuario = this.usuarioService.getUsuarioLogado();
+    this.myPets();
+  }
 
   ngOnInit() {
     this.fetchCounts();
@@ -52,4 +71,55 @@ export class DashboardComponent {
   calcular(count: number){
     return count = count * 5;
   }
+
+  /*
+
+  UserId!: Tutor;
+
+  myPets(){
+    this.tutorService.findByEmail(this.usuario.username).subscribe({
+      next: retorno =>{
+        this.UserId = retorno;
+      },
+      error: retorno => {
+      console.log("Não foi possivel");
+      }
+    });
+    this.pacienteService.findByTutor(this.UserId.id).subscribe({
+      next: retorno => {
+        this.lista = retorno;
+      }
+    });
+    
+    this.pacienteService.listAll().subscribe({
+      next: retorno=> {
+        this.lista = retorno;
+      }
+    });
+    
+  }
+  */
+
+UserId!: Tutor;
+
+myPets() {
+  this.tutorService.findByEmail(this.usuario.username).subscribe({
+    next: retorno => {
+      this.UserId = retorno;
+
+      this.pacienteService.findByTutor(this.UserId.id).subscribe({
+        next: retorno => {
+          this.lista = retorno;
+        },
+        error: error => {
+          console.error('Erro buscando:', error);
+        }
+      });
+    },
+    error: error => {
+      console.error('Erro buscando:', error);
+    }
+  });
+}
+
 }

@@ -8,7 +8,8 @@
     <span class="material-symbols-outlined icon">space_dashboard</span>
     Dashboard
   </a>
-  @if(loginService.hasPermission("ADMIN") || ("USER")){
+  <!--@if(loginService.hasPermission("ADMIN") || ("USER")){-->
+  @if(loginService.hasPermission("ADMIN")){
     <a href="admin/veterinarios" class="sidebar-button">
       <span class="material-symbols-outlined icon">stethoscope</span>
       Veterinários
@@ -18,10 +19,13 @@
     <span class="material-symbols-outlined icon">pets</span>
     Pacientes
   </a>
+  @if(loginService.hasPermission("ADMIN")){
   <a href="admin/especies" class="sidebar-button">
     <span class="material-symbols-outlined icon">raven</span>
     Especies
   </a>
+  }
+  @if(loginService.hasPermission("ADMIN")){
   <a href="admin/tutores" class="sidebar-button">
     <span class="material-symbols-outlined icon">person</span>
     Tutores
@@ -30,13 +34,16 @@
     <span class="material-symbols-outlined icon">medication</span>
     Procedimentos
   </a>
+ }
   <a href="#" class="sidebar-button">
     <span class="material-symbols-outlined icon">settings</span>
     Configurações
   </a>
+  @if(loginService.hasPermission("ADMIN")){
   <a href="#" class="sidebar-button">
     <span class="material-symbols-outlined icon">schedule</span>
     Logs
   </a>
+  }
   <a href="login" class="logout-button">Sair</a>
 </div>

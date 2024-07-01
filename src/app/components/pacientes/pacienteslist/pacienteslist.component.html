@@ -1,3 +1,4 @@
+@if (loginService.hasPermission("ADMIN")) {
 <div>
     <div class="card">
         <div class="card-body">
@@ -5,7 +6,7 @@
                 <div>
                     <h3 class="head title">Listagem de pacientes</h3>
                 </div>
-                <div class="alinharDireita">
+                <div class="alinharDireita showbtn">
                     @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
                         <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
                         data-mdb-ripple-init>
@@ -71,6 +72,86 @@
         </table>
     </div>
 </div>
+}
+@if (loginService.hasPermission("USER")) {
+<div>
+    <div class="card">
+        <div class="card-body">
+            <div class="alinhamentoListagem">
+                <div>
+                    <h3 class="head title">Listagem de pacientes</h3>
+                </div>
+                <div class="alinharDireita">
+                    @if (show) {
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                        <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
+                        data-mdb-ripple-init>
+                        <p>Novo</p>
+                    </button>
+                    }
+                    }
+                    
+                </div>
+            </div>
+        </div>
+        <div class="search">
+            <mat-form-field class="example-full-width">
+                <mat-label>Pesquisar</mat-label>
+                <input matInput placeholder="Ex. Cachorro" value="" (input)="buscar()" [(ngModel)]="busca" > 
+              </mat-form-field>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="centralizar" scope="col">ID</th>
+                    <th class="centralizar" scope="col">Nome</th>
+                    <th class="centralizar" scope="col">Espécie</th>
+                    <th class="centralizar" scope="col">Nascimento</th>
+                    <th class="centralizar" scope="col">Raça</th>
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                        <th class="centralizar" scope="col">Ação</th>
+                    }
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @for (paciente of lista; track $index) {
+                @if (paciente.tutor.username == usuario.username) {
+                <tr>
+                    <th class="centralizar" scope="row">{{paciente.id}}</th>
+                    <td class="centralizar">{{paciente.nome}}</td>
+                    <td class="centralizar">{{paciente.raca.especie.nome}}</td>
+                    <td class="centralizar">{{paciente.dataNascimento}}</td>
+                    <td class="centralizar">{{paciente.raca.nome}}</td>
+                    <td>
+                        <div class="centralizar actionbtn">
+                            @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                                <button (click)="edit(paciente)" type="button" type="button" class="actionbtns info"
+                                data-mdb-ripple-init data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+                            }
+                            @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                                <button (click)="delete(paciente)" type="button" class="actionbtns danger"
+                                data-mdb-ripple-init data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                            }
+                            
+                        </div>
+                    </td>
+                </tr>
+                  }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+}
 
 <ng-template #modalPacienteDetalhe>
     <div class="modal-header">

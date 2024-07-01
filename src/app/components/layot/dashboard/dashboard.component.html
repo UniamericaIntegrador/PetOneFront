@@ -1,4 +1,5 @@
 <div class="dashboard">
+    @if(usuarioService.hasPermission("ADMIN")){
     <div class="cards">
         <div class="card red">
             <div class="card-body">
@@ -81,3 +82,27 @@
             </button>
         </div>
     </div>
+    }
+
+    @if(usuarioService.hasPermission("USER")){
+    <div class="holder2">
+        <div class="cards2">
+            <div class="card red">
+                <div class="card-body">
+                    <h5 class="card-title">Pacientes cadastrados</h5>
+                    <h4>{{PacienteCount}}</h4>
+                </div>
+            </div>
+            <div class="card green">
+                <div class="card-body">
+                    <h5 class="card-title">Veterinários cadastrados</h5>
+                    <h4>{{VeterinarioCount}}</h4>
+                </div>
+            </div>
+        </div>
+        <app-pacienteslist id="show">
+
+        </app-pacienteslist>
+    </div>  
+    }
+</div>
