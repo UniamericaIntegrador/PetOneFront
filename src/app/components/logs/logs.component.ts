@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Logs } from '../../models/logs';
+import { HttpClient } from '@angular/common/http';
+import { LogsService } from '../../services/logs.service';
 
 @Component({
   selector: 'app-logs',
@@ -8,5 +11,19 @@ import { Component } from '@angular/core';
   styleUrl: './logs.component.scss'
 })
 export class LogsComponent {
+
+    lista: Logs[] = [];
+
+    constructor(private logService: LogsService){
+      this.loadLogs();
+    }
+
+    loadLogs() {
+      this.logService.listAll().subscribe({
+        next: data => {
+          this.lista = data;
+        }
+      });
+    }
 
 }

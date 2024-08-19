@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Id</th>
@@ -10,6 +10,15 @@
         </tr>
     </thead>
     <tbody>
-
+        @for(items of lista; track $index){
+            <tr>
+                <td class="centralizar">{{items.id}}</td>
+                <td class="centralizar">{{items.origem}}</td>
+                <td class="centralizar">{{items.acao}}</td>
+                <td class="centralizar">{{items.timestamp}}</td>
+                <td class="centralizar">{{items.description}}</td>
+                <td class="centralizar">{{items.usuario}}</td>
+            </tr>
+        }
     </tbody>
 </table>
