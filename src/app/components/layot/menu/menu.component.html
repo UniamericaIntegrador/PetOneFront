@@ -30,9 +30,11 @@
     <span class="material-symbols-outlined icon">settings</span>
     Configurações
   </a>
-  <a href="#" class="sidebar-button">
+  @if(loginService.hasPermission("ADMIN")){
+  <a href="admin/logs" class="sidebar-button">
     <span class="material-symbols-outlined icon">schedule</span>
     Logs
   </a>
+  }
   <a href="login" class="logout-button">Sair</a>
 </div>

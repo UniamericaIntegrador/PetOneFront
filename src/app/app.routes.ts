@@ -11,6 +11,7 @@ import { TutoresdetailsComponent } from './components/tutores/tutoresdetails/tut
 import { VeterinariosdetailsComponent } from './components/veterinarios/veterinariosdetails/veterinariosdetails.component';
 import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
 import { loginGuard } from './auth/login.guard';
+import { LogsComponent } from './components/logs/logs.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: "tutores/new", component: TutoresdetailsComponent, data: { title: 'Novo Tutor' } },
       { path: "tutores/edit/:id", component: TutoresdetailsComponent, data: { title: 'Editar Tutor' } },
       { path: "veterinarios/new", component: VeterinariosdetailsComponent, data: { title: 'Novo Veterinário' } },
-      { path: "veterinarios/edit/:id", component: VeterinariosdetailsComponent, data: { title: 'Editar Veterinário' } }
+      { path: "veterinarios/edit/:id", component: VeterinariosdetailsComponent, data: { title: 'Editar Veterinário' } },
+      { path: "logs", component: LogsComponent, data: { title: 'Logs' } }
     ]}
   ];
