@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -9,11 +9,12 @@ import { Tutor } from '../../../models/tutor';
 import { Endereco } from '../../../models/endereco';
 import { EnderecoService } from '../../../services/endereco.service';
 import { TutorService } from '../../../services/tutor.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, MatProgressBarModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -30,7 +31,14 @@ export class LoginComponent {
   enderecoService = inject(EnderecoService);
   tutorService = inject(TutorService);
 
+  passo: boolean = true;
+  passo2: boolean = false;
+  passo3: boolean = false;
+
+
+
   modoLogin: boolean = true; // Variável para controlar o modo de exibição inicial (true para login, false para cadastro)
+  progresso: number = 0;
 
   constructor() {
     this.loginService.removerToken();
@@ -41,20 +49,17 @@ export class LoginComponent {
       next: token => {
         if (token) {
           this.loginService.addToken(token);
-          if (this.loginService.hasPermission("ADMIN")) {
+          if (this.loginService.hasPermission("ADMIN"))
             this.router.navigate(['/admin/dashboard']);
-          } else if (this.loginService.hasPermission("USERVET")) {
-            this.router.navigate(['/admin/dashboard']); // Altere para a rota apropriada para USERVET
-          } else if (this.loginService.hasPermission("USER")) {
-            this.router.navigate(['/admin/pacientes']);
-          }
+          else if (this.loginService.hasPermission("USER"))
+            this.router.navigate(['/admin/dashboard']);
         } else {
           Swal.fire({
             title: 'Usuário ou senha incorretos!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ok'
-          });
+          })
         }
       },
       error: erro => {
@@ -62,7 +67,6 @@ export class LoginComponent {
       }
     });
   }
-  
   cadastrar(): void {
     if(this.senha != this.senhaconfirma){
       Swal.fire({
@@ -89,7 +93,7 @@ export class LoginComponent {
               if (this.loginService.hasPermission("ADMIN")) {
                 this.router.navigate(['/admin/dashboard']);
               } else if (this.loginService.hasPermission("USER")) {
-                this.router.navigate(['/admin/pacientes']);
+                this.router.navigate(['/admin/dashboard']);
               }
             } else {
               this.router.navigate(['/login']);
@@ -105,7 +109,6 @@ export class LoginComponent {
     });
   }
 
-  
 
   blur(event: any) {
     this.enderecoService.getCEP(this.tutor.endereco.cep).subscribe({
@@ -127,4 +130,29 @@ export class LoginComponent {
   toggleModo(): void {
     this.modoLogin = !this.modoLogin; // Alternar entre login e cadastro ao clicar no botão "Cadastre-se"
   }
+  passos: number = 0;
+  proximo(){
+    if(this.passos == 2){
+      console.log(this.passos + "Maximo!");
+    }else{
+      this.passos++;
+      console.log(this.passos);
+    }
+    this.addProgresso(43);
+  }
+
+  addProgresso(somar: number){
+    this.progresso = this.progresso + somar;
+  }
+
+  voltar(){
+    if(this.passos == 0){
+      this.toggleModo();
+    }else{
+    this.passos--;
+    this.addProgresso(-43);
+    }
+    console.log(this.passos);
+  }
+
 }
