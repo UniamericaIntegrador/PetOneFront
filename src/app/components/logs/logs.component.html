@@ -1,24 +1,8 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Origem</th>
-            <th>Ação</th>
-            <th>Data</th>
-            <th>Descrição</th>
-            <th>Usuário</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(items of lista; track $index){
-            <tr>
-                <td class="centralizar">{{items.id}}</td>
-                <td class="centralizar">{{items.origem}}</td>
-                <td class="centralizar">{{items.acao}}</td>
-                <td class="centralizar">{{items.timestamp}}</td>
-                <td class="centralizar">{{items.description}}</td>
-                <td class="centralizar">{{items.usuario}}</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<ol>
+    @for(logs of lista; track $index){
+    <li class="log">
+    <span class="circle"></span>
+        Foi {{logs.acao}} o {{logs.origem}}: {{logs.descricao}} na lista de {{logs.origem}} pelo usuário: {{logs.usuario}} no horário: {{logs.timestamp}}.
+    </li>
+    }
+</ol>

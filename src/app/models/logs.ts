@@ -3,6 +3,6 @@ export class Logs {
     origem!: string;
     acao!: string;
     timestamp!: Date;
-    description!: string;
-    usuario!: string;
+    descricao!: string;
+    usuario!: number;
 }

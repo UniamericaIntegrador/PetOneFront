@@ -12,18 +12,28 @@ import { LogsService } from '../../services/logs.service';
 })
 export class LogsComponent {
 
-    lista: Logs[] = [];
+  lista: Logs[] = [];
 
-    constructor(private logService: LogsService){
-      this.loadLogs();
-    }
+  constructor(private logService: LogsService) {
+    this.loadLogs();
+    //this.putDummyLog();
+  }
 
-    loadLogs() {
-      this.logService.listAll().subscribe({
-        next: data => {
-          this.lista = data;
-        }
-      });
-    }
+  loadLogs() {
+    this.logService.listAll().subscribe({
+      next: data => {
+        this.lista = data;
+      }
+    });
+  }
 
+  putDummyLog() {
+    const logs = new Logs();
+    logs.origem = 'procedimento';
+    logs.acao = 'removido';
+    logs.descricao = 'Raio X';
+    logs.usuario = 1;
+    logs.timestamp = new Date();
+    this.lista.push(logs);
+  }
 }
