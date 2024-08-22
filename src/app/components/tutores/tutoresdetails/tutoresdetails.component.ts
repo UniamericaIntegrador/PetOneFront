@@ -12,6 +12,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-tutoresdetails',
@@ -38,9 +39,15 @@ export class TutoresdetailsComponent {
   tutorService = inject(TutorService);
   enderecoService = inject(EnderecoService);
 
-  constructor() {}
+  loginService = inject(LoginService);
+
+
+  constructor() {
+    this.tutor = this.loginService.getUsuarioLogado();
+  }
 
   findById(id: number) {
+    this.loginService.getUsuarioLogado();
     this.tutorService.findById(id).subscribe({
       next: retorno => {
         this.tutor = retorno;
@@ -55,7 +62,8 @@ export class TutoresdetailsComponent {
     });
   }
 
-  /*
+  
+  
   save() {
     if (this.tutor.id > 0) {
         this.enderecoService.update(this.tutor.endereco, this.tutor.endereco.id).subscribe({
@@ -125,7 +133,7 @@ export class TutoresdetailsComponent {
         });
     }
 }
-*/
+
 
   blur(event: any) {
     this.enderecoService.getCEP(this.tutor.endereco.cep).subscribe({

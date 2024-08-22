@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class VeterinarioslistComponent {
   lista: Veterinario[] = [];
-  veterinarioEdit: Veterinario = new Veterinario(0,'','',new Endereco(0,'','','','','','',''));
+  veterinarioEdit: Veterinario = new Veterinario(0, '', '', new Endereco(0,'','','','','','',''),'','','','','');
 
   listaEndereco: Endereco[] = [];
   enderecoEdit: Endereco = new Endereco(0,'','','','','','','');
@@ -120,7 +120,7 @@ export class VeterinarioslistComponent {
     }
 
     new(){
-      this.veterinarioEdit = new Veterinario(0,'','',new Endereco(0,'','','','','','',''));
+      this.veterinarioEdit = new Veterinario(0, '', '', new Endereco(0,'','','','','','',''),'','','','','');
       this.modalRef = this.modalService.open(this.modalVeterinarioDetalhe, {
         modalClass: 'CustomModal'
       });

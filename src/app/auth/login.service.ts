@@ -15,6 +15,7 @@ export class LoginService {
   
   API = environment.SERVIDOR+"/api/login";
   API2 = environment.SERVIDOR+"/api/login/cadastroTutor";
+  API3 = environment.SERVIDOR+"/api/login/updateCadastro";
 
   constructor() { }
 
@@ -31,7 +32,10 @@ export class LoginService {
   cadastrar(tutor: Tutor): Observable<string> {
     return this.http.post<string>(this.API2, tutor, { responseType: 'text' as 'json' });
   }
-
+  
+  atualizarCadastro(tutor: Tutor): Observable<Tutor> {
+    return this.http.put<Tutor>(this.API3, tutor);
+  }
   addToken(token: string) {
     localStorage.setItem('token', token);
   }
