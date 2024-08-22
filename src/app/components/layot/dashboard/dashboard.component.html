@@ -1,4 +1,7 @@
+
+
 <div class="dashboard">
+    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
     <div class="cards">
         <div class="card red">
             <div class="card-body">
@@ -80,4 +83,106 @@
                 <h5>Novo Veterinário</h5>
             </button>
         </div>
+
     </div>
+    }
+
+
+    @if (loginService.hasPermission("USER")) {
+        <div class="cards">
+            <div class="card red">
+                <div class="card-body">
+                    <h5 class="card-title">Novo Paciente</h5>
+                    <button [routerLink]="['/admin/paciente/new']" routerLinkActive="router-link-active">
+                        Novo
+                    </button>
+                </div>
+            </div>
+            <div class="card green">
+                <div class="card-body">
+                    <h5 class="card-title">Novo agendamento</h5>
+                    <button [routerLink]="['/admin/procedimentos/new']" routerLinkActive="router-link-active">
+                        Novo
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="chartsTutor">
+            <div class="Pacientes">
+                <h2>Seus pets:</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="centralizar" scope="col">ID</th>
+                            <th class="centralizar" scope="col">Nome</th>
+                            <th class="centralizar" scope="col">Espécie</th>
+                            <th class="centralizar" scope="col">Nascimento</th>
+                            <th class="centralizar" scope="col">Raça</th>  
+                        </tr>
+                    </thead>
+                    @if (first == false) {
+                    <tbody>
+                        @for (paciente of lista; track $index) {
+                        <tr>
+                            <th class="centralizar" scope="row">{{paciente.id}}</th>
+                            <td class="centralizar">{{paciente.nome}}</td>
+                            <td class="centralizar">{{paciente.raca.especie.nome}}</td>
+                            <td class="centralizar">{{paciente.dataNascimento}}</td>
+                            <td class="centralizar">{{paciente.raca.nome}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                    }
+                </table>
+                @if(first == true){
+                    <div>
+                        <h3>Voce ainda não tem nenhum bichinho cadastrado!</h3>
+                        <h4>Cadastre o primeiro!</h4>
+                        <button class="addbtn" [routerLink]="['/admin/pacientes/new']" routerLinkActive="router-link-active" >
+                            <span class="material-symbols-outlined">
+                                add
+                                </span>
+                            <h5>Novo Paciente</h5>
+                        </button>
+                    </div>
+                }
+            </div> 
+            <div class="Procedimentos">
+                <h2>Seus procedimentos:</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="centralizar" scope="col">ID</th>
+                            <th class="centralizar" scope="col">Procedimento</th>
+                            <th class="centralizar" scope="col">data</th>
+                        </tr>
+                    </thead>
+                    @if (first == false) {
+                    <tbody>
+                        @for (paciente of lista; track $index) {
+                        <tr>
+                            <th class="centralizar" scope="row">{{paciente.procedimentos}}</th>
+                            <td class="centralizar">{{paciente.nome}}</td>
+                            <td class="centralizar">{{paciente.raca.especie.nome}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                    }
+                </table>
+                @if(first == true){
+                    <div>
+                        <h3>Voce ainda não tem nenhum procedimento cadastrado!</h3>
+                        <h4>Cadastre o primeiro!</h4>
+                        <button class="addbtn" [routerLink]="['/admin/agendamento/new']" routerLinkActive="router-link-active" >
+                            <span class="material-symbols-outlined">
+                                add
+                                </span>
+                            <h5>Novo Procedimento</h5>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }   
+</div>

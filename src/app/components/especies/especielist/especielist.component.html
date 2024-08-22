@@ -1,18 +1,20 @@
 <div>
+
     <div class="card">
         <div class="card-body">
             <div class="alinhamentoListagem">
                 <div>
-                    <h3 class="head title">Listagem de pacientes</h3>
+                    <h3 class="head title">Listagem de especies</h3>
                 </div>
                 <div class="alinharDireita">
-                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
+                    <div class="alinharDireita">
+                        @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
                         <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
-                        data-mdb-ripple-init>
-                        <p>Novo</p>
-                    </button>
-                    }
-                    
+                            data-mdb-ripple-init>
+                            <p>Novo</p>
+                        </button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,56 +29,47 @@
                 <tr>
                     <th class="centralizar" scope="col">ID</th>
                     <th class="centralizar" scope="col">Nome</th>
-                    <th class="centralizar" scope="col">Espécie</th>
-                    <th class="centralizar" scope="col">Nascimento</th>
-                    <th class="centralizar" scope="col">Raça</th>
-                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
-                        <th class="centralizar" scope="col">Ação</th>
+                    @if (loginService.hasPermission("ADMIN")) {
+                    <th class="centralizar" scope="col">Ação</th>
                     }
-                    
                 </tr>
             </thead>
+            @if (loginService.hasPermission("ADMIN")){
             <tbody>
-                @for (paciente of lista; track $index) {
+                @for (especie of lista; track $index) {
                 <tr>
-                    <th class="centralizar" scope="row">{{paciente.id}}</th>
-                    <td class="centralizar">{{paciente.nome}}</td>
-                    <td class="centralizar">{{paciente.raca.especie.nome}}</td>
-                    <td class="centralizar">{{paciente.dataNascimento}}</td>
-                    <td class="centralizar">{{paciente.raca.nome}}</td>
+                    <th class="centralizar" scope="row">{{especie.id}}</th>
+                    <td class="centralizar">{{especie.nome}}</td>
                     <td>
                         <div class="centralizar actionbtn">
-                            @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
-                                <button (click)="edit(paciente)" type="button" type="button" class="actionbtns info"
+                            <button (click)="edit(especie)" type="button" type="button" class="actionbtns info"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            }
-                            @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
-                                <button (click)="delete(paciente)" type="button" class="actionbtns danger"
+                            <button (click)="delete(especie)" type="button" class="actionbtns danger"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
                             </button>
-                            }
-                            
                         </div>
                     </td>
                 </tr>
                 }
             </tbody>
+            }
         </table>
     </div>
 </div>
 
-<ng-template #modalPacienteDetalhe>
+<ng-template #modalEspeciedetalhe>
     <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
     </div>
     <div class="modal-body">
-        <app-pacientesdetails [paciente]="pacienteEdit" (retorno)="retornoDetalhe($event)"></app-pacientesdetails>
+        <app-especiedetails [especie]="EspecieEdit"
+            (retorno)="retornoDetalhe($event)"></app-especiedetails>
     </div>
 </ng-template>

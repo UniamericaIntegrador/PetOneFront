@@ -1,5 +1,7 @@
 <div class="dash">
+    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
     <app-menu></app-menu>
+    }
     <div class="content">
         <app-navbar></app-navbar>
         <router-outlet/>

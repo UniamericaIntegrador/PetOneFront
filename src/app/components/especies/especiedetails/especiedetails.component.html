@@ -1,0 +1,20 @@
+<div class="Edit">
+    <div class="Edit-textos">
+        <div class="titulos">
+            <h2>Especies</h2>
+            <p><b>Edite o formulário</b> para atualizar a tabela de especies!</p>
+        </div>
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nome da especie</mat-label>
+                <input matInput placeholder="Ex. Gato" value="" [(ngModel)]="especie.nome">
+            </mat-form-field>
+    <div>
+        <button (click)="save()">
+            <p>Adicionar</p>
+        </button>
+    </div>
+</div>

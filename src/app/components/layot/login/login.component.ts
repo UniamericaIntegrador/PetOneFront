@@ -42,11 +42,12 @@ export class LoginComponent {
         if (token) {
           this.loginService.addToken(token);
           if (this.loginService.hasPermission("ADMIN")) {
+             this.router.navigate(['/admin/dashboard']);
+          } else if (this.loginService.hasPermission("USER")) {
             this.router.navigate(['/admin/dashboard']);
+          }
           } else if (this.loginService.hasPermission("USERVET")) {
             this.router.navigate(['/admin/dashboard']); // Altere para a rota apropriada para USERVET
-          } else if (this.loginService.hasPermission("USER")) {
-            this.router.navigate(['/admin/pacientes']);
           }
         } else {
           Swal.fire({
@@ -89,7 +90,7 @@ export class LoginComponent {
               if (this.loginService.hasPermission("ADMIN")) {
                 this.router.navigate(['/admin/dashboard']);
               } else if (this.loginService.hasPermission("USER")) {
-                this.router.navigate(['/admin/pacientes']);
+                this.router.navigate(['/admin/dashboard']);
               }
             } else {
               this.router.navigate(['/login']);

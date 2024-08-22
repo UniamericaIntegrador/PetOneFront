@@ -44,6 +44,10 @@ export class VeterinarioService {
     return this.http.get<Endereco>(this.API+"/findById/"+id);
   }
 
+
+  findByNome(nome: string): Observable<Veterinario[]>{
+    return this.http.get<Veterinario[]>(this.API+"/findByNomeStartingWith/"+nome);
+
   logar(veterinario: Veterinario): Observable<string> {
     return this.http.post<string>(this.API3, veterinario, {responseType: 'text' as 'json'});
   }

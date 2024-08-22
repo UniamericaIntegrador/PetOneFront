@@ -6,6 +6,10 @@ import { ProcedimentoslistComponent } from '../../procedimentos/procedimentoslis
 import { VeterinarioslistComponent } from '../../veterinarios/veterinarioslist/veterinarioslist.component';
 import { DashboardService } from '../../../services/dashboard.service';
 import { RouterModule } from '@angular/router';
+import { LoginService } from '../../../auth/login.service';
+import { PacienteService } from '../../../services/paciente.service';
+import { Paciente } from '../../../models/paciente';
+import { Usuario } from '../../../auth/usuario';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +25,21 @@ export class DashboardComponent {
   TutorCount!: number;
   ProcedimentoCount!: number;
 
-  constructor(private dashboardService: DashboardService) { }
+  loginService = inject(LoginService);
+
+  pacienteService = inject(PacienteService);
+
+  lista: Paciente[] = [];
+
+  first: boolean = true;
+
+  usuario!: Usuario;
+
+  constructor(private dashboardService: DashboardService) { 
+    this.usuario = this.loginService.getUsuarioLogado();
+    this.listarPacientesUser(this.usuario.id);
+
+  }
 
   ngOnInit() {
     this.fetchCounts();
@@ -52,4 +70,16 @@ export class DashboardComponent {
   calcular(count: number){
     return count = count * 5;
   }
+
+  listarPacientesUser(id: number){
+    this.pacienteService.findByUser(id).subscribe({
+      next: resultado =>{
+        this.lista = resultado;
+      },
+      error: erro =>{
+        this.first = true;
+      }
+    });
+  }
+
 }
