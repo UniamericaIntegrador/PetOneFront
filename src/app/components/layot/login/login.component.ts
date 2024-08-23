@@ -52,7 +52,7 @@ export class LoginComponent {
           if (this.loginService.hasPermission("ADMIN"))
             this.router.navigate(['/admin/dashboard']);
           else if (this.loginService.hasPermission("USER"))
-            this.router.navigate(['/admin/dashboard']);
+            this.router.navigate(['/user/dashboard']);
         } else {
           Swal.fire({
             title: 'Usuário ou senha incorretos!',

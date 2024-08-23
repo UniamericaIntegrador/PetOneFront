@@ -1,3 +1,4 @@
+@if(loginService.hasPermission("ADMIN")){
 <div class="dash">
     <app-menu></app-menu>
     <div class="content">
@@ -5,5 +6,12 @@
         <router-outlet/>
     </div>
 </div>
+}
 
+@if(loginService.hasPermission("USER")){
+<div>
+    <app-menu></app-menu>
+    <router-outlet/>
+</div>
+}
   

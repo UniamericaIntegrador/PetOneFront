@@ -10,12 +10,23 @@ import { ProcedimentosdetailsComponent } from './components/procedimentos/proced
 import { TutoresdetailsComponent } from './components/tutores/tutoresdetails/tutoresdetails.component';
 import { VeterinariosdetailsComponent } from './components/veterinarios/veterinariosdetails/veterinariosdetails.component';
 import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
+import { UserDashboardComponent } from './components/layot/user/dashboard/dashboard.component';
 import { loginGuard } from './auth/login.guard';
 import { LogsComponent } from './components/logs/logs.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
     { path: "login", component: LoginComponent },
+    { path: "user", component: PrincipalComponent, canActivate: [loginGuard], children: [
+      { path: "dashboard", component: UserDashboardComponent, data: { title: 'Dashboard' } },
+      { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
+      { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },
+      { path: "veterinarios", component: VeterinarioslistComponent, data: { title: 'Veterinários' } },
+      { path: "pacientes/new", component: PacientesdetailsComponent, data: { title: 'Novo Paciente' } },
+      { path: "pacientes/edit/:id", component: PacientesdetailsComponent, data: { title: 'Editar Paciente' } },
+      { path: "procedimentos/new", component: ProcedimentosdetailsComponent, data: { title: 'Novo Procedimento' } },
+      { path: "tutores/edit/:id", component: TutoresdetailsComponent, data: { title: 'Editar Tutor' } },
+    ]},
     { path: "admin", component: PrincipalComponent, canActivate: [loginGuard], children: [
       { path: "dashboard", component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },

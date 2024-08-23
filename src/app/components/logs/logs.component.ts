@@ -23,9 +23,16 @@ export class LogsComponent {
     this.logService.listAll().subscribe({
       next: data => {
         this.lista = data;
+        this.updateDatas();
       }
     });
   }
+
+  updateDatas() {
+    for (let i = 0; i < this.lista.length; i++) {
+        this.lista[i].data = new Date(this.lista[i].timestamp).toLocaleString();
+    }
+}
 
   putDummyLog() {
     const logs = new Logs();

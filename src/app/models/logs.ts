@@ -5,4 +5,5 @@ export class Logs {
     timestamp!: Date;
     descricao!: string;
     usuario!: number;
+    data!: string;
 }

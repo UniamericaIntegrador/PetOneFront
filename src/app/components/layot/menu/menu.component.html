@@ -2,18 +2,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
+@if(loginService.hasPermission("ADMIN")){
 <div class="sidebar">
   <img src="assets/logo.svg" alt="Logo" class="top-image">
   <a href="admin/dashboard" class="sidebar-button">
     <span class="material-symbols-outlined icon">space_dashboard</span>
     Dashboard
   </a>
-  @if(loginService.hasPermission("ADMIN") || ("USER")){
     <a href="admin/veterinarios" class="sidebar-button">
       <span class="material-symbols-outlined icon">stethoscope</span>
       Veterinários
     </a>
-  }
   <a href="admin/pacientes" class="sidebar-button">
     <span class="material-symbols-outlined icon">pets</span>
     Pacientes
@@ -38,3 +37,46 @@
   }
   <a href="login" class="logout-button">Sair</a>
 </div>
+}
+
+@if(loginService.hasPermission("USER")){
+<div class="user-sidebar">
+  <img src="assets/logo2.svg" alt="Logo" class="user-top-image">
+  <div class="items">
+    <a href="user/dashboard" class="user-sidebar-button">
+      <span class="material-symbols-outlined icon">space_dashboard</span>
+      Dashboard
+    </a>
+      <a href="user/veterinarios" class="user-sidebar-button">
+        <span class="material-symbols-outlined icon">stethoscope</span>
+        Veterinários
+      </a>
+    <a href="user/pacientes" class="user-sidebar-button">
+      <span class="material-symbols-outlined icon">pets</span>
+      Pacientes
+    </a>
+    <a href="user/procedimentos" class="user-sidebar-button">
+      <span class="material-symbols-outlined icon">medication</span>
+      Procedimentos
+    </a>
+  </div>
+  <div class="user">
+    <div class="user-profile">
+      <div class="user-icon">
+        <span class="material-symbols-outlined">
+          person
+          </span>
+      </div>
+      <div class="user-text">
+        <h3>André Nascimento</h3>
+        <p>andre2email.com</p>
+      </div>
+    </div>
+    <div class="logout">
+      <span class="material-symbols-outlined">
+        logout
+        </span>
+    </div>
+  </div>
+</div>
+}
