@@ -92,7 +92,11 @@ export class PacienteslistComponent {
 
     new(){
       //this.pacienteEdit = new Paciente(0,'', new Especie(0, ''), new Date(), new Raca(0, '', new Especie(0, '')), null);
-      this.pacienteEdit = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
+      if(this.loginService.hasPermission("USER")){
+      this.pacienteEdit = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')), this.loginService.getUsuarioLogado());
+      }else {
+        this.pacienteEdit = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')), null);
+      }
       this.modalRef = this.modalService.open(this.modalPacienteDetalhe, {
         modalClass: 'CustomModal'
       });

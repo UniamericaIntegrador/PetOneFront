@@ -1,1 +1,68 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+    <div class="block1">
+        <div class="InitText">
+            <div class="text">
+                <ul>
+                    <li>
+                        <h3>20</h3>
+                        <p>Pets <br> cadastrados!</p>
+                    </li>
+                    <li id="second">
+                        <h3>22</h3>
+                        <p>Procedimentos <br> cadastrados!</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="PetList">
+            <h4 class="header">Seus pets:</h4>
+            <table class="custom-table" id="animal-table">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Nome</th>
+                        <th class="text-center" scope="col">Espécie</th>
+                        <th class="text-center" scope="col">Raça</th>
+                        <th class="text-center" scope="col">Nascimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (paciente of paciente; track $index) {
+                    <tr>
+                        <td class="text-left">{{paciente.nome}}</td>
+                        <td class="text-left">{{paciente.raca.especie.nome}}</td>
+                        <td class="text-left">{{paciente.raca.nome}}</td>
+                        <td class="text-left">{{paciente.dataNascimento}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    <div class="block2">
+        <div class="ProcedimentoList">
+            <h4 class="header">Seus procedimentos:</h4>
+            <table class="custom-table" id="procedimento-table">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Procedimento</th>
+                        <th class="text-center" scope="col">veterinario</th>
+                        <th class="text-center" scope="col">Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (procedimentos of procedimentos; track $index) {
+                    <tr>
+                        <td class="text-left">{{procedimentos.nomeProcedimento}}</td>
+                        <td class="text-left">{{procedimentos.veterinario.nome}}</td>
+                        <td class="text-left">{{procedimentos.data}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>  
+        </div>
+        <div class="Actions">
+
+        </div>
+    </div>
+</div>

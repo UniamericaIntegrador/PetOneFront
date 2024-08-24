@@ -75,6 +75,7 @@
             </mat-form-field>
         </div>
     </div>
+    @if (loginService.hasPermission("ADMIN")){
     <div class="tutor-data-input">
         <div class="tutor-data-select">
             <h3>Tutor:</h3>
@@ -109,6 +110,7 @@
             }
         </div>
     </div>
+    }
     <div class="procedimento-data-input">
         <div class="procedimento-data-select">
             <h3>Procedimentos:</h3>

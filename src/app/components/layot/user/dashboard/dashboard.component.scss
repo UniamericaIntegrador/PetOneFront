@@ -1,0 +1,173 @@
+.dashboard {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.block1 {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: #6e6e6e60 1px solid;
+}
+
+.InitText {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    flex: 1 0 0;
+    max-width: 430px;
+    margin-right: 40px;
+}
+
+.text {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex: 1 0 0;
+}
+
+.text ul {
+    list-style: none;
+}
+
+.text ul li {
+    list-style: none;
+    display: flex;
+    padding: 18px;
+    align-items: center;
+    gap: 32px;
+}
+
+.text ul li h3 {
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(180deg, #F98948 0%, #B6174B 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.text ul li p {
+    font-family: Inter;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(180deg, #F98948 0%, #B6174B 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+#second h3 {
+    background: linear-gradient(180deg, #87B6A7 0%, #1AA179 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#second p {
+    background: linear-gradient(180deg, #87B6A7 0%, #1AA179 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.PetList {
+    width: 100%;
+}
+
+.table {
+    overflow-y: scroll;
+    height: 260px;
+    margin: 0;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+    border-color: white;
+    border-style: none;
+    border-width: 0;
+}
+
+#table {
+    border-left: #6e6e6e60 2x solid;
+}
+
+td {
+    padding: 0;
+}
+
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 12px 15px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+.text-center {
+    text-align: left;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.header {
+    color: #6e6e6e;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.block2 {
+    display: flex;
+    padding: 32px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    flex: 1 0 0;
+    align-self: stretch;
+    height: 100%;
+}
+
+.ProcedimentoList {
+    max-width: 900px;
+    width: 100%;
+}

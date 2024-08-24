@@ -38,6 +38,10 @@ export class PacienteService {
     return this.http.get<Paciente>(this.API+"/findById/"+id);
   }
 
+  findByTutor(): Observable<Paciente[]>{
+    return this.http.get<Paciente[]>(this.API+"/findbyuser");
+  }
+
   /*
   getRacas(): Observable<string[]>{
     return this.http.get<any[]>(this.CATAPI).pipe(

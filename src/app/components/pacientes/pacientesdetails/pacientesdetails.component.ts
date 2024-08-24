@@ -18,6 +18,7 @@ import { Especie } from '../../../models/especie';
 import { Raca } from '../../../models/raca';
 import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-pacientesdetails',
@@ -42,6 +43,8 @@ export class PacientesdetailsComponent {
   //@Input("paciente") paciente: Paciente = new Paciente(0,'', '', new Date(), '', null);
   @Input("paciente") paciente: Paciente = new Paciente(0, '', new Date(), new Raca(0, '', new Especie(0, '')), null);
   @Output("retorno") retorno = new EventEmitter<any>();
+
+  loginService = inject(LoginService);
 
   router = inject(ActivatedRoute);
   router2 = inject(Router);
