@@ -25,7 +25,7 @@ import { LoginService } from '../../../auth/login.service';
 })
 
 export class ProcedimentosdetailsComponent {
-  @Input("procedimento") procedimento: Procedimento = new Procedimento(0,'', new Date(),'','',null);
+  @Input("procedimento") procedimento: Procedimento = new Procedimento(0,'');
   @Output("retorno") retorno = new EventEmitter<any>();
 
   router = inject(ActivatedRoute);
@@ -76,9 +76,10 @@ export class ProcedimentosdetailsComponent {
 
   save() {
     console.log(this.procedimento);
+    /*
     if (this.procedimento.data instanceof Date) {
       this.procedimento.data = this.datePipe.transform(this.procedimento.data, 'yyyy-MM-dd') as unknown as Date;
-    }
+    }*/
     console.log(this.procedimento);
     if (this.procedimento.id > 0) {
       this.procedimentoService.update(this.procedimento, this.procedimento.id).subscribe({
@@ -130,10 +131,12 @@ export class ProcedimentosdetailsComponent {
     this.modalRef = this.modalService.open(this.modalVeterinarios, { modalClass: 'modal-lg' });
   }
 
+  /*
   retornoVeterinario(veterinario: Veterinario) {
     this.procedimento.veterinario = veterinario;
     this.modalRef.close();
   }
+  
   /*
   onDateChange(date: Date) {
     if (date) {

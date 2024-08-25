@@ -18,7 +18,7 @@ import { LoginService } from '../../../auth/login.service';
 
 export class ProcedimentoslistComponent {
   lista: Procedimento[] = [];
-  procedimentoEdit: Procedimento = new Procedimento(0,'',new Date(0),'', '', null);
+  procedimentoEdit: Procedimento = new Procedimento(0,'');
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -99,7 +99,7 @@ export class ProcedimentoslistComponent {
     }
 
     new(){
-      this.procedimentoEdit = new Procedimento(0,'',new Date(0),'','', null);
+      this.procedimentoEdit = new Procedimento(0,'');
       this.modalRef = this.modalService.open(this.modalProcedimentoDetalhe, {
         modalClass: 'CustomModal'
       });

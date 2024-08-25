@@ -52,6 +52,10 @@ export class VeterinarioService {
     return this.http.post<string>(this.API2, veterinario, { responseType: 'text' as 'json' });
   }
 
+  findByNome(nome: string): Observable<Veterinario[]>{
+    return this.http.get<Veterinario[]>(this.API+"/findByNomeStartingWith/"+nome);
+  }
+
   addToken(token: string) {
     localStorage.setItem('token', token);
   }

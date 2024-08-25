@@ -19,6 +19,7 @@ import { Raca } from '../../../models/raca';
 import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
 import { LoginService } from '../../../auth/login.service';
+import { Agendamento } from '../../../models/agendamento';
 
 @Component({
   selector: 'app-pacientesdetails',
@@ -232,17 +233,17 @@ export class PacientesdetailsComponent {
     this.modalRef.close();
   }
 
-  retornoProcedimento(procedimento: Procedimento) {
-    if (this.paciente.procedimentos == null)
-      this.paciente.procedimentos = [];
+  retornoProcedimento(agendamentos: Agendamento) {
+    if (this.paciente.agendamentos == null)
+      this.paciente.agendamentos = [];
 
-    this.paciente.procedimentos.push(procedimento);
+    this.paciente.agendamentos.push(agendamentos);
     this.modalRef.close();
   }
 
-  desvincularProcedimentoPaciente(procedimento: Procedimento) {
-    let posicao = this.paciente.procedimentos.findIndex(x => { return x.id == procedimento.id });
-    this.paciente.procedimentos.splice(posicao, 1);
+  desvincularProcedimentoPaciente(agendamento: Agendamento) {
+    let posicao = this.paciente.agendamentos.findIndex(x => { return x.id == agendamento.id });
+    this.paciente.agendamentos.splice(posicao, 1);
   }
 
 

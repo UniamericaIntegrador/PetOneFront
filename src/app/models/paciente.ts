@@ -1,3 +1,4 @@
+import { Agendamento } from "./agendamento";
 import { Especie } from "./especie";
 import { Procedimento } from "./procedimento";
 import { Raca } from "./raca";
@@ -12,7 +13,7 @@ export class Paciente {
     raca!: Raca;
     //raca!: string;
     tutor!: Tutor;
-    procedimentos: Procedimento[] = [];
+    agendamentos: Agendamento[] = [];
 
     constructor(id: number, nome: string, dataNascimento: Date, raca: Raca | null, tutor: Tutor | null){
         this.id = id;

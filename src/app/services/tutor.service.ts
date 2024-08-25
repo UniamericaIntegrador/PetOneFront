@@ -36,6 +36,10 @@ export class TutorService {
     return this.http.get<Tutor>(this.API+"/findById/"+id);
   }
 
+  findByNome(nome: string): Observable<Tutor[]>{
+    return this.http.get<Tutor[]>(this.API+"/findByTrechoNome/"+nome);
+  }
+
   addToken(token: string) {
     localStorage.setItem('token', token);
   }

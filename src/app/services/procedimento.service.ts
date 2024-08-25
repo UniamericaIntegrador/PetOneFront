@@ -34,4 +34,8 @@ export class ProcedimentoService {
   findById(id: number): Observable<Procedimento>{
     return this.http.get<Procedimento>(this.API+"/findById/"+id);
   }
+  
+  findByNome(nome: string): Observable<Procedimento[]>{
+    return this.http.get<Procedimento[]>(this.API+"/findByNomeProcedimento/"+nome);
+  }
 }

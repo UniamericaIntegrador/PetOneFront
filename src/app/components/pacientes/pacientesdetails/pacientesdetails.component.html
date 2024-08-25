@@ -144,7 +144,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (procedimento of paciente.procedimentos; track $index) {
+                @for (procedimento of paciente.agendamentos; track $index) {
                 <tr class="table-body">
                     <th id="ID">
                         <div class="rowcell">
@@ -153,7 +153,7 @@
                     </th>
                     <td>
                         <div class="rowcell">
-                            <p>{{ procedimento.nomeProcedimento }}</p>
+                            <p>{{ procedimento.nome }}</p>
                         </div>
                     </td>
                     <td>

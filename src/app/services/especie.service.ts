@@ -33,4 +33,8 @@ export class EspecieService {
     findById(id: number): Observable<Especie> {
         return this.http.get<Especie>(this.API + "/findById/" + id);
     }
+
+    findByNome(nome: string): Observable<Especie[]>{
+        return this.http.get<Especie[]>(this.API + "/findbynome/" + nome);
+    }
 }
