@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Tutor } from '../models/tutor';
 import { environment } from '../../environments/environment';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
-
+import { tutorDTO } from '../DTO/tutorDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +30,10 @@ export class TutorService {
 
   update(tutor: Tutor, id: number): Observable<string>{
     return this.http.put<string>(this.API+"/update/"+id, tutor, {responseType: 'text' as 'json'});
+  }
+
+  tutorLogado(): Observable<tutorDTO>{
+    return this.http.get<tutorDTO>(this.API+"/activated");
   }
 
   findById(id: number): Observable<Tutor>{

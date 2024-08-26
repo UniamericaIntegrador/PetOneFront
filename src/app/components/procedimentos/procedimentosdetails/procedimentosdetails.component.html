@@ -15,73 +15,7 @@
                 <input matInput placeholder="Ex. Check-up" value="" [(ngModel)]="procedimento.nomeProcedimento">
             </mat-form-field>
         </div>
-        <div class="input-MAT">
-            <mat-form-field>
-                <mat-label>Escolha uma data</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="procedimento.data">
-                <mat-hint>YYYY/MM/DD</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="input-MAT">
-            <mat-form-field>
-                <mat-label>Selecione uma opcão</mat-label>
-                <mat-select [(ngModel)]="procedimento.resultado">
-                    <mat-option value="hourglass_empty">Aguardando</mat-option>
-                    <mat-option value="schedule_send">Enviado</mat-option>
-                    <mat-option value="close_small">Cancelado</mat-option>
-                    <mat-option value="done_all">Finalizado</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="input-MAT">
-            <mat-form-field>
-                <mat-label>Selecione uma opcão</mat-label>
-                <mat-select [(ngModel)]="procedimento.diagnostico">
-                    <mat-option value="hourglass_empty">Aguardando</mat-option>
-                    <mat-option value="schedule_send">Enviado</mat-option>
-                    <mat-option value="close_small">Cancelado</mat-option>
-                    <mat-option value="done_all">Finalizado</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-
-    <div class="procedimento-data-input">
-        <div class="procedimento-data-select">
-            <h3>Veterinario:</h3>
-            @if(procedimento.veterinario == null){
-
-            }@else{
-            <button class="" (click)="buscarVeterinario()">
-                <p>Trocar tutor</p>
-            </button>
-            }
-        </div>
-        <div class="procedimento-data-view">
-            @if(procedimento.veterinario == null){
-            <button (click)="buscarVeterinario()">
-                <p>Selecionar Veterinario</p>
-            </button>
-            }@else {
-            <div class="patient-data-input">
-                <div class="input-MAT">
-                    <label for="">Nome</label>
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="{{procedimento.veterinario.nome}}" value="">
-                    </mat-form-field>
-                </div>
-                <div class="input-MAT">
-                    <label for="">CRMV</label>
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="{{procedimento.veterinario.crmv}}" value="">
-                    </mat-form-field>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
+        
     <div>
         <button (click)="save()">
             <p>Adicionar</p>
@@ -134,7 +68,7 @@
         </div>
     </div>
 </div>
--->
+
 
 
 
@@ -149,3 +83,4 @@
 
     </div>
 </ng-template>
+-->

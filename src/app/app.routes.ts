@@ -13,6 +13,8 @@ import { DashboardComponent } from './components/layot/dashboard/dashboard.compo
 import { UserDashboardComponent } from './components/layot/user/dashboard/dashboard.component';
 import { loginGuard } from './auth/login.guard';
 import { LogsComponent } from './components/logs/logs.component';
+import { AgendamentodetailComponent } from './components/agendamento/agendamentodetail/agendamentodetail.component';
+import { AgendamentolistComponent } from './components/agendamento/agendamentolist/agendamentolist.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
@@ -24,13 +26,18 @@ export const routes: Routes = [
       { path: "veterinarios", component: VeterinarioslistComponent, data: { title: 'Veterinários' } },
       { path: "pacientes/new", component: PacientesdetailsComponent, data: { title: 'Novo Paciente' } },
       { path: "pacientes/edit/:id", component: PacientesdetailsComponent, data: { title: 'Editar Paciente' } },
-      { path: "procedimentos/new", component: ProcedimentosdetailsComponent, data: { title: 'Novo Procedimento' } },
       { path: "tutores/edit/:id", component: TutoresdetailsComponent, data: { title: 'Editar Tutor' } },
+      { path: "agendamento/edit/:id", component: AgendamentodetailComponent, data: { title: 'Editar Agendamentos' }},
+      { path: "agendamento/edit/new", component: AgendamentodetailComponent, data: { title: 'Editar Agendamentos' }},
+      { path: "agendamento", component: AgendamentolistComponent, data: { title: 'Agendamentos' }},
     ]},
     { path: "admin", component: PrincipalComponent, canActivate: [loginGuard], children: [
       { path: "dashboard", component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
       { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },
+      { path: "agendamentos", component: AgendamentolistComponent, data: { title: 'Agendamentos' } },
+      { path: "agendamento/edit/:id", component: AgendamentodetailComponent, data: { title: 'Editar Agendamentos' }},
+      { path: "agendamento/edit/new", component: AgendamentodetailComponent, data: { title: 'Editar Agendamentos' }},
       { path: "tutores", component: TutoreslistComponent, data: { title: 'Tutores' } },
       { path: "veterinarios", component: VeterinarioslistComponent, data: { title: 'Veterinários' } },
       { path: "pacientes/new", component: PacientesdetailsComponent, data: { title: 'Novo Paciente' } },

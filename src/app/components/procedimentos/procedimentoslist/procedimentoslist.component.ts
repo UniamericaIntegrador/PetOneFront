@@ -21,6 +21,7 @@ export class ProcedimentoslistComponent {
   procedimentoEdit: Procedimento = new Procedimento(0,'');
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;
+  @Input("view") view: boolean = true;
   @Output("retorno") retorno = new EventEmitter<any>();
   
   modalService = inject(MdbModalService);

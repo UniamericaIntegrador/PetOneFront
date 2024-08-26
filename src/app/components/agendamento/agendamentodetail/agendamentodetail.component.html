@@ -1,1 +1,236 @@
-<p>agendamentodetail works!</p>
+<div class="Edit">
+    <div class="Edit-textos">
+        <div class="titulos">
+            <h2>Agendamentos</h2>
+            <p><b>Edite o formulário</b> para atualizar a tabela de Agendamentos</p>
+        </div>
+    </div>
+    <div class="procedimento-data-view">
+        <div class="procedimento-data-select" style="width: 100%;">
+            <h3>Paciente:</h3>
+            @if(agendamento.paciente == null){
+
+            }@else{
+            <button class="" (click)="buscarPaciente()">
+                <p>Trocar paciente</p>
+            </button>
+            }
+        </div>
+        @if(agendamento.paciente == null){
+        <button (click)="buscarPaciente()">
+            <p>Selecionar Paciente</p>
+        </button>
+        }@else {
+        <div class="patient-data-input">
+            <div class="input-MAT">
+                <label for="">Nome</label>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{agendamento.paciente.nome}}" value="">
+                </mat-form-field>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="procedimento-data-view">
+        <div class="procedimento-data-select" style="width: 100%;">
+            <h3>Procedimento:</h3>
+            @if(agendamento.procedimento == null){
+
+            }@else{
+            <button class="" (click)="buscarProcedimento()">
+                <p>Trocar procedimento</p>
+            </button>
+            }
+        </div>
+        @if(agendamento.procedimento == null){
+        <button (click)="buscarProcedimento()">
+            <p>Selecionar Procedimento</p>
+        </button>
+        }@else {
+        <div class="patient-data-input">
+            <div class="input-MAT">
+                <label for="">Nome</label>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{agendamento.procedimento.nomeProcedimento}}" value="">
+                </mat-form-field>
+            </div>
+        </div>
+        }
+    </div>
+
+    <div class="procedimentoForm">
+        <!--
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)] = "dateHold">
+                <mat-hint>YYYY/MM/DD</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        
+        <div class="input-MAT">
+            <input type="date" name="datas" id="data" [(ngModel)] = "dateHold">
+        </div>
+        -->
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="agendamento.data">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="agendamento.resultado">
+                    <mat-option value="hourglass_empty">Aguardando</mat-option>
+                    <mat-option value="schedule_send">Enviado</mat-option>
+                    <mat-option value="close_small">Cancelado</mat-option>
+                    <mat-option value="done_all">Finalizado</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="agendamento.diagnostico">
+                    <mat-option value="hourglass_empty">Aguardando</mat-option>
+                    <mat-option value="schedule_send">Enviado</mat-option>
+                    <mat-option value="close_small">Cancelado</mat-option>
+                    <mat-option value="done_all">Finalizado</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="procedimento-data-input">
+        <div class="procedimento-data-select">
+            <h3>Veterinario:</h3>
+            @if(agendamento.veterinario == null){
+
+            }@else{
+            <button class="" (click)="buscarVeterinario()">
+                <p>Trocar veterinario</p>
+            </button>
+            }
+        </div>
+        <div class="procedimento-data-view">
+            @if(agendamento.veterinario == null){
+            <button (click)="buscarVeterinario()">
+                <p>Selecionar Veterinario</p>
+            </button>
+            }@else {
+            <div class="patient-data-input">
+                <div class="input-MAT">
+                    <label for="">Nome</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{agendamento.veterinario.nome}}" value="">
+                    </mat-form-field>
+                </div>
+                <div class="input-MAT">
+                    <label for="">CRMV</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{agendamento.veterinario.crmv}}" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div>
+        <button (click)="save()">
+            <p>Adicionar</p>
+        </button>
+    </div>
+</div>
+
+<!--
+<div class="container">
+    <h3 style="color: #000">PROCEDIMENTO</h3>
+    <p>Edite o formulário para atualizar a tabela de procedimentos</p>
+    <div class="card">
+        <div class="card-body">
+            <div class="holder">
+                Procedimento
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.nomeProcedimento" />
+                Data
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.data" />
+                Resultado
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.resultado" />
+                Diagnostico 
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.diagnostico" />
+                <div>
+                    @if(procedimento.veterinario == null){
+                    <button style="background-color: #87B6A7; color: white;" type="button" class="btn btn-rounded" mdbRipple (click)="buscarVeterinario()">
+                        Buscar veterinario</button>
+                    }@else {
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <p class="text-primary alert-primary">Veterinário: {{procedimento.veterinario.nome}}</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-warning btn-rounded" mdbRipple
+                                (click)="buscarVeterinario()">
+                                Trocar Veterinario
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
+                <button type="button" style="background-color: #dfaeb5;" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
+                    (click)="save()">
+                    Adicionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+-->
+
+<ng-template #modalVeterinarios>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Veterinarios</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-veterinarioslist [esconderBotoes]="true" (retorno)="retornoVeterinario($event)"></app-veterinarioslist>
+
+    </div>
+</ng-template>
+
+<ng-template #modalProcedimentos>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Procedimentos</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-procedimentoslist [esconderBotoes]="true" (retorno)="retornoProcedimento($event)"></app-procedimentoslist>
+
+    </div>
+
+</ng-template>
+
+<ng-template #modalPacientes>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pacientes</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-pacienteslist [esconderBotoes]="true" (retorno)="retornoPaciente($event)"></app-pacienteslist>
+
+    </div>
+
+</ng-template>

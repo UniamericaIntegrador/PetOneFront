@@ -40,6 +40,13 @@
                     <td class="centralizar">{{paciente.raca.nome}}</td>
                     <td>
                         <div class="centralizar actionbtn">
+                            @if(esconderBotoes){
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(paciente)">
+                                        Selecionar
+                                    </button>
+                                </td>
+                            }@else{
                             @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USER")) {
                                 <button (click)="edit(paciente)" type="button" type="button" class="actionbtns info"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
@@ -55,6 +62,7 @@
                                     delete
                                 </span>
                             </button>
+                            }
                             }
                             
                         </div>

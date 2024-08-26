@@ -23,14 +23,12 @@
                 <tr>
                     <th class="centralizar" scope="col">ID</th>
                     <th class="centralizar" scope="col">Procedimento</th>
-                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
-                    <th class="centralizar" scope="col">Data</th>
-                    <th class="centralizar" scope="col">Resultado</th>
-                    <th class="centralizar" scope="col">Diagnostico</th>
-                    <th class="centralizar" scope="col">Ação</th>
-
+                    @if(esconderBotoes){
+                    <th class="centralizar" scope="col">Ações</th>
                     }
-
+                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
+                    <th class="centralizar" scope="col">Ação</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -38,52 +36,45 @@
                 <tr>
                     <th class="centralizar" scope="row">{{procedimento.id}}</th>
                     <td class="centralizar">{{procedimento.nomeProcedimento}}</td>
-
-                    <!--
-                    @if (loginService.hasPermission("ADMIN") || loginService.hasPermission("USERVET")) {
-                    <td class="centralizar">{{procedimento.data}}</td>
-                    <td class="centralizar"><span class="material-symbols-outlined">{{procedimento.resultado}}</span>
-                    </td>
-                    <td class="centralizar"><span class="material-symbols-outlined">{{procedimento.diagnostico}}</span>
+                    @if(esconderBotoes){
+                        <td>
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(procedimento)">
+                            Selecionar
+                        </button>
                     </td>
                     }
-                    -->
-                    @if (loginService.hasPermission("ADMIN")){
+                    
+                    
+                    @if (loginService.hasPermission("ADMIN")) {
                     <td>
                         @if(esconderBotoes){
-                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple
-                            (click)="select(procedimento)">
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(procedimento)">
                             Selecionar
                         </button>
                         }@else{
                         <div class="centralizar actionbtn">
                             @if (loginService.hasPermission("USERVET") || loginService.hasPermission("ADMIN")) {
-                            <button (click)="edit(procedimento)" type="button" type="button" class="actionbtns info"
-                                data-mdb-ripple-init data-mdb-ripple-color="dark">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
+                            <button (click)="edit(procedimento)" type="button" class="actionbtns info" data-mdb-ripple-init
+                                data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">edit</span>
                             </button>
                             }
-
+        
                             @if (loginService.hasPermission("USERVET") || loginService.hasPermission("ADMIN")) {
                             <button (click)="delete(procedimento)" type="button" class="actionbtns danger"
                                 data-mdb-ripple-init data-mdb-ripple-color="dark">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
+                                <span class="material-symbols-outlined">delete</span>
                             </button>
                             }
                         </div>
-
                         }
-                        <div class="centralizar">
-                        </div>
                     </td>
+                    }
                 </tr>
                 }
             </tbody>
         </table>
+        
     </div>
 </div>
 

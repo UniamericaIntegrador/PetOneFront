@@ -20,6 +20,8 @@ import { EspecieService } from '../../../services/especie.service';
 import { RacaService } from '../../../services/raca.service';
 import { LoginService } from '../../../auth/login.service';
 import { Agendamento } from '../../../models/agendamento';
+import { TutorService } from '../../../services/tutor.service';
+import { PacienteDTO } from '../../../DTO/pacienteDTO';
 
 @Component({
   selector: 'app-pacientesdetails',
@@ -46,6 +48,8 @@ export class PacientesdetailsComponent {
   @Output("retorno") retorno = new EventEmitter<any>();
 
   loginService = inject(LoginService);
+  tutorService = inject(TutorService);
+
 
   router = inject(ActivatedRoute);
   router2 = inject(Router);
@@ -58,14 +62,15 @@ export class PacientesdetailsComponent {
   pacienteService = inject(PacienteService);
   racaService = inject(RacaService);
   especieService = inject(EspecieService);
-
+  Tutor!: Tutor;
+  pacienteDTO: PacienteDTO = new PacienteDTO(0, '', new Date(), new Raca(0, '', new Especie(0, '')), new Tutor(0, '', '', 0, null, '', '', '', ''))
   startDate = new Date(2024, 6, 6);
 
   lista: string[] = [];
   listaDog: string[] = [];
 
   listaEspecie: Especie[] = [];
-  
+
 
   //Gatos: boolean = false;
   //Cachorros: boolean = false;
@@ -73,7 +78,7 @@ export class PacientesdetailsComponent {
   //Gatos: string = "Gato";
   //Cachorros: string = "Cachorro";
 
-  
+
 
   constructor() {
 
@@ -81,13 +86,13 @@ export class PacientesdetailsComponent {
       console.log(this.paciente);
 
     }, 1000);
-    
+
     this.carregarRacas();
     this.carregarRacasDog();
     this.carregarEspecie();
 
 
-    
+
     /*
     let id = this.router.snapshot.params['id'];
     if (id > 0) {
@@ -117,108 +122,53 @@ export class PacientesdetailsComponent {
   }
 
   save() {
-  if (this.paciente.id > 0) {
-    // Atualiza Espécie
-    this.especieService.update(this.paciente.raca.especie, this.paciente.raca.especie.id).subscribe({
-      next: especieAtualizada => {
-        // Atualiza Raça
-        this.racaService.update(this.paciente.raca, this.paciente.raca.id).subscribe({
-          next: racaAtualizada => {
-            // Atualiza Paciente
-            this.pacienteService.update(this.paciente, this.paciente.id).subscribe({
-              next: mensagem => {
-                Swal.fire({
-                  title: mensagem,
-                  icon: 'success',
-                  confirmButtonText: 'Ok',
-                });
-                this.router2.navigate(['admin/pacientes'], {
-                  state: { pacienteEditado: this.paciente },
-                });
-                this.retorno.emit(this.paciente);
-              },
-              error: erro => {
-                Swal.fire({
-                  title: 'Erro ao editar o cadastro do paciente',
-                  icon: 'error',
-                  confirmButtonText: 'Ok',
-                });
-              },
-            });
-          },
-          error: erro => {
-            Swal.fire({
-              title: 'Erro ao atualizar a raça',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-            });
-          },
-        });
-      },
-      error: erro => {
-        Swal.fire({
-          title: 'Erro ao atualizar a espécie',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-        });
-      },
-    });
-  } else {
-    // Salva Espécie
-    this.especieService.save(this.paciente.raca.especie).subscribe({
-      next: (especie) => {
-        this.paciente.raca.especie.id = especie.id;
-        console.log("aaaa")
-        console.log(especie.id)
-        // Salva Raça
-        this.racaService.save(this.paciente.raca).subscribe({
-          next: (raca: Raca) => {
-            this.paciente.raca.id = raca.id;
-            console.log("bbbb")
-            console.log(raca.id)
-
-            // Salva Paciente
-            this.pacienteService.save(this.paciente).subscribe({
-              next: mensagem => {
-                Swal.fire({
-                  title: mensagem,
-                  confirmButtonColor: '#54B4D3',
-                  text: 'Paciente salvo com sucesso!',
-                  icon: 'success',
-                });
-                this.router2.navigate(['admin/pacientes'], {
-                  state: { pacienteNovo: this.paciente },
-                });
-                this.retorno.emit(this.paciente);
-              },
-              error: erro => {
-                Swal.fire({
-                  title: 'Erro ao salvar o paciente',
-                  icon: 'error',
-                  confirmButtonText: 'Ok',
-                });
-              },
-            });
-          },
-          error: erro => {
-            Swal.fire({
-              title: 'Erro ao salvar a raça',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-            });
-          },
-        });
-      },
-      error: erro => {
-        Swal.fire({
-          title: 'Erro ao salvar a espécie',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-        });
-      },
-    });
+    if (this.paciente.id > 0) {
+      this.pacienteToDTO(this.paciente);
+      this.pacienteService.update(this.pacienteDTO, this.paciente.id).subscribe({
+        next: mensagem => {
+          Swal.fire({
+            title: mensagem,
+            icon: 'success',
+            confirmButtonText: 'Ok',
+          });
+          this.router2.navigate(['admin/pacientes'], {
+            state: { pacienteEditado: this.paciente },
+          });
+          this.retorno.emit(this.paciente);
+        },
+        error: erro => {
+          Swal.fire({
+            title: 'Erro ao editar o cadastro do paciente',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          });
+        },
+      });
+    } else {
+      this.pacienteToDTO(this.paciente);
+      this.pacienteService.save(this.pacienteDTO).subscribe({
+        next: mensagem => {
+          Swal.fire({
+            title: mensagem,
+            confirmButtonColor: '#54B4D3',
+            text: 'Paciente salvo com sucesso!',
+            icon: 'success',
+          });
+          this.router2.navigate(['admin/pacientes'], {
+            state: { pacienteNovo: this.paciente },
+          });
+          this.retorno.emit(this.paciente);
+        },
+        error: erro => {
+          Swal.fire({
+            title: 'Erro ao salvar o paciente',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          });
+        },
+      });
+    }
   }
-}
 
   buscarTutor() {
     this.modalRef = this.modalService.open(this.modalTutores, { modalClass: 'modal-lg' });
@@ -244,6 +194,26 @@ export class PacientesdetailsComponent {
   desvincularProcedimentoPaciente(agendamento: Agendamento) {
     let posicao = this.paciente.agendamentos.findIndex(x => { return x.id == agendamento.id });
     this.paciente.agendamentos.splice(posicao, 1);
+  }
+
+  pacienteToDTO(paciente: Paciente) {
+    if (this.paciente.id > 0) {
+      this.pacienteDTO.id = paciente.id;
+      this.pacienteDTO.nome = paciente.nome;
+      this.pacienteDTO.dataNascimento = paciente.dataNascimento;
+      this.pacienteDTO.agendamentos = paciente.agendamentos;
+      this.pacienteDTO.raca.nome = paciente.raca.nome;
+      this.pacienteDTO.raca.especie.id = paciente.raca.especie.id;
+      this.pacienteDTO.tutor.id = paciente.tutor.id;
+    } else {
+      this.pacienteDTO.nome = paciente.nome;
+      this.pacienteDTO.dataNascimento = paciente.dataNascimento;
+      this.pacienteDTO.agendamentos = paciente.agendamentos;
+      this.pacienteDTO.raca.nome = paciente.raca.nome;
+      this.pacienteDTO.raca.especie.id = paciente.raca.especie.id;
+      this.pacienteDTO.tutor.id = paciente.tutor.id;
+    }
+    console.log(this.pacienteDTO);
   }
 
 
@@ -277,7 +247,7 @@ export class PacientesdetailsComponent {
     });
   }
 
-  carregarEspecie(){
+  carregarEspecie() {
     this.especieService.listAll().subscribe({
       next: data => {
         this.listaEspecie = data;
@@ -291,6 +261,16 @@ export class PacientesdetailsComponent {
       }
     })
   }
+
+  loadTutor() {
+    this.tutorService.tutorLogado().subscribe({
+      next: data => {
+        this.Tutor.id = data.id;
+        this.paciente.tutor = this.Tutor;
+      }
+    })
+  }
+
   /*
   racaToEspecie(){
     this.paciente.especie.nome = this.paciente.raca.especie.nome;

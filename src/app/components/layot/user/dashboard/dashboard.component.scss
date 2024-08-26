@@ -159,6 +159,7 @@ td {
 .block2 {
     display: flex;
     padding: 32px;
+    padding-left: 0px;
     flex-direction: row;
     align-items: flex-start;
     gap: 32px;
@@ -171,3 +172,42 @@ td {
     max-width: 900px;
     width: 100%;
 }
+
+.interaction {
+    display: flex;
+    max-width: 550px;
+    padding: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.addbtn {
+    display: flex;
+    padding: 24px 16px;
+    align-items: center;
+    gap: 16px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 8px;
+background: var(--87-b-6-a-7, #87B6A7);
+border-style: none;
+}
+
+.addbtn span{
+    font-size: 38px;
+    color: white;
+}
+
+.addbtn h5 {
+    color: var(--ffffff, #FFF);
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+margin: 0px;
+}
+

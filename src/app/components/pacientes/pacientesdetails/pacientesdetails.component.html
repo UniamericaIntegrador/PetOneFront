@@ -37,7 +37,7 @@
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
                 <mat-select [(ngModel)]="paciente.raca.nome">
-                    @for (raca of lista; track $index) {
+                    @for (raca of listaDog; track $index) {
                     <mat-option [value]="raca">{{raca}}</mat-option>
                     }
                 </mat-select>
@@ -49,7 +49,7 @@
             <mat-form-field>
                 <mat-label>Escolha uma opção</mat-label>
                 <mat-select [(ngModel)]="paciente.raca.nome">
-                    @for (raca of listaDog; track $index) {
+                    @for (raca of lista; track $index) {
                     <mat-option [value]="raca">{{raca}}</mat-option>
                     }
                 </mat-select>
@@ -111,69 +111,6 @@
         </div>
     </div>
     }
-    <div class="procedimento-data-input">
-        <div class="procedimento-data-select">
-            <h3>Procedimentos:</h3>
-            <button (click)="buscarProcedimentos()">
-                <p>Novo procedimento</p>
-            </button>
-        </div>
-        <table class="procedimento-table">
-            <thead>
-                <tr class="table-head">
-                    <th id="ID">
-                        <div class="rowcell">
-                            <p>ID</p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="rowcell">
-                            <p>Procedimentos</p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="rowcell">
-                            <p>Data de agendamento</p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="rowcell">
-                            <p>Ações</p>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (procedimento of paciente.agendamentos; track $index) {
-                <tr class="table-body">
-                    <th id="ID">
-                        <div class="rowcell">
-                            <p>{{procedimento.id}}</p>
-                        </div>
-                    </th>
-                    <td>
-                        <div class="rowcell">
-                            <p>{{ procedimento.nome }}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="rowcell">
-                            <p>{{ procedimento.data }}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="rowcell">
-                            <button type="button" class="btn" mdbRipple
-                                (click)="desvincularProcedimentoPaciente(procedimento)">
-                                Deletar
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
     <div class="btn-holder" style="display: none;">
         <div class="btns">
             <button (keyup.enter)="save()" data-mdb-ripple-init (click)="save()">
@@ -182,7 +119,6 @@
         </div>
     </div>
 </div>
-
 
 <ng-template #modalTutores>
     <div class="modal-header">
@@ -194,17 +130,4 @@
         <app-tutoreslist [esconderBotoes]="true" (retorno)="retornoTutor($event)"></app-tutoreslist>
 
     </div>
-</ng-template>
-
-<ng-template #modalProcedimentos>
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Procedimentos</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
-    </div>
-    <div class="modal-body">
-
-        <app-procedimentoslist [esconderBotoes]="true" (retorno)="retornoProcedimento($event)"></app-procedimentoslist>
-
-    </div>
-
 </ng-template>

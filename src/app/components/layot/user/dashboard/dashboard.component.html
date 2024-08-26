@@ -4,12 +4,12 @@
             <div class="text">
                 <ul>
                     <li>
-                        <h3>20</h3>
+                        <h3>{{paciente.length}}</h3>
                         <p>Pets <br> cadastrados!</p>
                     </li>
                     <li id="second">
-                        <h3>22</h3>
-                        <p>Procedimentos <br> cadastrados!</p>
+                        <h3>{{agendamentos.length}}</h3>
+                        <p>Agendamentos <br> cadastrados!</p>
                     </li>
                 </ul>
             </div>
@@ -40,6 +40,7 @@
         </div>
     </div>
     <div class="block2">
+        <!--
         <div class="ProcedimentoList">
             <h4 class="header">Seus procedimentos:</h4>
             <table class="custom-table" id="procedimento-table">
@@ -51,7 +52,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!--
                     @for (procedimentos of procedimentos; track $index) {
                     <tr>
                         <td class="text-left">{{procedimentos.nomeProcedimento}}</td>
@@ -59,12 +59,26 @@
                         <td class="text-left">{{procedimentos.data}}</td>
                     </tr>
                     }
-                -->
                 </tbody>
             </table>  
         </div>
-        <div class="Actions">
-
+        -->
+        <div class="ProcedimentoList">      
+            <app-agendamentolist [view]="false" ></app-agendamentolist>
         </div>
+        <div class="interaction">
+            <button class="addbtn" [routerLink]="['/user/pacientes/new']" routerLinkActive="router-link-active" >
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Paciente</h5>
+            </button>
+            <button class="addbtn" [routerLink]="['/user/agendamento/new']">
+                <span class="material-symbols-outlined">
+                    add
+                    </span>
+                <h5>Novo Agendamento</h5>
+            </button>
+            </div>
     </div>
 </div>

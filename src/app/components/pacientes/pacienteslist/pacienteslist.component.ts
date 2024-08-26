@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PacientesdetailsComponent } from '../pacientesdetails/pacientesdetails.component';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
@@ -21,6 +21,11 @@ import { LoginService } from '../../../auth/login.service';
 })
 //
 export class PacienteslistComponent {
+
+  @Input("esconderBotoes") esconderBotoes: boolean = false;
+  @Input("view") view: boolean = true;
+  @Output("retorno") retorno = new EventEmitter<any>();
+  
   lista: Paciente[] = [];
   pacienteEdit: Paciente = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
 
@@ -76,6 +81,7 @@ export class PacienteslistComponent {
               icon: "success",
               confirmButtonText: "Ok"
             });
+            this.lista = [];
             this.listAll();
           },
           error: erro => {
@@ -115,5 +121,9 @@ export class PacienteslistComponent {
     retornoDetalhe(paciente: Paciente){
       this.listAll();
       this.modalRef.close();
+    }
+
+    select(paciente: Paciente){
+      this.retorno.emit(paciente);
     }
   }

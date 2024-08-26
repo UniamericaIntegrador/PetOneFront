@@ -1,28 +1,24 @@
 {
-    "id": 5,
-    "nome": "Thom",
-    "dataNascimento": "2024-07-01",
-    "raca": {
-        "id": 9
-    },
-    "tutor": {
-        "id": 12
-    },
-    "agendamentos": [
-        {
-            "data": "2024-08-30",
-            "nome": "raio-X",
-            "resultado": "aguardando",
-            "diagnostico": "aguardando",
-            "veterinario": {
-                "id": 1
-            },
-            "paciente": {
-                "id": 5
-            },
-            "procedimento":{
-                "id": 2
-            }
-        }
-    ]
+  "agendamentos": [],
+  "id": 0,
+  "nome": "Bela",
+  "dataNascimento": "2024-08-26T02:02:36.692Z",
+  "raca": {
+      "id": 0,
+      "nome": "",
+      "especie": {
+          "id": 1,
+          "nome": ""
+      }
+  },
+  "tutor": {
+      "id": "1",
+      "nome": "",
+      "cpf": "",
+      "idade": 0,
+      "email": "",
+      "username": "",
+      "password": "",
+      "role": ""
+  }
 }

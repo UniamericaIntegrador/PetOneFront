@@ -21,6 +21,10 @@
     <span class="material-symbols-outlined icon">person</span>
     Tutores
   </a>
+  <a href="admin/agendamentos" class="sidebar-button">
+    <span class="material-symbols-outlined icon">add</span>
+    Agendamentos
+  </a>
   <a href="admin/procedimentos" class="sidebar-button">
     <span class="material-symbols-outlined icon">medication</span>
     Procedimentos
@@ -47,17 +51,17 @@
       <span class="material-symbols-outlined icon">space_dashboard</span>
       Dashboard
     </a>
-      <a href="user/veterinarios" class="user-sidebar-button">
-        <span class="material-symbols-outlined icon">stethoscope</span>
-        Veterinários
-      </a>
     <a href="user/pacientes" class="user-sidebar-button">
       <span class="material-symbols-outlined icon">pets</span>
       Pacientes
     </a>
-    <a href="user/procedimentos" class="user-sidebar-button">
+    <a href="user/agendamento" class="user-sidebar-button">
       <span class="material-symbols-outlined icon">medication</span>
-      Procedimentos
+      Agendamentos
+    </a>
+    <a href="user/veterinarios" class="user-sidebar-button">
+      <span class="material-symbols-outlined icon">stethoscope</span>
+      Veterinários
     </a>
   </div>
   <div class="user">
@@ -67,12 +71,12 @@
           person
           </span>
       </div>
-      <div class="user-text">
-        <h3>André Nascimento</h3>
-        <p>andre2email.com</p>
+      <div class="user-text"s>
+        <h3>{{tutor.nome}}</h3>
+        <p>{{tutor.email}}</p>
       </div>
     </div>
-    <div class="logout">
+    <div [routerLink]="['/login']" class="logout" style="cursor: pointer;">
       <span class="material-symbols-outlined">
         logout
         </span>

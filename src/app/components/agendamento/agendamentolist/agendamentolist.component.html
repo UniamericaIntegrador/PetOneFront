@@ -1,1 +1,87 @@
-<p>agendamentolist works!</p>
+<div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alinhamentoListagem">
+                <div>
+                    <h3 class="head title">Listagem de procedimentos</h3>
+                </div>
+                <div class="alinharDireita">
+                    <div class="alinharDireita">
+                        @if (view) {
+                        <button (click)="new()" type="button" class="btn btn-info btn-rounded title newbtn"
+                            data-mdb-ripple-init>
+                            <p>Novo</p>
+                        </button>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="centralizar" scope="col">Procedimento</th>
+                    <th class="centralizar" scope="col">Data</th>
+                    <th class="centralizar" scope="col">Paciente</th>
+                    <th class="centralizar" scope="col">Resultado</th>
+                    <th class="centralizar" scope="col">Diagnostico</th>
+                    <th class="centralizar" scope="col">Veterinario</th>
+                    @if (view) {
+                    <th class="centralizar" scope="col">Ação</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (procedimento of lista; track $index) {
+                <tr>
+                    <td class="centralizar" scope="row"><span>{{procedimento.nome}}</span></td>
+                    <td class="centralizar" scope="row"><span>{{procedimento.data}}</span></td>
+                    <td class="centralizar" scope="row"><span>{{procedimento.paciente.nome}}</span></td>
+                    <td class="centralizar" scope="row"><span
+                            class="material-symbols-outlined">{{procedimento.resultado}}</span></td>
+                    <td class="centralizar" scope="row"><span
+                            class="material-symbols-outlined">{{procedimento.diagnostico}}</span></td>
+                    <td class="centralizar" scope="row"><span>{{procedimento.veterinario.nome}}</span></td>
+                    @if (view) {
+                    <td>
+                        @if(esconderBotoes){
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple
+                            (click)="select(procedimento)">
+                            Selecionar
+                        </button>
+                        }@else{
+
+                        <div class="centralizar actionbtn">
+                            <button (click)="edit(procedimento)" type="button" class="actionbtns info"
+                                data-mdb-ripple-init data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                            <button (click)="delete(procedimento)" type="button" class="actionbtns danger"
+                                data-mdb-ripple-init data-mdb-ripple-color="dark">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+
+                        }
+                    </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<ng-template #modalAgendamentoDetalhe>
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+        <app-agendamentodetail [agendamento]="agendamentoEdit"
+            (retorno)="retornoDetalhe($event)"></app-agendamentodetail>
+    </div>
+</ng-template>
