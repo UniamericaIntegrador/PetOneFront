@@ -2,11 +2,8 @@
     @for(logs of lista; track $index){
     <li class="log">
     <span class="circle"></span>
+         <h2 style="margin: 0;">{{logs.acao}}</h2>
         Foi {{logs.acao}} o {{logs.origem}}: {{logs.descricao}} na lista de {{logs.origem}} pelo usuário: {{logs.usuario}} no horário: {{logs.data}}.
-    </li>
-    <li>
-        <h2>{{logs.acao}}</h2>
-
     </li>
     }
 </ol>

@@ -97,6 +97,7 @@ export class AgendamentolistComponent {
       }
     });
   }
+  
   loadPacientes() {
     const pacienteRequests = this.lista.map(paciente =>
       this.pacienteService.findById(paciente.id_paciente)

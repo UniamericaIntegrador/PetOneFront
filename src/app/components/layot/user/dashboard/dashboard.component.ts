@@ -10,6 +10,8 @@ import { AgendamentolistComponent } from "../../../agendamento/agendamentolist/a
 import { RouterModule } from '@angular/router';
 import { Agendamento } from '../../../../models/agendamento';
 import { AgendamentoService } from '../../../../services/agendamento.service';
+import Swal from 'sweetalert2';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +30,7 @@ export class UserDashboardComponent {
   usuario!: Tutor;
   _agendamentos: number = 0;
   pacientes: number = 0;
+  listaPacientes: Paciente[] = [];
 
   pacientesList: Paciente[] = [];
 
@@ -45,10 +48,35 @@ export class UserDashboardComponent {
   }
 
   loadLength() {
-    this.agendamentoService.findByTutor(1).subscribe({
-      next: lista => {
-        this.agendamentos = lista;
+    this.pacienteService.findByTutor().subscribe({
+      next: pacientes => {
+        this.listaPacientes = pacientes;
+        const agendamentos = pacientes.map(p =>
+          this.agendamentoService.findByTutor(p.id)
+        );
+  
+        forkJoin(agendamentos).subscribe({
+          next: agendamentosPorPaciente => {
+            agendamentosPorPaciente.forEach(_agendamento => {
+              this.agendamentos.push(..._agendamento);
+            });
+          },
+          error: erro => {
+            Swal.fire({
+              title: "Ocorreu um erro ao exibir a lista de agendamento",
+              icon: "error",
+              confirmButtonText: "Ok"
+            });
+          }
+        });
       },
+      error: erro => {
+        Swal.fire({
+          title: "Ocorreu um erro ao buscar os pacientes",
+          icon: "error",
+          confirmButtonText: "Ok"
+        });
+      }
     });
   }
 

@@ -19,3 +19,8 @@ ol {
     margin-left: 11px;
     list-style: none;
 }
+
+.lista {
+    display: flex;
+    flex-direction: column-reverse;
+}

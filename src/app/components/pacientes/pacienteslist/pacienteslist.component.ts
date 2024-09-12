@@ -86,7 +86,7 @@ export class PacienteslistComponent {
           },
           error: erro => {
             Swal.fire({
-              title: "Occoreu um erro",
+              title: paciente.nome + " possuí agendamentos pendentes, não é possivel remover",
               icon: "error",
               confirmButtonText: "Ok"
             });
