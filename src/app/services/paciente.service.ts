@@ -4,6 +4,7 @@ import { Paciente } from '../models/paciente';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PacienteDTO } from '../DTO/pacienteDTO';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class PacienteService {
 
   http = inject(HttpClient);
   
-  API = "http://localhost:8080/api/paciente";
+  API = environment.SERVIDOR+"/api/paciente";
   //CATAPI = "https://api.thecatapi.com/v1/breeds";
   //DOGAPI = "https://api.thedogapi.com/v1/breeds";
 

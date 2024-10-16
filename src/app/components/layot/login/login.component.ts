@@ -50,9 +50,9 @@ export class LoginComponent {
         if (token) {
           this.loginService.addToken(token);
           if (this.loginService.hasPermission("ADMIN"))
-            this.router.navigate(['/admin/dashboard']);
+            this.router.navigate(['/user/home']);
           else if (this.loginService.hasPermission("USER"))
-            this.router.navigate(['/user/dashboard']);
+            this.router.navigate(['/user/home']);
         } else {
           Swal.fire({
             title: 'Usuário ou senha incorretos!',
@@ -91,9 +91,9 @@ export class LoginComponent {
             if (result.isConfirmed) {
               this.loginService.addToken(token);
               if (this.loginService.hasPermission("ADMIN")) {
-                this.router.navigate(['/admin/dashboard']);
+                this.router.navigate(['/user/home']);
               } else if (this.loginService.hasPermission("USER")) {
-                this.router.navigate(['/admin/dashboard']);
+                this.router.navigate(['/user/home']);
               }
             } else {
               this.router.navigate(['/login']);

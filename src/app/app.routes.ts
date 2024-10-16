@@ -15,11 +15,13 @@ import { loginGuard } from './auth/login.guard';
 import { LogsComponent } from './components/logs/logs.component';
 import { AgendamentodetailComponent } from './components/agendamento/agendamentodetail/agendamentodetail.component';
 import { AgendamentolistComponent } from './components/agendamento/agendamentolist/agendamentolist.component';
+import { HomeComponent } from './components/home/home/home.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
     { path: "login", component: LoginComponent },
     { path: "user", component: PrincipalComponent, canActivate: [loginGuard], children: [
+      { path: "home", component: HomeComponent, data: { title: 'Home' } },
       { path: "dashboard", component: UserDashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
       { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },

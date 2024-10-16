@@ -33,3 +33,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-form-field {
     width: 100%;
 }
+
+app-home {
+    display: flex;
+}
+
+.body {
+    flex :1;
+}

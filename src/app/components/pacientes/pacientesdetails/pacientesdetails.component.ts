@@ -131,7 +131,7 @@ export class PacientesdetailsComponent {
             icon: 'success',
             confirmButtonText: 'Ok',
           });
-          this.router2.navigate(['admin/pacientes'], {
+          this.router2.navigate(['user/home'], {
             state: { pacienteEditado: this.paciente },
           });
           this.retorno.emit(this.paciente);
@@ -154,7 +154,7 @@ export class PacientesdetailsComponent {
             text: 'Paciente salvo com sucesso!',
             icon: 'success',
           });
-          this.router2.navigate(['admin/pacientes'], {
+          this.router2.navigate(['user/home'], {
             state: { pacienteNovo: this.paciente },
           });
           this.retorno.emit(this.paciente);
