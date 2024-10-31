@@ -25,10 +25,10 @@ export class PacienteslistComponent {
   @Input("esconderBotoes") esconderBotoes: boolean = false;
   @Input("view") view: boolean = true;
   @Output("retorno") retorno = new EventEmitter<any>();
-  
-  lista: Paciente[] = [];
   pacienteEdit: Paciente = new Paciente(0,'', new Date(), new Raca(0,'',new Especie(0,'')),null);
 
+  
+  lista: Paciente[] = [];
   listaEspecie: Especie[] = [];
   listaRaca: Raca [] = [];
 

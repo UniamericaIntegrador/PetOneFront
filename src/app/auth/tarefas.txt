@@ -1,0 +1,188 @@
+Para integrar seu frontend em Angular com o Keycloak, você precisa configurar o Keycloak Service no Angular, além de adicionar uma lógica para gerenciar a autenticação e o token de acesso. Vamos detalhar os passos:
+
+### 1. Instalar a Biblioteca Angular Keycloak
+
+Instale o pacote `keycloak-angular` e `keycloak-js`, que facilitam a integração do Keycloak com o Angular:
+
+```bash
+npm install keycloak-angular keycloak-js
+```
+
+### 2. Configurar o Keycloak no Angular
+
+Crie uma configuração de inicialização do Keycloak no Angular. Você pode fazer isso criando um arquivo `keycloak.service.ts`, que gerencia a inicialização e configura o cliente do Keycloak.
+
+#### Exemplo: `keycloak.service.ts`
+
+```typescript
+import { Injectable } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakInstance } from 'keycloak-js';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class KeycloakAuthService {
+  private keycloakInstance: KeycloakInstance;
+
+  constructor(private keycloakService: KeycloakService) {}
+
+  // Inicializa o Keycloak
+  async init(): Promise<void> {
+    await this.keycloakService.init({
+      config: {
+        url: 'http://192.168.56.13:8080/auth', // URL do seu servidor Keycloak
+        realm: 'petone', // Nome do realm configurado no Keycloak
+        clientId: 'frontend', // ID do cliente configurado no Keycloak para o frontend
+      },
+      initOptions: {
+        onLoad: 'login-required', // Redireciona o usuário para login se não autenticado
+        checkLoginIframe: false,
+      },
+      enableBearerInterceptor: true, // Adiciona o token de autorização automaticamente nas requisições HTTP
+      bearerPrefix: 'Bearer', // Define o prefixo do token de autorização
+    });
+  }
+
+  // Funções auxiliares
+  isLoggedIn(): boolean {
+    return this.keycloakService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.keycloakService.logout();
+  }
+
+  getUsername(): string | null {
+    return this.keycloakService.getUsername();
+  }
+}
+```
+
+### 3. Inicializar o Keycloak no Angular
+
+Configure o Keycloak para ser carregado assim que o aplicativo iniciar. No arquivo `app.module.ts`, inicialize o serviço usando o `APP_INITIALIZER`:
+
+#### Exemplo: `app.module.ts`
+
+```typescript
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { AppComponent } from './app.component';
+import { KeycloakAuthService } from './keycloak.service';
+
+export function initializeKeycloak(keycloak: KeycloakAuthService) {
+  return () => keycloak.init();
+}
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, KeycloakAngularModule],
+  providers: [
+    KeycloakAuthService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakAuthService],
+    },
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+### 4. Proteger Rotas no Angular (Opcional)
+
+Caso você queira proteger rotas específicas no Angular com o Keycloak, configure o **AuthGuard** nas rotas desejadas.
+
+#### Exemplo de Rota Protegida com AuthGuard
+
+No seu arquivo de rotas (`app-routing.module.ts`), aplique a proteção usando o `KeycloakAuthGuard`:
+
+```typescript
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
+import { HomeComponent } from './home/home.component';
+import { ProtectedComponent } from './protected/protected.component';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'protected',
+    component: ProtectedComponent,
+    canActivate: [KeycloakAuthGuard],
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+```
+
+### 5. Incluir o Token JWT nas Requisições HTTP
+
+Com `enableBearerInterceptor: true` configurado, o `keycloak-angular` intercepta automaticamente as requisições HTTP, adicionando o token JWT como o header `Authorization`. Assim, todas as chamadas ao backend enviam o token, e o backend pode validar o usuário autenticado.
+
+### 6. Personalizar o Login e Logout
+
+Agora você pode usar o Keycloak para login e logout no Angular:
+
+```typescript
+// Para realizar login
+await this.keycloakService.login();
+
+// Para realizar logout
+await this.keycloakService.logout();
+```
+
+### 7. (Opcional) Adicionar Botão de Login/Logout na Interface
+
+Crie um botão de login/logout no seu componente para facilitar a interação do usuário:
+
+```html
+<!-- app.component.html -->
+<div *ngIf="keycloakService.isLoggedIn(); else loginButton">
+  <button (click)="logout()">Logout</button>
+</div>
+<ng-template #loginButton>
+  <button (click)="login()">Login</button>
+</ng-template>
+```
+
+No seu `app.component.ts`, defina as funções:
+
+```typescript
+import { Component } from '@angular/core';
+import { KeycloakAuthService } from './keycloak.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  constructor(public keycloakService: KeycloakAuthService) {}
+
+  login() {
+    this.keycloakService.login();
+  }
+
+  logout() {
+    this.keycloakService.logout();
+  }
+}
+```
+
+### Recapitulando
+
+Essas etapas permitem que:
+1. O usuário faça login no Keycloak automaticamente, redirecionando para a página de login do Keycloak.
+2. O token JWT seja adicionado automaticamente aos headers das requisições ao backend.
+3. Rotas no Angular possam ser protegidas usando o AuthGuard, garantindo que apenas usuários autenticados acessem.
+
+Essa implementação garante segurança e facilita a interação do Angular com o backend usando autenticação JWT com Keycloak.

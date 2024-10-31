@@ -18,11 +18,12 @@ import { MdbModalService, MdbModalModule, MdbModalRef } from 'mdb-angular-ui-kit
 import { Especie } from '../../../models/especie';
 import { Raca } from '../../../models/raca';
 import { PacientesdetailsComponent } from '../../pacientes/pacientesdetails/pacientesdetails.component';
+import { AgendamentodetailComponent } from '../../agendamento/agendamentodetail/agendamentodetail.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, MdbModalModule, PacientesdetailsComponent],
+  imports: [CommonModule, FormsModule, RouterLink, MdbModalModule, PacientesdetailsComponent, AgendamentodetailComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -34,10 +35,13 @@ export class HomeComponent {
   modalService = inject(MdbModalService);
   @ViewChild("modalPacienteDetalhe") modalPacienteDetalhe!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
+  @ViewChild("modalAgendamentoDetalhe") modalAgendamentoDetalhe!: TemplateRef<any>;
+
 
   opc!: number;
   agendamentos: Agendamento[] = [];
   veterinarios: Veterinario[] = [];
+  agendamentoEdit: Agendamento = new Agendamento();
   tutor!: Tutor;
   nextAgendamento: Agendamento | null = null; // Inicializa como null
   proxAgendamento: Agendamento [] = [];
@@ -332,5 +336,60 @@ delete(paciente: Paciente){
     }
   });
   }
+
+  deleteAgendamento(agendamento: Agendamento){
+    Swal.fire({
+      title: 'Tem certeza que deseja deletar este registro?',
+      icon: 'warning',
+      showConfirmButton: true,
+      showDenyButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.agendamentoService.delete(agendamento.id).subscribe({
+          next: mensagem => {
+            Swal.fire({
+              title: mensagem,
+              icon: "success",
+              confirmButtonText: "Ok"
+            });
+            this.agendamentos = [];
+            this.listAllAgendamentos();
+          },
+          error: erro => {
+            Swal.fire({
+              title: "Occoreu um erro",
+              icon: "error",
+              confirmButtonText: "Ok"
+            });
+          }
+        });
+      }
+    });
+    }
+    
+    newAgendamento(){
+      this.agendamentoEdit = new Agendamento();
+      this.modalRef = this.modalService.open(this.modalAgendamentoDetalhe, {
+        modalClass: 'CustomModal'
+      });
+    }
+
+    editAgendamento(agendamento: Agendamento){
+      this.agendamentoEdit = Object.assign({}, agendamento); 
+      this.modalRef = this.modalService.open(this.modalAgendamentoDetalhe, {
+        modalClass: 'CustomModal'
+      });
+    }
+
+    retornoDetalheAgendamento(agendamento: Agendamento){
+      this.listAllAgendamentos();
+      this.modalRef.close();
+    }
+    
+    selectAgendamento(agendamento: Agendamento){
+      this.retorno.emit(agendamento);
+    }
 
 }
