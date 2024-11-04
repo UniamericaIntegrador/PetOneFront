@@ -11,16 +11,16 @@ import { TutoresdetailsComponent } from './components/tutores/tutoresdetails/tut
 import { VeterinariosdetailsComponent } from './components/veterinarios/veterinariosdetails/veterinariosdetails.component';
 import { DashboardComponent } from './components/layot/dashboard/dashboard.component';
 import { UserDashboardComponent } from './components/layot/user/dashboard/dashboard.component';
-import { loginGuard } from './auth/login.guard';
 import { LogsComponent } from './components/logs/logs.component';
 import { AgendamentodetailComponent } from './components/agendamento/agendamentodetail/agendamentodetail.component';
 import { AgendamentolistComponent } from './components/agendamento/agendamentolist/agendamentolist.component';
 import { HomeComponent } from './components/home/home/home.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },
     { path: "login", component: LoginComponent },
-    { path: "user", component: PrincipalComponent, canActivate: [loginGuard], children: [
+    { path: "user", component: PrincipalComponent, canActivate: [AuthGuard], children: [
       { path: "home", component: HomeComponent, data: { title: 'Home' } },
       { path: "dashboard", component: UserDashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
@@ -33,7 +33,7 @@ export const routes: Routes = [
       { path: "agendamento/edit/new", component: AgendamentodetailComponent, data: { title: 'Editar Agendamentos' }},
       { path: "agendamento", component: AgendamentolistComponent, data: { title: 'Agendamentos' }},
     ]},
-    { path: "admin", component: PrincipalComponent, canActivate: [loginGuard], children: [
+    { path: "admin", component: PrincipalComponent, canActivate: [AuthGuard], children: [
       { path: "dashboard", component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: "pacientes", component: PacienteslistComponent, data: { title: 'Pacientes' } },
       { path: "procedimentos", component: ProcedimentoslistComponent, data: { title: 'Procedimentos' } },

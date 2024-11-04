@@ -1,55 +1,50 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class KeycloakAuthService {
-  constructor(private keycloakService: KeycloakService) {}
+export class AuthService {
+  private keycloak = inject(KeycloakService);
+  private userProfile$ = new BehaviorSubject<any | null>(null);
 
-  // Inicializa o Keycloak
-  async init(): Promise<void> {
+  async login(username: string, password: string): Promise<boolean> {
     try {
-      await this.keycloakService.init({
-        config: {
-          url: 'http://192.168.56.13:8080/auth',  // URL do seu servidor Keycloak
-          realm: 'petone',                        // Nome do realm configurado no Keycloak
-          clientId: 'frontend',                   // ID do cliente configurado no Keycloak para o frontend
-        },
-        initOptions: {
-          onLoad: 'login-required',              // Redireciona o usuário para login se não autenticado
-          checkLoginIframe: false,
-        },
-        enableBearerInterceptor: true,           // Inclui o token JWT automaticamente nas requisições HTTP
-        bearerPrefix: 'Bearer',                  // Define o prefixo do token de autorização
+      await this.keycloak.login({
+        username,
+        password
       });
+      
+      const profile = await this.keycloak.loadUserProfile();
+      this.userProfile$.next(profile);
+      
+      return true;
     } catch (error) {
-      console.error('Erro ao inicializar o Keycloak', error);
+      console.error('Login error:', error);
+      return false;
     }
   }
 
-  // Verifica se o usuário está autenticado
-  async isLoggedIn(): Promise<boolean> {
-    return await this.keycloakService.isLoggedIn();
+  async logout() {
+    try {
+      await this.keycloak.logout(window.location.origin);
+      this.userProfile$.next(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 
-  // Realiza o login do usuário
-  login(): void {
-    this.keycloakService.login();
+  getUserProfile(): Observable<any | null> {
+    return this.userProfile$.asObservable();
   }
 
-  // Realiza o logout do usuário
-  logout(): void {
-    this.keycloakService.logout();
+  public isAuthenticated(): Promise<boolean> {
+    return Promise.resolve(this.keycloak.isLoggedIn());
   }
+  
 
-  // Obtém o nome do usuário autenticado
-  getUsername(): string | null {
-    return this.keycloakService.getUsername();
-  }
-
-  // Obtém o token JWT atual do usuário
-  async getToken(): Promise<string> {
-    return await this.keycloakService.getToken();
+  getToken(): Promise<string> {
+    return this.keycloak.getToken();
   }
 }
